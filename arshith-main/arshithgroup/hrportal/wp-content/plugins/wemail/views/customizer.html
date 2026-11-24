@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>weMail Email Campaign</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- weMail styles -->
+    <style>
+        @font-face {
+            font-family: 'Lato';
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: url('../assets/fonts/lato/lato-regular.woff2') format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+        @font-face {
+            font-family: 'Lato';
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: url('../assets/fonts/lato/lato-regular-ext.woff2') format('woff2');
+            unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+        }
+        @font-face {
+            font-family: 'Lato';
+            font-style: normal;
+            font-weight: 700;
+            font-display: swap;
+            src: url('../assets/fonts/lato/lato-700.woff2') format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+        @font-face {
+            font-family: 'Lato';
+            font-style: normal;
+            font-weight: 700;
+            font-display: swap;
+            src: url('../assets/fonts/lato/lato-700-ext.woff2') format('woff2');
+            unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+        }
+        @font-face {
+            font-family: 'Lato';
+            font-style: italic;
+            font-weight: 400;
+            font-display: swap;
+            src: url('../assets/fonts/lato/lato-italic.woff2') format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+        @font-face {
+            font-family: 'Lato';
+            font-style: italic;
+            font-weight: 400;
+            font-display: swap;
+            src: url('../assets/fonts/lato/lato-italic-ext.woff2') format('woff2');
+            unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+        }
+        @font-face {
+            font-family: 'Lato';
+            font-style: italic;
+            font-weight: 700;
+            font-display: swap;
+            src: url('../assets/fonts/lato/lato-700italic.woff2') format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+        @font-face {
+            font-family: 'Lato';
+            font-style: italic;
+            font-weight: 700;
+            font-display: swap;
+            src: url('../assets/fonts/lato/lato-700italic-ext.woff2') format('woff2');
+            unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+
+    <link rel="stylesheet" href="" id="customizer-primary-style">
+    <style id="global-element-style"></style>
+
+    <!-- litmus styles -->
+    <style type="text/css">
+        /* CLIENT-SPECIFIC STYLES */
+        body, table, td, a{-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;} /* Prevent WebKit and Windows mobile changing default text sizes */
+        table, td{mso-table-lspace: 0pt; mso-table-rspace: 0pt;} /* Remove spacing between tables in Outlook 2007 and up */
+        img{-ms-interpolation-mode: bicubic;} /* Allow smoother rendering of resized image in Internet Explorer */
+
+        /* RESET STYLES */
+        img{border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none;}
+        table{border-collapse: collapse !important;}
+        body{height: 100% !important; margin: 0 !important; padding: 0 !important; width: 100% !important;}
+
+        /* iOS BLUE LINKS */
+        a[x-apple-data-detectors] {
+            color: inherit !important;
+            text-decoration: none !important;
+            font-size: inherit !important;
+            font-family: inherit !important;
+            font-weight: inherit !important;
+            line-height: inherit !important;
+        }
+
+        /* MOBILE STYLES */
+        @media screen and (max-width: 525px) {
+
+            /* ALLOWS FOR FLUID TABLES */
+            .wrapper {
+              width: 100% !important;
+                max-width: 100% !important;
+            }
+
+            /* USE THESE CLASSES TO HIDE CONTENT ON MOBILE */
+            .mobile-hide {
+              display: none !important;
+            }
+
+            .img-max {
+              max-width: 100% !important;
+              width: 100% !important;
+              height: auto !important;
+            }
+
+            /* FULL-WIDTH TABLES */
+            .responsive-table {
+              width: 100% !important;
+            }
+
+        }
+
+        /* ANDROID CENTER FIX */
+        div[style*="margin: 16px 0;"] { margin: 0 !important; }
+    </style>
+</head>
+<body style="margin: 0 !important; padding: 0 !important;">
+    <div class="hidden" id="wemail-customizer" v-cloak :style="{ paddingTop: template.globalCss.paddingTop, paddingBottom: template.globalCss.paddingBottom, backgroundColor: template.globalCss.backgroundColor}">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%" :style="template.globalCss">
+            <tr v-for="(section, sectionIndex) in template.sections" :key="section.name" :class="['section section-' + section.name]">
+                <td align="center" :style="section.style">
+                    <table class="responsive-table section-wrapper" :style="section.wrapperStyle" border="0" cellpadding="0" cellspacing="0" width="100%">
+                        <tbody :data-section-index="sectionIndex" :class="[!section.contents.length ? 'empty-content-zone': '']">
+                            <tr v-if="!section.contents.length">
+                                <td>
+                                    <div class="content-dropzone-placeholder">
+                                      {{ templateSections[section.name] }} - {{ __('Drop content here') }}
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr
+                                v-for="(content, contentIndex) in section.contents"
+                                :key="content.id"
+                                data-source="iframe"
+                                :data-content-type="content.type"
+                                :data-section-index="sectionIndex"
+                                :data-content-index="contentIndex"
+                                class="content-wrapper"
+                                @click="editContent(sectionIndex, contentIndex)"
+                            >
+                                <td>
+                                    <component
+                                        :is="'content-' + content.type"
+                                        :content="content"
+                                        :global-css="template.globalCss"
+                                        :customizer="customizerObj"
+                                    ></component>
+                                    <div v-if="!isPreview && section.name !== 'brand'" class="control-buttons">
+                                        <p>
+                                            <i class="fa fa-arrows move"></i>
+                                            <i
+                                                :class="['fa fa-arrow-up move-up', (sectionIndex === 0 && contentIndex === 0) ? 'disabled': '']"
+                                                :data-content-type="content.type"
+                                                :data-section-index="sectionIndex"
+                                                :data-content-index="contentIndex"
+                                            ></i>
+                                            <i
+                                                :class="['fa fa-arrow-down move-down', ((sectionIndex === template.sections.length - 1) && (contentIndex === section.contents.length - 1)) ? 'disabled' : '']"
+                                                :data-content-type="content.type"
+                                                :data-section-index="sectionIndex"
+                                                :data-content-index="contentIndex"
+                                            ></i>
+                                            <i class="fa fa-pencil" @click="editContent(sectionIndex, contentIndex)"></i>
+                                            <i class="fa fa-clone" @click="cloneContent(sectionIndex, contentIndex)"></i>
+                                            <i class="fa fa-trash-o" @click="deleteContent(sectionIndex, contentIndex)"></i>
+                                        </p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </table>
+
+        <div v-if="!isPreview" id="section-highlighter" :style="highlighterStyle">&nbsp;</div>
+    </div>
+</body>
+</html>

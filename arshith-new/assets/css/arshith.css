@@ -1,0 +1,83 @@
+/* Arshith Group - minimal additions. The Monoline template styles are used as-is; this file only
+   adapts the Arshith logo and makes real photos (different sizes) sit cleanly in the template slots. */
+
+/* ---------- logo: no box; white on the transparent header (like the template logo), original colours once sticky ---------- */
+.site-logo img { width: 150px; height: auto; filter: brightness(0) invert(1); transition: filter .3s; }
+.sticky-wrapper.is-sticky .site-navbar .site-logo img { filter: none; }
+.footer_logo img { filter: brightness(0) invert(1); }
+.site-navbar .site-navigation .site-menu > li > a { padding: 25px 14px; }
+.site-navbar .site-navigation .site-menu > li > a.active { color: #ffaa17 !important; }
+.site-navbar .site-menu-toggle { color: #fff; }
+.sticky-wrapper.is-sticky .site-navbar .site-menu-toggle { color: #000; }
+
+/* ---------- photos inside template image slots ---------- */
+/* photos: keep a 4:3 frame and anchor to the top so heads/faces are never cut */
+.home_single_blog img, .single-gallery img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; object-position: center top; }
+.our-team .single-team img { width: 100%; height: 340px; object-fit: cover; object-position: top; }
+.promotional_content img { width: 100%; max-height: 520px; object-fit: cover; border-radius: 10px; }
+.case_content_top_img img, .marketing_content img { border-radius: 10px; }
+.marketing_content img { margin-top: 30px; }
+.single_why_choose_img img { max-height: 560px; display: block; margin: 0 auto; }
+.single_about_content p { margin-bottom: 15px; }
+.single_feature h4 a { color: inherit; }
+.single_feature h4 a:hover { color: #ffaa17; }
+
+/* ---------- small content helpers ---------- */
+.counter_feature .single-project h2.ag-word { font-size: 30px; }
+.ag-bar-note { display: block; margin: -6px 0 14px; color: #6b7385; font-size: 13px; line-height: 1.5; }
+.ag-sign { border-left: 3px solid #ffaa17; padding-left: 14px; }
+.ag-initial { float: left; width: 100px; height: 100px; line-height: 100px; border-radius: 100px; margin: 0 20px 60px 0; background: #ffaa17; color: #fff; font-size: 40px; font-weight: 600; text-align: center; }
+.marketing_icon_img.ag-time { float: left; width: 70px; margin-right: 20px; color: #ffaa17; font-weight: 700; line-height: 1.3; }
+.single_service .ag-meta { color: #ffaa17; font-size: 14px; margin-bottom: 8px; }
+.single_service { margin-bottom: 30px; }
+.marketing_text strong.ag-name { font-size: 22px; color: #1b2032; }
+.pricing-content ul li { font-size: 15px; }
+.ag-price-sub { font-size: 16px; color: #fff; letter-spacing: 1px; text-transform: uppercase; }
+.ag-help li { color: #a9b4c7; }
+.ag-start { color: #fff; margin-top: 15px; }
+.ag-start strong { color: #ffaa17; }
+
+/* ---------- forms ---------- */
+.contact select.form-control { height: 55px; }
+.contact label { color: #fff; float: left; margin-bottom: 6px; }
+.ag-form-h { color: #fff; text-align: left; margin: 10px 0 20px; }
+.ag-form-success { margin-top: 15px; font-weight: 600; color: #fff; }
+.ag-filters { margin-bottom: 30px; }
+.ag-filters .form-control { height: 55px; }
+.ag-filters .btn_one { margin-top: 0; width: 100%; height: 55px; }
+.ag-no-results { display: none; }
+.ag-result { display: none; text-align: center; color: #fff; }
+.ag-result a { color: #fff; text-decoration: underline; }
+.ag-ref { font-family: monospace; font-size: 20px; }
+.ag-apply-top .portfolio_filter { margin-top: 25px; }
+.ag-apply-top .portfolio_filter li { margin-bottom: 10px; }
+
+/* certificate verification (classes used by certificate-verification.js) */
+.result.hidden { display: none; }
+.ag-cert-result { background: #fff; border-radius: 10px; padding: 30px; margin-top: 30px; text-align: left; }
+.ag-cert-result .detail { display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px dashed #e9eef5; }
+.ag-cert-result .message { margin-top: 16px; padding: 12px 16px; border-radius: 8px; }
+.ag-cert-result .message.success, .ag-cert-result .status.verified { background: #ecfdf3; color: #166534; }
+.ag-cert-result .message.error, .ag-cert-result .status.invalid { background: #fef2f2; color: #991b1b; }
+.ag-cert-result .status { display: inline-block; padding: 4px 14px; border-radius: 30px; font-weight: 600; margin-bottom: 10px; }
+
+/* partner brands (text wordmarks in the template partner row) */
+.ag-brand { display: block; padding: 10px; color: #8a93a6; transition: .3s; }
+.ag-brand span { display: block; font-family: 'Oswald', sans-serif; font-size: 22px; letter-spacing: 1px; text-transform: uppercase; }
+.ag-brand small { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; }
+.ag-brand:hover { color: #ffaa17; }
+
+/* internship modal */
+.modal { z-index: 3000; }
+.modal-backdrop { z-index: 2990; }
+.ag-modal h5 { margin-top: 18px; color: #0e5ca6; font-size: 17px; }
+.ag-modal small { color: #ffaa17; letter-spacing: 2px; font-weight: 600; }
+.ag-modal-meta span { margin-right: 16px; color: #6b7385; font-size: 14px; }
+.ag-chip { display: inline-block; background: #f9fcff; border: 1px solid #e9eef5; padding: 4px 12px; border-radius: 30px; margin: 0 6px 6px 0; font-size: 13px; }
+
+.map iframe { width: 100%; height: 450px; border: 0; display: block; }
+
+@media (max-width: 991px) {
+
+	.contact label { float: none; display: block; text-align: left; }
+}

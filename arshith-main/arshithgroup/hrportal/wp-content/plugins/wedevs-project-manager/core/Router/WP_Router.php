@@ -1,0 +1,474 @@
+<?php
+
+namespace WeDevs\PM\Core\Router;
+
+use WP_REST_Request;
+use WP_REST_Server;
+use WP_Error;
+use WeDevs\PM\Core\Validator\Validator;
+use WeDevs\PM\Core\Sanitizer\Sanitizer;
+
+class WP_Router {
+	/**
+	 * Array of routes that are got from route files.
+	 *
+	 * @var array
+	 */
+	public static $routes = [];
+
+	public static $request = null;
+
+	/**
+	 * Register routes that are got from route files as wp rest route.
+	 *
+	 * @param  array  $routes
+	 *
+	 * @return void
+	 */
+	public static function register( $routes = [] ) {
+		static::$routes = $routes;
+
+        add_action( 'rest_api_init', array( new WP_Router, 'make_wp_rest_route' ) );
+
+        // Keep PHP notices/deprecations (incl. PHP 8.1–8.5 ones from vendor libs)
+        // out of the JSON body — they would otherwise corrupt REST responses when
+        // display_errors is on. Errors are still logged; only display is silenced.
+        add_filter( 'rest_pre_dispatch', array( __CLASS__, 'silence_error_display' ), 10, 3 );
+
+        // Mark plugin REST responses as uncacheable. Without this, a host or CDN
+        // that rewrites Cache-Control on wp-json (e.g. an nginx `expires 1h` rule)
+        // makes browsers replay stale JSON, so the UI keeps showing old data.
+        add_filter( 'rest_post_dispatch', array( __CLASS__, 'send_nocache_headers' ), 10, 3 );
+
+        // Controllers that answer with wp_send_json_*() echo and exit before
+        // rest_post_dispatch ever runs, so the filter above never reaches them.
+        // Emit the same headers up front for plugin routes: whichever way the
+        // controller returns, the response is marked uncacheable.
+        add_filter( 'rest_pre_dispatch', array( __CLASS__, 'send_early_nocache_headers' ), 10, 3 );
+	}
+
+	/**
+	 * Send no-store cache headers for this plugin's REST responses.
+	 *
+	 * @param  \WP_HTTP_Response $response
+	 * @param  \WP_REST_Server   $server
+	 * @param  \WP_REST_Request  $request
+	 *
+	 * @return \WP_HTTP_Response
+	 */
+	public static function send_nocache_headers( $response, $server, $request ) {
+		if ( ! is_object( $request ) || ! is_object( $response ) || ! method_exists( $response, 'header' ) ) {
+			return $response;
+		}
+
+		if ( ! self::is_plugin_route( $request ) ) {
+			return $response;
+		}
+
+		$response->header( 'Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0' );
+		$response->header( 'Expires', 'Wed, 11 Jan 1984 05:00:00 GMT' );
+
+		return $response;
+	}
+
+	/**
+	 * Send the no-store cache headers before the controller runs.
+	 *
+	 * send_nocache_headers() only fires for controllers that return a response.
+	 * Ones that finish with wp_send_json_*() terminate the request first, so
+	 * their responses shipped with no cache headers at all. Setting the headers
+	 * here covers both paths; the later filter simply overwrites the same names.
+	 *
+	 * @param  mixed            $result
+	 * @param  \WP_REST_Server  $server
+	 * @param  \WP_REST_Request $request
+	 *
+	 * @return mixed
+	 */
+	public static function send_early_nocache_headers( $result, $server, $request ) {
+		if ( ! is_object( $request ) || headers_sent() ) {
+			return $result;
+		}
+
+		if ( ! self::is_plugin_route( $request ) ) {
+			return $result;
+		}
+
+		header( 'Cache-Control: no-store, no-cache, must-revalidate, max-age=0' );
+		header( 'Expires: Wed, 11 Jan 1984 05:00:00 GMT' );
+
+		return $result;
+	}
+
+	/**
+	 * Whether the request targets this plugin's REST namespace.
+	 *
+	 * @param  \WP_REST_Request $request
+	 *
+	 * @return bool
+	 */
+	private static function is_plugin_route( $request ) {
+		$namespace = wedevs_pm_api_namespace();
+		$route     = ltrim( (string) $request->get_route(), '/' );
+
+		return $route === $namespace || strpos( $route, $namespace . '/' ) === 0;
+	}
+
+	/**
+	 * Disable error display for this plugin's REST requests so stray PHP
+	 * notices/deprecations never leak into the JSON response body.
+	 *
+	 * @param  mixed            $result
+	 * @param  \WP_REST_Server  $server
+	 * @param  \WP_REST_Request $request
+	 *
+	 * @return mixed
+	 */
+	public static function silence_error_display( $result, $server, $request ) {
+		if ( ! is_object( $request ) ) {
+			return $result;
+		}
+
+		// Exact namespace or a sub-route of it — avoids matching unrelated prefixes (pm/v2 vs pm/v20).
+		if ( self::is_plugin_route( $request ) ) {
+			static $logged = false;
+
+			if ( ini_set( 'display_errors', '0' ) === false && ! $logged ) {
+				$logged = true;
+				error_log( 'WeDevs PM: unable to disable display_errors for REST request; PHP notices may leak into JSON responses.' );
+			}
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Convert routes that are stored in static property 'routes' to wp rest route.
+	 *
+	 * @return void
+	 */
+	public function make_wp_rest_route() {
+		$routes = static::$routes;
+
+		foreach ( $routes as $route ) {
+			$uri         = '/' . $route['uri'];
+			$http_verb   = $route['http_verb'];
+			$controller  = new $route['controller'];
+			$method      = $route['method'];
+			$permissions = $route['permission'];
+			$validator   = $route['validator'];
+			$sanitizer   = $route['sanitizer'];
+			$namespace   = wedevs_pm_api_namespace();
+
+			register_rest_route( $namespace, $uri, array(
+				'methods'             => $http_verb,
+				'callback'            => array( $controller, $method ),
+				'args'                => $this->prepare_args( $http_verb, $namespace, $uri, $validator, $sanitizer ),
+				'permission_callback' => function ( WP_REST_Request $request ) use ( $permissions ) {
+					return $this->check_permission( $request, $permissions );
+				},
+			) );
+		}
+	}
+
+	/**
+	 * Check for permissions for a specific route.
+	 *
+	 * @param  WP_REST_Request $request (Current http request object.)
+	 *
+	 * @param  array $permissions (Array of class namespaces of permission classes.)
+	 *
+	 * @return boolean|\WP_Error (Return true if permitted; otherwise false or WP_Error.)
+	 */
+	private function check_permission( WP_REST_Request $request, $permissions ) {
+		$permitted   = array();
+		$merge_error = false;
+
+		// Fail closed. A route that forgets ->permission() used to be public to
+		// unauthenticated callers. Genuinely public endpoints must opt in with
+		// WeDevs\PM\Core\Permissions\Public_Access.
+		if ( empty( $permissions ) ) {
+			return new \WP_Error(
+				'wedevs_pm_no_permission',
+				__( 'You have no permission to access this endpoint.', 'wedevs-project-manager' ),
+				array( 'status' => rest_authorization_required_code() )
+			);
+		}
+
+		foreach ( $permissions as $permission ) {
+			$permission_obj = new $permission( $request );
+			$has_permission = $permission_obj->check();
+
+			if ( is_wp_error( $has_permission ) ) {
+				$merge_error = true;
+			}
+
+			$permitted[] = $has_permission;
+		}
+
+		if ( $merge_error ) {
+			$permitted = $this->merge_permission_error( $permitted );
+		} else if ( is_array( $permitted ) && in_array( false, $permitted ) ) {
+			$permitted = false;
+		}
+		
+		return $permitted;
+	}
+
+	function merge_permission_error($wp_errors) {
+	  	$wp_error_merged = new WP_Error();
+
+	  	if ( ! is_array( $wp_errors ) ) {
+	  		return $wp_errors;
+	  	}
+		
+		foreach ( $wp_errors as $wp_error ) {
+			if ( ! is_wp_error( $wp_error ) )
+				continue;
+			foreach ( $wp_error as $key => $errors ) {
+				foreach ( $errors as $error ) {
+					$wp_error_merged->add( $key, $error );
+				}
+				if ( isset( $wp_error->error_data[ $key ] ) ) {
+					$wp_error_merged->add_data( $wp_error->error_data[ $key ], $key );
+				}
+			}
+		}	
+
+		// Permission classes return a WP_Error with no status, so the REST API
+		// answered 500 for what is really an authorization failure. Default the
+		// merged error to 401/403 so clients can tell denial from a server fault.
+		$code = $wp_error_merged->get_error_code();
+
+		if ( $code ) {
+			$data = $wp_error_merged->get_error_data( $code );
+
+			if ( ! is_array( $data ) || ! isset( $data['status'] ) ) {
+				$data = is_array( $data ) ? $data : array();
+				$data['status'] = rest_authorization_required_code();
+				$wp_error_merged->add_data( $data, $code );
+			}
+		}
+
+		return $wp_error_merged;
+	}
+
+	/**
+	 * Making of parameters for wp rest routes.
+	 *
+	 * @param  string $validator (Class namespace of a validator class.)
+	 *
+	 * @param  string $sanitizer (Class namespace of a sanitizer class.)
+	 *
+	 * @return array (Array of arguments/parameters that will be passed to a
+	 * wp rest route.)
+	 */
+	private function prepare_args( $http_verb, $namespace, $uri, $validator = null, $sanitizer = null ) {
+
+        $validator = $validator ? new $validator( $this->prepare_request_object( $http_verb, $namespace, $uri ) ) : null;
+        $sanitizer = $sanitizer ? new $sanitizer( $this->prepare_request_object( $http_verb, $namespace, $uri ) ) : null;
+		$args = [];
+
+		if ( $validator ) {
+			$args = $this->apply_validation( $args, $validator );
+		}
+
+		if ( $sanitizer ) {
+			$args = $this->apply_sanitizer( $args, $sanitizer );
+		}
+
+		return $args;
+	}
+
+	protected function prepare_request_object( $http_verb, $namespace, $uri) {
+		$request_uri = isset( $_SERVER['REQUEST_URI'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
+		$url_prefix  = '/' . rest_get_url_prefix();
+		$request_uri = substr( $request_uri, strlen( $url_prefix ) );
+
+		$route   = '/' . $namespace . $uri;
+		$request = new WP_REST_Request( $http_verb, $request_uri );
+		$request = $this->append_header( $request );
+		$request = $this->append_uri_params( $request, $route );
+		$request = $this->append_params( $request );
+
+		return $request;
+	}
+
+	protected function append_header( WP_REST_Request $request ) {
+		$headers = $this->get_headers();
+
+		foreach( $headers as $key => $value ) {
+			$request->add_header( $key, $value );
+		}
+
+		return $request;
+	}
+
+
+    /**
+     * Get all HTTP header key/values as an associative array for the current request.
+     *
+     * @return array The HTTP header key/value pairs.
+     */
+    private function get_headers() {
+        $headers = array();
+
+        $copy_server = array(
+			'CONTENT_TYPE'    => 'Content-Type',
+			'CONTENT_LENGTH'  => 'Content-Length',
+			'CONTENT_MD5'     => 'Content-Md5',
+			'HTTP_X_WP_NONCE' => 'HTTP_X_WP_NONCE'
+        );
+
+        foreach ( $_SERVER as $key => $value ) {
+            if ( substr( $key, 0, 5 ) === 'HTTP_' ) {
+                $key = substr( $key, 5 );
+
+                if ( ! isset( $copy_server[ $key ] ) || !isset( $_SERVER[ $key ] ) ) {
+                    $key = str_replace( ' ', '-', ucwords( strtolower( str_replace( '_', ' ', $key ) ) ) );
+                    $headers[ $key ] = $value;
+                }
+            } elseif ( isset( $copy_server[$key] ) ) {
+                $headers[ $copy_server[ $key ] ] = $value;
+            }
+        }
+
+        if ( ! isset( $headers['Authorization'] ) ) {
+            if ( isset( $_SERVER['REDIRECT_HTTP_AUTHORIZATION'] ) ) {
+                $headers['Authorization'] = isset( $_SERVER['REDIRECT_HTTP_AUTHORIZATION'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REDIRECT_HTTP_AUTHORIZATION'] ) ) : '';
+            } elseif ( isset( $_SERVER['PHP_AUTH_USER'] ) ) {
+                $basic_pass = isset( $_SERVER['PHP_AUTH_PW'] ) ? sanitize_text_field( wp_unslash( $_SERVER['PHP_AUTH_PW'] )  ) : '';
+                $auth_user  = isset( $_SERVER['PHP_AUTH_USER'] ) ? sanitize_text_field( wp_unslash( $_SERVER['PHP_AUTH_USER'] ) ) : '';
+                $headers['Authorization'] = 'Basic ' . base64_encode( $auth_user . ':' . $basic_pass );
+            } elseif ( isset( $_SERVER['PHP_AUTH_DIGEST'] ) ) {
+                $headers['Authorization'] = isset( $_SERVER['PHP_AUTH_DIGEST'] ) ? sanitize_text_field( wp_unslash( $_SERVER['PHP_AUTH_DIGEST'] ) ) : '';
+            }
+        }
+
+        return $headers;
+    }
+
+    protected function append_uri_params( WP_REST_Request $request, $route ) {
+    	$request_uri = $request->get_route();
+    	$uri_parts   = explode( '/', $request_uri );
+    	$route_parts = explode( '/', $route );
+    	$params = [];
+
+    	if ( count( $uri_parts ) === count( $route_parts ) ) {
+    		foreach ( $uri_parts as $key => $value ) {
+    			if ( $value === $route_parts[ $key ] ) {
+    				continue;
+    			} elseif ( preg_match( "/^(\(\?P<).+(>\.\+\))$/", $route_parts[ $key ] ) ) {
+    				$param = str_replace( "(?P<", '', $route_parts[ $key ] );
+    				$param = str_replace( ">.+)", '', $param );
+    				$params[ $param ] = $value;
+    			}
+    		}
+    	}
+
+    	$request->set_url_params( $params );
+
+    	return $request;
+    }
+
+	protected function append_params( WP_REST_Request $request ) {
+		$nonce = $request->get_header( 'x_wp_nonce' );
+
+		// if ( ! isset(  $_SERVER['HTTP_X_WP_NONCE'] ) ) {
+		// 	return $request;
+		// };
+
+		// $nonce = sanitize_text_field( $_SERVER['HTTP_X_WP_NONCE'] );
+
+		// JWT/mobile requests carry no wp_rest nonce but transformers still need the shared request object, so always set it before the nonce gate.
+		static::$request = $request;
+
+		if ( ! wp_verify_nonce( $nonce, 'wp_rest' ) ) {
+			return $request;
+		}
+
+		$get_data = wp_unslash( $_GET );
+		$post_data = wp_unslash( $_POST );
+		$file_data = wp_unslash( $_FILES );
+
+		// Handle JSON body — $_POST is empty when Content-Type is application/json
+		if ( empty( $post_data ) && $request->get_content_type() ) {
+			$content_type = $request->get_content_type();
+			if ( isset( $content_type['value'] ) && $content_type['value'] === 'application/json' ) {
+				$json_params = $request->get_json_params();
+				if ( is_array( $json_params ) && ! empty( $json_params ) ) {
+					$post_data = $json_params;
+				}
+			}
+		}
+
+		$request->set_query_params( $get_data );
+		$request->set_body_params( $post_data );
+		$request->set_file_params( $file_data );
+		return $request;
+	}
+
+	/**
+	 * Apply validation to the data that are passed to a wp rest route.
+	 *
+	 * @param  array $args (Arguments/Parameters that will be passed to a wp
+	 * rest route.)
+	 *
+	 * @param  Validator $validator
+	 *
+	 * @return array (Array of arguments/parameters that will be passed to a
+	 * wp rest route.)
+	 */
+	protected function apply_validation( $args, Validator $validator ) {
+		$rules = $validator->rules();
+		$keys  = array_keys( $rules );
+
+		foreach ( $keys as $key ) {
+			$args[$key] = [
+				'required' => in_array( 'required', explode( '|', $rules[$key] ) ),
+				'validate_callback' => function ( $param, $request, $key ) use ( $validator ) {
+					if ( $validator->validate( $request, $key ) ) {
+						return true;
+					}
+
+					$errors = $validator->get_errors( $key );
+					$message = is_array( $errors ) ? implode( ' ', $errors ) : $errors;
+
+					return new WP_Error(
+						'rest_invalid_param',
+						$message,
+						array(
+							'status' => 400
+						)
+					);
+				},
+			];
+		}
+
+		return $args;
+	}
+
+	/**
+	 * Apply sanitization to the data that are passed to a wp rest route.
+	 *
+	 * @param  array $args (Arguments/Parameters that will be passed to a wp
+	 * rest route.)
+	 *
+	 * @param  Sanitizer $sanitizer
+	 *
+	 * @return array (Array of arguments/parameters that will be passed to a
+	 * wp rest route.)
+	 */
+	protected function apply_sanitizer( $args, Sanitizer $sanitizer ) {
+		$filters = $sanitizer->filters();
+		$keys = array_keys( $filters );
+
+		foreach ( $keys as $key ) {
+			$args[ $key ]['sanitize_callback'] = function ( $param, $request, $key ) use ( $sanitizer ) {
+				return $sanitizer->sanitize( $request, $key );
+			};
+		}
+
+		return $args;
+	}
+}

@@ -1,0 +1,4585 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Internship Program | Arshith Group Careers</title>
+  <meta name="description"
+    content="Launch your career with Arshith Group's Internship Program. Real production projects, executive mentorship, and fast-track PPO opportunities." />
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- Google Fonts: Outfit & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800;900&display=swap"
+    rel="stylesheet" />
+
+  <!-- Site CSS -->
+  <link rel="stylesheet" href="styles.css?v=6" />
+  <link rel="stylesheet" href="styles2.css?v=6" />
+  <link rel="stylesheet" href="footer-premium.css?v=6" />
+
+  <style>
+    /* ============================================================
+       ARSHITH GROUP - HIGH IMPACT INTERNSHIP PAGE WITH ANIMATIONS
+       Theme: Fresh MNC Mint & Emerald (#C2EDC2, #0abf9e, #0f172a)
+       ============================================================ */
+    :root {
+      --mint-bg0: #C2EDC2;
+      /* Soft fresh light mint */
+      --mint-bg1: #eef0f3;
+      /* Soft MNC gray */
+      --mint-brand: #0abf9e;
+      /* Brand emerald green */
+      --mint-brand-dark: #059669;
+      /* Dark emerald */
+      --mint-brand-light: #dcfce7;
+      /* Light emerald tint */
+      --text-dark: #0f172a;
+      /* Primary dark text - HIGH VISIBILITY */
+      --text-muted: #334155;
+      /* Muted text - HIGH VISIBILITY */
+      --font-head: 'Outfit', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Force all text & elements to be 100% visible, overriding any opacity bugs */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(180deg, var(--mint-bg0) 0%, var(--mint-bg1) 35%, #ffffff 100%);
+      color: var(--text-dark);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* ── SECTION COMMON UTILITIES ── */
+    .mint-section {
+      padding: 90px 0;
+      position: relative;
+    }
+
+    .mint-section-alt {
+      background: #f8fafc;
+    }
+
+    .mint-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 18px;
+      border-radius: 30px;
+      font-family: var(--font-head);
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 16px;
+      background: #ffffff;
+      color: var(--mint-brand-dark);
+      border: 1px solid rgba(10, 191, 158, 0.35);
+      box-shadow: 0 4px 12px rgba(10, 191, 158, 0.12);
+    }
+
+    .mint-heading-center {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 55px auto;
+    }
+
+    .mint-title-lg {
+      font-family: var(--font-head);
+      font-size: 2.6rem;
+      font-weight: 800;
+      line-height: 1.25;
+      color: var(--text-dark);
+      margin-bottom: 16px;
+      letter-spacing: -0.5px;
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+
+    .mint-desc-md {
+      font-size: 1.05rem;
+      line-height: 1.65;
+      color: var(--text-muted);
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+
+    /* High-Contrast Overrides for Dark Background Sections */
+    #benefits .mint-title-lg,
+    #values .mint-title-lg {
+      color: #ffffff !important;
+      text-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+    }
+
+    #benefits .mint-desc-md,
+    #values .mint-desc-md {
+      color: #cbd5e1 !important;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    /* ── DYNAMIC CARD ANIMATIONS ── */
+    .anim-card {
+      transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+
+    .anim-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(10, 191, 158, 0.2);
+    }
+
+    /* Keyframe float for visual banners */
+    @keyframes floatGraphic {
+
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .floating-banner {
+      animation: floatGraphic 4s ease-in-out infinite;
+    }
+
+    /* ── 1. HERO SECTION WITH INTERNSHIP BANNER ── */
+    .mint-hero {
+      position: relative;
+      padding: 150px 0 90px 0;
+      background: linear-gradient(135deg, rgba(194, 237, 194, 0.9) 0%, rgba(238, 240, 243, 0.95) 100%);
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 45px;
+      align-items: center;
+    }
+
+    .mint-badge-live {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #ffffff;
+      color: var(--mint-brand-dark);
+      padding: 8px 20px;
+      border-radius: 30px;
+      font-weight: 800;
+      font-size: 0.85rem;
+      border: 1px solid rgba(10, 191, 158, 0.35);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+      margin-bottom: 24px;
+    }
+
+    .mint-badge-live i {
+      color: var(--mint-brand);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.5;
+        transform: scale(1.3);
+      }
+    }
+
+    .mint-hero-title {
+      font-family: var(--font-head);
+      font-size: 3.4rem;
+      font-weight: 900;
+      line-height: 1.15;
+      color: var(--text-dark) !important;
+      margin-bottom: 22px;
+      letter-spacing: -1px;
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+
+    .mint-hero-title span {
+      color: var(--mint-brand-dark);
+      background: linear-gradient(135deg, #0abf9e 0%, #047857 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* ── CINEMATIC FULL-SCREEN HERO SECTION (HIGH VISIBILITY & AZURE MINT THEME) ── */
+    .cinematic-hero-section {
+      position: relative;
+      min-height: 92vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 130px 24px 80px 24px;
+      overflow: hidden;
+      background: #090e1a;
+      color: #ffffff;
+      margin-top: 80px;
+    }
+
+    .cinematic-hero-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      object-fit: cover;
+      opacity: 0.70;
+      filter: brightness(0.92) contrast(1.12);
+      transition: opacity 0.5s ease;
+    }
+
+    .cinematic-hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      background: radial-gradient(circle at center, rgba(15, 23, 42, 0.40) 0%, rgba(9, 14, 26, 0.78) 100%),
+        linear-gradient(180deg, rgba(15, 23, 42, 0.50) 0%, rgba(9, 14, 26, 0.85) 100%);
+    }
+
+    .cinematic-hero-container {
+      position: relative;
+      z-index: 3;
+      max-width: 1150px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .cinematic-badge-live {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 24px;
+      border-radius: 30px;
+      background: rgba(16, 185, 129, 0.22);
+      border: 1.5px solid #10b981;
+      color: #ffffff;
+      font-family: var(--font-head);
+      font-size: 0.9rem;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 0 25px rgba(16, 185, 129, 0.35);
+    }
+
+    .cinematic-hero-h1 {
+      font-family: var(--font-head);
+      font-size: 4.2rem;
+      font-weight: 900;
+      line-height: 1.15;
+      color: #ffffff;
+      letter-spacing: -1px;
+      margin-bottom: 24px;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .cinematic-bracket {
+      color: #38bdf8;
+      font-weight: 900;
+      font-family: monospace, sans-serif;
+    }
+
+    .cinematic-bracket-highlight {
+      background: linear-gradient(135deg, #06b6d4 0%, #10b981 50%, #38bdf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+      padding: 0 6px;
+      filter: drop-shadow(0 2px 10px rgba(6, 182, 212, 0.3));
+    }
+
+    .cinematic-hero-sub {
+      font-size: 1.25rem;
+      line-height: 1.7;
+      color: #f1f5f9;
+      max-width: 840px;
+      margin: 0 auto 38px auto;
+      font-weight: 500;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+    }
+
+    .cinematic-hero-actions {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 50px;
+    }
+
+    .hero-stat-card-glass {
+      background: rgba(15, 23, 42, 0.78) !important;
+      border: 1.5px solid rgba(255, 255, 255, 0.22) !important;
+      backdrop-filter: blur(16px) !important;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45) !important;
+      border-radius: 20px !important;
+      padding: 22px 28px !important;
+      transition: all 0.3s ease !important;
+    }
+
+    .hero-stat-card-glass:hover {
+      transform: translateY(-5px) !important;
+      border-color: #06b6d4 !important;
+      box-shadow: 0 16px 40px rgba(6, 182, 212, 0.3) !important;
+    }
+
+    /* ── UNIFIED CYBER NAVY FLOATING CARDS (BENEFITS & VALUES) ── */
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 45px;
+    }
+
+    .benefit-card-float {
+      background: linear-gradient(145deg, rgba(15, 23, 42, 0.85) 0%, rgba(13, 21, 39, 0.95) 100%);
+      border-radius: 22px;
+      padding: 40px 30px;
+      border: 1.5px solid rgba(255, 255, 255, 0.14);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(16px);
+      transition: all 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+      text-align: center;
+      position: relative;
+    }
+
+    .benefit-card-float:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 22px 50px rgba(16, 185, 129, 0.3);
+      border-color: #10b981;
+    }
+
+    .benefit-icon-box {
+      width: 72px;
+      height: 72px;
+      border-radius: 22px;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1.5px solid rgba(16, 185, 129, 0.4);
+      color: #34d399;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.85rem;
+      margin-bottom: 22px;
+      transition: all 0.35s ease;
+    }
+
+    .benefit-card-float:hover .benefit-icon-box {
+      background: #10b981;
+      color: #ffffff;
+      transform: scale(1.1) rotate(4deg);
+      box-shadow: 0 0 25px rgba(16, 185, 129, 0.6);
+    }
+
+    .benefit-card-float h3 {
+      font-family: var(--font-head);
+      font-size: 1.38rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 14px;
+    }
+
+    .benefit-card-float p {
+      font-size: 0.98rem;
+      line-height: 1.7;
+      color: #cbd5e1;
+      margin: 0;
+    }
+
+    /* ── OUR VALUES DARK FLOATING CONTRAST CARDS ── */
+    .values-grid-dark {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 45px;
+    }
+
+    .value-card-dark {
+      background: linear-gradient(145deg, rgba(15, 23, 42, 0.85) 0%, rgba(13, 21, 39, 0.95) 100%);
+      border-radius: 22px;
+      padding: 42px 32px;
+      border: 1.5px solid rgba(255, 255, 255, 0.14);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(16px);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      color: #ffffff;
+      text-align: left;
+    }
+
+    .value-card-dark:hover {
+      transform: translateY(-12px);
+      border-color: #0284c7;
+      box-shadow: 0 22px 50px rgba(2, 132, 199, 0.38);
+    }
+
+    .value-icon-dark {
+      width: 64px;
+      height: 64px;
+      border-radius: 18px;
+      background: rgba(56, 189, 248, 0.15);
+      border: 1.5px solid rgba(56, 189, 248, 0.4);
+      color: #38bdf8;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.75rem;
+      margin-bottom: 24px;
+      transition: all 0.35s ease;
+    }
+
+    .value-card-dark:hover .value-icon-dark {
+      background: #0284c7;
+      color: #ffffff;
+      transform: scale(1.1);
+      box-shadow: 0 0 25px rgba(2, 132, 199, 0.6);
+    }
+
+    .value-card-dark h3 {
+      font-family: var(--font-head);
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 14px;
+    }
+
+    .value-card-dark p {
+      font-size: 0.98rem;
+      line-height: 1.7;
+      color: #cbd5e1;
+      margin: 0;
+    }
+
+    /* ── INTERACTIVE DOMAINS & OPENINGS PORTAL (GEO-CIVIX / JOB PORTAL GRID STYLE) ── */
+    .portal-search-bar {
+      background: linear-gradient(145deg, rgba(15, 23, 42, 0.85) 0%, rgba(13, 21, 39, 0.95) 100%);
+      border: 1.5px solid rgba(255, 255, 255, 0.18);
+      border-radius: 22px;
+      padding: 24px 28px;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+      margin-bottom: 45px;
+    }
+
+    .portal-search-input-wrap {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 18px;
+      position: relative;
+    }
+
+    .portal-search-icon {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #38bdf8;
+      font-size: 1.1rem;
+    }
+
+    .portal-search-input {
+      width: 100%;
+      background: rgba(9, 14, 26, 0.85);
+      border: 1.5px solid rgba(255, 255, 255, 0.18);
+      border-radius: 14px;
+      padding: 14px 20px 14px 50px;
+      color: #ffffff;
+      font-family: var(--font-body);
+      font-size: 1.02rem;
+      transition: all 0.3s ease;
+    }
+
+    .portal-search-input:focus {
+      outline: none;
+      border-color: #06b6d4;
+      box-shadow: 0 0 25px rgba(6, 182, 212, 0.35);
+    }
+
+    .portal-filter-pills {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .filter-select-pill {
+      background: rgba(9, 14, 26, 0.85);
+      border: 1.5px solid rgba(255, 255, 255, 0.16);
+      color: #38bdf8;
+      padding: 10px 18px;
+      border-radius: 30px;
+      font-family: var(--font-head);
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .filter-select-pill:hover {
+      border-color: #06b6d4;
+      background: rgba(6, 182, 212, 0.18);
+      color: #ffffff;
+    }
+
+    .role-grid-portal {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+
+    .role-card-portal {
+      background: linear-gradient(145deg, rgba(15, 23, 42, 0.85) 0%, rgba(13, 21, 39, 0.95) 100%);
+      border-radius: 22px;
+      padding: 32px 28px;
+      border: 1.5px solid rgba(255, 255, 255, 0.14);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(16px);
+      transition: all 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .role-card-portal:hover {
+      transform: translateY(-8px);
+      border-color: #06b6d4;
+      box-shadow: 0 22px 50px rgba(6, 182, 212, 0.3);
+    }
+
+    .role-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .role-brand-icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 16px;
+      background: rgba(6, 182, 212, 0.15);
+      border: 1.5px solid rgba(6, 182, 212, 0.4);
+      color: #38bdf8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.65rem;
+    }
+
+    .role-pill-badge {
+      padding: 6px 15px;
+      border-radius: 20px;
+      background: rgba(16, 185, 129, 0.2);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #34d399;
+      font-family: var(--font-head);
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .role-portal-title {
+      font-family: var(--font-head);
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 10px;
+      line-height: 1.35;
+    }
+
+    .role-portal-meta {
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .role-btn-bar {
+      display: flex;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .role-btn-apply {
+      flex: 1.2;
+      background: linear-gradient(135deg, #0284c7 0%, #0d9488 100%);
+      color: #ffffff !important;
+      border: none;
+      padding: 13px 18px;
+      border-radius: 12px;
+      font-family: var(--font-head);
+      font-size: 0.96rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+      box-shadow: 0 6px 18px rgba(2, 132, 199, 0.35);
+      transition: all 0.3s ease;
+    }
+
+    .role-btn-apply:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(2, 132, 199, 0.55);
+    }
+
+    .role-btn-details {
+      flex: 0.8;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1.5px solid rgba(255, 255, 255, 0.25);
+      color: #ffffff !important;
+      padding: 13px 16px;
+      border-radius: 12px;
+      font-family: var(--font-head);
+      font-size: 0.95rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .role-btn-details:hover {
+      background: rgba(255, 255, 255, 0.24);
+      border-color: #38bdf8;
+    }
+
+    /* ── ROLE DETAILS GLASSMORPHIC MODAL ── */
+    .role-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(9, 14, 26, 0.88);
+      backdrop-filter: blur(16px);
+      z-index: 99999;
+      display: none !important;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .role-modal-overlay.active {
+      display: flex !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+
+    .role-modal-container {
+      background: linear-gradient(145deg, #0f172a 0%, #090e1a 100%);
+      border: 1.5px solid rgba(6, 182, 212, 0.45);
+      box-shadow: 0 25px 65px rgba(0, 0, 0, 0.75), 0 0 40px rgba(6, 182, 212, 0.3);
+      border-radius: 26px;
+      width: 100%;
+      max-width: 880px;
+      max-height: 88vh;
+      overflow-y: auto;
+      padding: 40px 34px;
+      color: #ffffff;
+      position: relative;
+      transform: scale(0.92);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .role-modal-overlay.active .role-modal-container {
+      transform: scale(1);
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1.5px solid rgba(255, 255, 255, 0.25);
+      color: #ffffff;
+      font-size: 1.25rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .modal-close-btn:hover {
+      background: #ef4444;
+      border-color: #ef4444;
+      transform: rotate(90deg);
+    }
+
+    .modal-header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 20px;
+      background: rgba(16, 185, 129, 0.2);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #34d399;
+      font-family: var(--font-head);
+      font-size: 0.85rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 14px;
+    }
+
+    .modal-section-title {
+      font-family: var(--font-head);
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #38bdf8;
+      margin-top: 26px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      padding-bottom: 8px;
+    }
+
+    .modal-stipend-box-online {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(5, 150, 105, 0.25) 100%);
+      border: 1.5px solid rgba(16, 185, 129, 0.5);
+      border-radius: 18px;
+      padding: 20px 24px;
+      margin-top: 12px;
+      margin-bottom: 14px;
+    }
+
+    .modal-stipend-box-offline {
+      background: linear-gradient(135deg, rgba(2, 132, 199, 0.15) 0%, rgba(13, 148, 136, 0.25) 100%);
+      border: 1.5px solid rgba(2, 132, 199, 0.5);
+      border-radius: 18px;
+      padding: 20px 24px;
+      margin-top: 12px;
+      margin-bottom: 18px;
+    }
+
+    .modal-tech-tag {
+      display: inline-block;
+      background: rgba(6, 182, 212, 0.15);
+      border: 1px solid rgba(6, 182, 212, 0.35);
+      color: #38bdf8;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      margin: 4px;
+    }
+
+    @media (max-width: 992px) {
+      .role-grid-portal {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .role-grid-portal {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 992px) {
+
+      .benefits-grid,
+      .values-grid-dark {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+
+      .benefits-grid,
+      .values-grid-dark {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Scroll Bounce Arrow */
+    .scroll-bounce-btn {
+      position: absolute;
+      bottom: 25px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 4;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      animation: bounceArrow 2s infinite;
+    }
+
+    .scroll-bounce-btn:hover {
+      background: #0abf9e;
+      border-color: #0abf9e;
+      color: #ffffff;
+      box-shadow: 0 0 20px rgba(10, 191, 158, 0.5);
+    }
+
+    @keyframes bounceArrow {
+
+      0%,
+      20%,
+      50%,
+      80%,
+      100% {
+        transform: translate(-50%, 0);
+      }
+
+      40% {
+        transform: translate(-50%, -10px);
+      }
+
+      60% {
+        transform: translate(-50%, -5px);
+      }
+    }
+
+    @keyframes pulseGlow {
+      0% {
+        opacity: 0.4;
+      }
+
+      50% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0.4;
+      }
+    }
+
+    .mint-hero-sub {
+      font-size: 1.12rem;
+      line-height: 1.7;
+      color: var(--text-muted) !important;
+      margin-bottom: 36px;
+      max-width: 580px;
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+
+    .mint-btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: linear-gradient(135deg, #0abf9e 0%, #059669 100%);
+      color: #ffffff !important;
+      font-family: var(--font-head);
+      font-size: 1.05rem;
+      font-weight: 700;
+      padding: 16px 36px;
+      border-radius: 30px;
+      text-decoration: none;
+      box-shadow: 0 10px 25px rgba(10, 191, 158, 0.35);
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .mint-btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px rgba(10, 191, 158, 0.5);
+      color: #ffffff !important;
+    }
+
+    .mint-btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: #ffffff;
+      color: #0f172a !important;
+      font-family: var(--font-head);
+      font-size: 1.05rem;
+      font-weight: 800;
+      padding: 12px 28px 12px 18px;
+      border-radius: 35px;
+      text-decoration: none;
+      border: 1.5px solid #cbd5e1;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .mint-btn-secondary i {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: #dcfce7;
+      color: #059669 !important;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      transition: all 0.3s ease;
+      padding-left: 3px;
+    }
+
+    .mint-btn-secondary:hover {
+      border-color: #0abf9e;
+      color: #059669 !important;
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px rgba(10, 191, 158, 0.2);
+    }
+
+    .mint-btn-secondary:hover i {
+      background: #0abf9e;
+      color: #ffffff !important;
+      transform: scale(1.12);
+    }
+
+    /* Hero Banner Image Wrap */
+    .hero-banner-container {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+      border: 3px solid #ffffff;
+      background: #ffffff;
+    }
+
+    .hero-banner-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .hero-banner-container:hover .hero-banner-img {
+      transform: scale(1.03);
+    }
+
+    .hero-banner-overlay-tag {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      background: rgba(15, 23, 42, 0.88);
+      backdrop-filter: blur(8px);
+      color: #ffffff;
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-family: var(--font-head);
+      font-size: 0.85rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .hero-stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-top: 50px;
+    }
+
+    .hero-stat-card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 24px 20px;
+      text-align: center;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.04);
+    }
+
+    .hero-stat-num {
+      font-family: var(--font-head);
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--mint-brand-dark) !important;
+      margin-bottom: 4px;
+    }
+
+    .hero-stat-lbl {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text-muted) !important;
+    }
+
+    /* ── 2. WHY INTERN AT ARSHITH GROUP? ── */
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .why-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 22px;
+      padding: 32px 24px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.04);
+    }
+
+    .why-icon {
+      width: 58px;
+      height: 58px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 24px;
+      background: var(--mint-brand-light);
+      color: var(--mint-brand-dark);
+    }
+
+    .why-card h3 {
+      font-family: var(--font-head);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-dark) !important;
+      margin-bottom: 12px;
+    }
+
+    .why-card p {
+      font-size: 0.92rem;
+      line-height: 1.6;
+      color: var(--text-muted) !important;
+      margin: 0;
+    }
+
+    /* ── 3. WHAT MAKES OUR INTERNSHIP DIFFERENT? ── */
+    .diff-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+
+    .diff-card {
+      border-radius: 24px;
+      padding: 40px;
+    }
+
+    .diff-card-old {
+      background: #fff5f5;
+      border: 1px solid #fecaca;
+    }
+
+    .diff-card-new {
+      background: #ffffff;
+      border: 2px solid var(--mint-brand);
+      box-shadow: 0 15px 35px rgba(10, 191, 158, 0.15);
+    }
+
+    .diff-card h3 {
+      font-family: var(--font-head);
+      font-size: 1.45rem;
+      font-weight: 800;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .diff-ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .diff-ul li {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+
+    /* ── 4. EXPLORE OUR INTERNSHIP DOMAINS ── */
+    .domain-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .domain-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 22px;
+      padding: 32px 26px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.04);
+    }
+
+    .domain-ico {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: var(--mint-brand-light);
+      color: var(--mint-brand-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+    }
+
+    .domain-card h4 {
+      font-family: var(--font-head);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-dark) !important;
+      margin-bottom: 10px;
+    }
+
+    .domain-card p {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: var(--text-muted) !important;
+      margin-bottom: 20px;
+    }
+
+    .domain-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .domain-tag-item {
+      font-size: 0.76rem;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 12px;
+      background: #f1f5f9;
+      color: #334155 !important;
+    }
+
+    /* ── 5. WHAT WILL YOU ACTUALLY WORK ON? ── */
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+    }
+
+    .work-card {
+      background: #ffffff;
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      border: 1px solid #e2e8f0;
+    }
+
+    .work-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .work-body {
+      padding: 28px;
+    }
+
+    .work-badge {
+      font-family: var(--font-head);
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: var(--mint-brand-dark);
+      background: var(--mint-brand-light);
+      padding: 4px 14px;
+      border-radius: 20px;
+      display: inline-block;
+      margin-bottom: 14px;
+    }
+
+    .work-card h4 {
+      font-family: var(--font-head);
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--text-dark) !important;
+      margin-bottom: 10px;
+    }
+
+    .work-card p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--text-muted) !important;
+      margin: 0;
+    }
+
+    /* ── 6. INTERNSHIP ROADMAP ── */
+    .roadmap-timeline {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 16px;
+    }
+
+    .roadmap-node {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 20px;
+      padding: 24px 16px;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+    }
+
+    .roadmap-num {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #0abf9e 0%, #059669 100%);
+      color: #ffffff !important;
+      font-family: var(--font-head);
+      font-weight: 800;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 14px auto;
+      box-shadow: 0 4px 12px rgba(10, 191, 158, 0.3);
+    }
+
+    .roadmap-node h5 {
+      font-family: var(--font-head);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-dark) !important;
+      margin-bottom: 8px;
+    }
+
+    .roadmap-node p {
+      font-size: 0.8rem;
+      line-height: 1.45;
+      color: var(--text-muted) !important;
+      margin: 0;
+    }
+
+    /* ── 7. SKILLS YOU'LL BUILD ── */
+    .skills-cloud-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
+      max-width: 920px;
+      margin: 0 auto;
+    }
+
+    .skill-pill {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-dark) !important;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    }
+
+    .skill-pill:hover {
+      border-color: var(--mint-brand);
+      background: var(--mint-brand-light);
+      color: var(--mint-brand-dark) !important;
+      transform: translateY(-3px);
+    }
+
+    /* ── 8. MEET OUR INTERNS (ALUMNI REVIEWS - NO IMAGES) ── */
+    .testi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 36px;
+    }
+
+    .testi-card {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 32px 28px;
+      border: 1.5px solid #e2e8f0;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.04);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .testi-card:hover {
+      transform: translateY(-6px);
+      border-color: #0abf9e;
+      box-shadow: 0 18px 40px rgba(10, 191, 158, 0.18);
+    }
+
+    .testi-header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .testi-quote-icon {
+      font-size: 2rem;
+      color: #0abf9e;
+      opacity: 0.8;
+    }
+
+    .testi-stars {
+      display: flex;
+      gap: 4px;
+      color: #fbbf24;
+      font-size: 0.9rem;
+    }
+
+    .testi-quote {
+      font-family: var(--font-body);
+      font-size: 0.96rem;
+      line-height: 1.68;
+      color: #334155 !important;
+      font-style: normal;
+      margin-bottom: 28px;
+    }
+
+    .testi-footer-info {
+      border-top: 1px solid #f1f5f9;
+      padding-top: 18px;
+    }
+
+    .testi-author-name {
+      font-family: var(--font-head);
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #0f172a !important;
+      margin: 0 0 4px 0;
+    }
+
+    .testi-role-badge {
+      display: inline-block;
+      font-family: var(--font-head);
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #059669;
+      background: #dcfce7;
+      padding: 3px 10px;
+      border-radius: 12px;
+    }
+
+    @media (max-width: 992px) {
+      .testi-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .testi-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ── 9. WHAT WE LOOK FOR (MNC CANDIDATE EVALUATION CARDS) ── */
+    .lookfor-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 36px;
+    }
+
+    .lookfor-card {
+      background: #ffffff;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 22px;
+      padding: 32px 24px;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.04);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .lookfor-card:hover {
+      transform: translateY(-6px);
+      border-color: #0abf9e;
+      box-shadow: 0 18px 40px rgba(10, 191, 158, 0.18);
+    }
+
+    .lookfor-icon-box {
+      width: 60px;
+      height: 60px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(10, 191, 158, 0.12) 0%, rgba(56, 189, 248, 0.12) 100%);
+      border: 1px solid rgba(10, 191, 158, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+    }
+
+    .lookfor-card i {
+      font-size: 1.6rem;
+      color: #0abf9e;
+    }
+
+    .lookfor-card h4 {
+      font-family: var(--font-head);
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #0f172a !important;
+      margin-bottom: 8px;
+    }
+
+    .lookfor-card p {
+      font-size: 0.92rem;
+      line-height: 1.6;
+      color: #475569 !important;
+      margin-bottom: 18px;
+    }
+
+    .lookfor-badge {
+      display: inline-block;
+      font-family: var(--font-head);
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 12px;
+      background: #e0f2fe;
+      color: #0284c7;
+    }
+
+    @media (max-width: 1024px) {
+      .lookfor-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .lookfor-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ── 10. INTERNSHIP BENEFITS ── */
+    .benefit-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 36px;
+    }
+
+    .benefit-card {
+      background: #ffffff;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 24px;
+      padding: 32px 28px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.04);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .benefit-card:hover {
+      transform: translateY(-6px);
+      border-color: #0abf9e;
+      box-shadow: 0 18px 40px rgba(10, 191, 158, 0.18);
+    }
+
+    .benefit-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #0abf9e 0%, #059669 100%);
+      color: #ffffff !important;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      box-shadow: 0 8px 20px rgba(10, 191, 158, 0.25);
+    }
+
+    .benefit-icon i {
+      color: #ffffff !important;
+    }
+
+    .benefit-card h4 {
+      font-family: var(--font-head);
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #0f172a !important;
+      margin-bottom: 8px;
+    }
+
+    .benefit-card p {
+      font-size: 0.92rem;
+      line-height: 1.6;
+      color: #475569 !important;
+      margin: 0;
+    }
+
+    @media (max-width: 992px) {
+      .benefit-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .benefit-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ── 11. MINT FAQ ACCORDION CONTAINER (REFERENCE DESIGN) ── */
+    .faq-mint-wrapper {
+      background: #c7e5d6;
+      border-radius: 32px;
+      padding: 44px 40px;
+      max-width: 960px;
+      margin: 40px auto 0 auto;
+      box-shadow: 0 20px 50px rgba(10, 191, 158, 0.08);
+    }
+
+    .faq-category-group {
+      margin-bottom: 28px;
+    }
+
+    .faq-category-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .faq-category-label {
+      font-family: var(--font-head);
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #0d8a6e;
+      margin-bottom: 14px;
+      letter-spacing: 0.2px;
+    }
+
+    .faq-accordion-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .faq-accordion-item {
+      background: #ffffff;
+      border-radius: 18px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+    }
+
+    .faq-accordion-header {
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .faq-accordion-header h4 {
+      font-family: var(--font-head);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #1e293b !important;
+      margin: 0;
+    }
+
+    .faq-accordion-header i {
+      font-size: 1rem;
+      color: #0abf9e;
+      transition: transform 0.3s ease;
+    }
+
+    .faq-accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s cubic-bezier(0, 1, 0, 1), padding 0.35s ease;
+      background: #e8f5ed;
+      padding: 0 24px;
+    }
+
+    .faq-accordion-item.active {
+      background: #e8f5ed;
+    }
+
+    .faq-accordion-item.active .faq-accordion-header i {
+      transform: rotate(180deg);
+    }
+
+    .faq-accordion-item.active .faq-accordion-content {
+      max-height: 300px;
+      padding: 0 24px 22px 24px;
+    }
+
+    .faq-accordion-content p {
+      font-family: var(--font-body);
+      font-size: 0.94rem;
+      line-height: 1.65;
+      color: #334155 !important;
+      margin: 0;
+    }
+
+    @media (max-width: 640px) {
+      .faq-mint-wrapper {
+        padding: 28px 20px;
+        border-radius: 24px;
+      }
+
+      .faq-accordion-header {
+        padding: 16px 18px;
+      }
+
+      .faq-accordion-header h4 {
+        font-size: 0.95rem;
+      }
+    }
+
+    /* ── 11. INTERNSHIP OPENINGS ── */
+    .openings-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px;
+    }
+
+    .opening-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 24px;
+      padding: 35px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .opening-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+
+    .opening-title {
+      font-family: var(--font-head);
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--text-dark) !important;
+    }
+
+    .opening-badge {
+      background: var(--mint-brand-light);
+      color: var(--mint-brand-dark);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 20px;
+    }
+
+    .opening-meta-list {
+      display: flex;
+      gap: 16px;
+      font-size: 0.85rem;
+      color: var(--text-muted) !important;
+      margin-bottom: 18px;
+    }
+
+    .opening-meta-list span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .opening-desc {
+      font-size: 0.92rem;
+      line-height: 1.6;
+      color: var(--text-muted) !important;
+      margin-bottom: 24px;
+    }
+
+    .opening-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #0abf9e 0%, #059669 100%);
+      color: #ffffff !important;
+      font-family: var(--font-head);
+      font-weight: 700;
+      padding: 12px 24px;
+      border-radius: 25px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 4px 15px rgba(10, 191, 158, 0.25);
+    }
+
+    .opening-btn:hover {
+      box-shadow: 0 8px 25px rgba(10, 191, 158, 0.4);
+      transform: translateY(-2px);
+    }
+
+    /* ── 12. FINAL CTA ── */
+    .cta-banner-card {
+      background: linear-gradient(135deg, #0f172a 0%, #064e3b 100%);
+      border-radius: 32px;
+      padding: 70px 40px;
+      text-align: center;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+      color: #ffffff !important;
+    }
+
+    .cta-banner-title {
+      font-family: var(--font-head);
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: #ffffff !important;
+      margin-bottom: 18px;
+    }
+
+    .cta-banner-desc {
+      font-size: 1.1rem;
+      color: #a7f3d0 !important;
+      max-width: 650px;
+      margin: 0 auto 36px auto;
+      line-height: 1.6;
+    }
+
+
+
+    /* ── RESPONSIVE MEDIA QUERIES ── */
+    @media (max-width: 1024px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .why-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .domain-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .roadmap-timeline {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+
+      .lookfor-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .hero-stats-row {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .mint-hero-title {
+        font-size: 2.3rem;
+      }
+
+      .diff-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .domain-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .work-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .roadmap-timeline {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .testi-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .benefit-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .openings-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cta-banner-card {
+        padding: 45px 20px;
+      }
+
+      .cta-banner-title {
+        font-size: 2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .why-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .roadmap-timeline {
+        grid-template-columns: 1fr;
+      }
+
+      .lookfor-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-stats-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ── APPLICATION FORM SECTION ── */
+    .apply-form-card {
+      background: #ffffff;
+      border-radius: 28px;
+      padding: 45px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+      border: 2px solid var(--mint-brand);
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    .form-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text-dark) !important;
+      margin-bottom: 8px;
+    }
+
+    .form-input,
+    .form-select,
+    .form-textarea {
+      width: 100%;
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-radius: 12px;
+      padding: 14px 18px;
+      color: var(--text-dark) !important;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+      border-color: var(--mint-brand);
+      background: #ffffff;
+      box-shadow: 0 0 0 4px rgba(10, 191, 158, 0.15);
+    }
+
+    /* GLOBAL IMAGE VISIBILITY OVERRIDE */
+    img,
+    .work-img,
+    .hero-banner-img,
+    .culture-img,
+    .alumni-avatar-img {
+      opacity: 1 !important;
+      visibility: visible !important;
+      max-width: 100%;
+    }
+
+    /* ── CULTURE GALLERY SECTION ── */
+    .culture-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .culture-card {
+      background: #ffffff;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.04);
+      transition: all 0.35s ease;
+    }
+
+    .culture-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 35px rgba(10, 191, 158, 0.2);
+    }
+
+    .culture-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .culture-caption {
+      padding: 16px;
+      text-align: center;
+    }
+
+    .culture-caption h5 {
+      font-family: var(--font-head);
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--text-dark) !important;
+      margin: 0 0 4px 0;
+    }
+
+    .culture-caption p {
+      font-size: 0.8rem;
+      color: var(--text-muted) !important;
+      margin: 0;
+    }
+
+    /* ALUMNI PHOTO AVATAR STYLES */
+    .alumni-avatar-img {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--mint-brand);
+      box-shadow: 0 4px 10px rgba(10, 191, 158, 0.25);
+    }
+
+    @media (max-width: 1024px) {
+      .culture-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .culture-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ── CORPORATELY X STYLE DUAL-TONE CULTURE SECTION ── */
+    .corp-culture-wrapper {
+      position: relative;
+      width: 100%;
+      background: #f8fafc;
+      overflow: hidden;
+      padding-top: 70px;
+    }
+
+    .corp-culture-bg-dark {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 40%;
+      background-color: #0b1329;
+      z-index: 1;
+    }
+
+    .corp-culture-container {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px 80px 24px;
+    }
+
+    .corp-culture-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .corp-culture-left {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .corp-culture-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 20px;
+      background: #ffffff;
+      border: 1px solid rgba(10, 191, 158, 0.4);
+      color: #0abf9e;
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      width: fit-content;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 12px rgba(10, 191, 158, 0.1);
+    }
+
+    .corp-culture-title {
+      font-family: var(--font-head);
+      font-size: 3rem;
+      font-weight: 800;
+      color: #0f172a;
+      line-height: 1.15;
+      margin-bottom: 20px;
+      letter-spacing: -0.8px;
+    }
+
+    .corp-culture-desc {
+      font-family: var(--font-body);
+      font-size: 1.05rem;
+      color: #475569;
+      line-height: 1.65;
+      margin-bottom: 32px;
+      max-width: 480px;
+    }
+
+    .corp-culture-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #1e293b;
+      color: #ffffff !important;
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      width: fit-content;
+      transition: all 0.3s ease;
+      margin-bottom: 48px;
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.15);
+    }
+
+    .corp-culture-btn:hover {
+      background: #0abf9e;
+      color: #ffffff !important;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(10, 191, 158, 0.35);
+    }
+
+    .corp-culture-img-left-wrap {
+      width: 100%;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.28);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .corp-culture-img-left {
+      width: 100%;
+      height: 330px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .corp-culture-img-left-wrap:hover .corp-culture-img-left {
+      transform: scale(1.03);
+    }
+
+    .corp-culture-right {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .corp-culture-img-right-wrap {
+      width: 100%;
+      height: 100%;
+      min-height: 640px;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.32);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .corp-culture-img-right {
+      width: 100%;
+      height: 100%;
+      min-height: 640px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .corp-culture-img-right-wrap:hover .corp-culture-img-right {
+      transform: scale(1.03);
+    }
+
+    @media (max-width: 992px) {
+      .corp-culture-grid {
+        grid-template-columns: 1fr;
+        gap: 36px;
+      }
+
+      .corp-culture-title {
+        font-size: 2.2rem;
+      }
+
+      .corp-culture-img-right-wrap,
+      .corp-culture-img-right {
+        min-height: 420px;
+        height: 420px;
+      }
+    }
+
+    /* ── DARK PROFESSIONAL SKILLS CARDS SECTION (MATCHING REFERENCE DESIGN) ── */
+    .dark-skills-section {
+      background: linear-gradient(180deg, #0b1329 0%, #070d1d 100%);
+      padding: 90px 0 100px 0;
+      color: #ffffff;
+      position: relative;
+    }
+
+    .dark-skills-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 18px;
+      border-radius: 20px;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: #38bdf8;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .dark-skills-title {
+      font-family: var(--font-head);
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 16px;
+      letter-spacing: -0.5px;
+    }
+
+    .dark-skills-desc {
+      font-family: var(--font-body);
+      font-size: 1.05rem;
+      color: #94a3b8;
+      max-width: 620px;
+      margin: 0 auto 50px auto;
+      line-height: 1.6;
+    }
+
+    .dark-skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .dark-skill-card {
+      background: #121b2d;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 18px;
+      padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .dark-skill-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(56, 189, 248, 0.4);
+      background: #162238;
+      box-shadow: 0 20px 40px rgba(11, 19, 41, 0.5), 0 0 20px rgba(56, 189, 248, 0.15);
+    }
+
+    .dark-skill-icon-box {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      background: rgba(56, 189, 248, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      color: #38bdf8;
+      margin-bottom: 22px;
+      border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+
+    .dark-skill-card-title {
+      font-family: var(--font-head);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+
+    .dark-skill-card-text {
+      font-family: var(--font-body);
+      font-size: 0.92rem;
+      color: #94a3b8;
+      line-height: 1.6;
+      margin-bottom: 24px;
+      flex-grow: 1;
+    }
+
+    .dark-skill-card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #38bdf8;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: gap 0.3s ease, color 0.3s ease;
+    }
+
+    .dark-skill-card-link:hover {
+      color: #7dd3fc;
+      gap: 12px;
+    }
+
+    @media (max-width: 992px) {
+      .dark-skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .dark-skills-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ── 6-STAGE INFOGRAPHIC ROADMAP SECTION ── */
+    .info-roadmap-section {
+      background: linear-gradient(180deg, #f8fafc 0%, #eef2f6 100%);
+      padding: 90px 0 100px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .info-roadmap-grid {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 36px;
+      align-items: center;
+      position: relative;
+      margin-top: 50px;
+    }
+
+    /* Central Hub */
+    .info-hub-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 3;
+    }
+
+    .info-hub-circle {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: #ffffff;
+      box-shadow: 0 15px 35px rgba(10, 191, 158, 0.22), 0 0 0 10px rgba(255, 255, 255, 0.85);
+      border: 3px solid #0abf9e;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .info-hub-circle:hover {
+      transform: scale(1.05);
+      box-shadow: 0 20px 40px rgba(10, 191, 158, 0.35), 0 0 0 12px rgba(255, 255, 255, 0.95);
+    }
+
+    .info-hub-num {
+      font-family: var(--font-head);
+      font-size: 3rem;
+      font-weight: 900;
+      line-height: 1;
+      background: linear-gradient(135deg, #0abf9e 0%, #3b82f6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .info-hub-text {
+      font-family: var(--font-head);
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    .info-hub-dots {
+      display: flex;
+      gap: 5px;
+      margin-top: 6px;
+    }
+
+    .info-hub-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #cbd5e1;
+    }
+
+    .info-hub-dot.active {
+      background: #0abf9e;
+    }
+
+    /* Left & Right Columns */
+    .info-column {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      position: relative;
+    }
+
+    /* Capsule Card Component */
+    .info-card-wrap {
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+
+    .info-card-wrap.left-side {
+      justify-content: flex-end;
+    }
+
+    .info-card-wrap.right-side {
+      justify-content: flex-start;
+    }
+
+    .info-capsule-card {
+      background: #ffffff;
+      border-radius: 50px;
+      padding: 18px 26px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+      border: 1px solid #e2e8f0;
+      width: 100%;
+      max-width: 440px;
+      position: relative;
+      z-index: 2;
+      transition: all 0.35s ease;
+      display: flex;
+      align-items: center;
+    }
+
+    .left-side .info-capsule-card {
+      padding-right: 75px;
+      text-align: right;
+    }
+
+    .right-side .info-capsule-card {
+      padding-left: 75px;
+      text-align: left;
+    }
+
+    .info-capsule-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 15px 35px rgba(10, 191, 158, 0.18);
+    }
+
+    /* Number Circle Badge attached to Capsule */
+    .info-num-circle {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      background: #ffffff;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-head);
+      font-size: 1.8rem;
+      font-weight: 900;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 3;
+      border: 4px solid #ffffff;
+      transition: transform 0.3s ease;
+    }
+
+    .info-card-wrap:hover .info-num-circle {
+      transform: translateY(-50%) scale(1.08);
+    }
+
+    .left-side .info-num-circle {
+      right: -10px;
+    }
+
+    .right-side .info-num-circle {
+      left: -10px;
+    }
+
+    /* Stage Color Themes Matching Page Palette */
+    .stage-1 .info-num-circle {
+      color: #0284c7;
+      background: #e0f2fe;
+    }
+
+    .stage-2 .info-num-circle {
+      color: #0abf9e;
+      background: #dcfce7;
+    }
+
+    .stage-3 .info-num-circle {
+      color: #2563eb;
+      background: #dbeafe;
+    }
+
+    .stage-4 .info-num-circle {
+      color: #7c3aed;
+      background: #ede9fe;
+    }
+
+    .stage-5 .info-num-circle {
+      color: #0284c7;
+      background: #e0f2fe;
+    }
+
+    .stage-6 .info-num-circle {
+      color: #059669;
+      background: #d1fae5;
+    }
+
+    .stage-1 .info-capsule-card {
+      border-left: 6px solid #0284c7;
+    }
+
+    .stage-2 .info-capsule-card {
+      border-left: 6px solid #0abf9e;
+    }
+
+    .stage-3 .info-capsule-card {
+      border-left: 6px solid #2563eb;
+    }
+
+    .stage-4 .info-capsule-card {
+      border-right: 6px solid #7c3aed;
+    }
+
+    .stage-5 .info-capsule-card {
+      border-right: 6px solid #0284c7;
+    }
+
+    .stage-6 .info-capsule-card {
+      border-right: 6px solid #059669;
+    }
+
+    .info-content {
+      flex-grow: 1;
+    }
+
+    .info-pill-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 12px;
+      margin-bottom: 4px;
+    }
+
+    .stage-1 .info-pill-tag {
+      background: #e0f2fe;
+      color: #0284c7;
+    }
+
+    .stage-2 .info-pill-tag {
+      background: #dcfce7;
+      color: #0abf9e;
+    }
+
+    .stage-3 .info-pill-tag {
+      background: #dbeafe;
+      color: #2563eb;
+    }
+
+    .stage-4 .info-pill-tag {
+      background: #ede9fe;
+      color: #7c3aed;
+    }
+
+    .stage-5 .info-pill-tag {
+      background: #e0f2fe;
+      color: #0284c7;
+    }
+
+    .stage-6 .info-pill-tag {
+      background: #d1fae5;
+      color: #059669;
+    }
+
+    .info-title {
+      font-family: var(--font-head);
+      font-size: 1.12rem;
+      font-weight: 800;
+      color: #0f172a;
+      margin: 0 0 4px 0;
+      line-height: 1.25;
+    }
+
+    .info-desc {
+      font-family: var(--font-body);
+      font-size: 0.86rem;
+      color: #475569;
+      margin: 0;
+      line-height: 1.45;
+    }
+
+    /* Connector line decoration */
+    .info-connector {
+      position: absolute;
+      top: 50%;
+      height: 2px;
+      border-top: 2px dashed #cbd5e1;
+      z-index: 1;
+    }
+
+    .left-side .info-connector {
+      right: -36px;
+      width: 36px;
+    }
+
+    .right-side .info-connector {
+      left: -36px;
+      width: 36px;
+    }
+
+    @media (max-width: 992px) {
+      .info-roadmap-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .info-hub-wrapper {
+        order: -1;
+        margin-bottom: 20px;
+      }
+
+      .left-side .info-capsule-card,
+      .right-side .info-capsule-card {
+        padding: 18px 24px 18px 75px;
+        text-align: left;
+        border-left: 6px solid #0abf9e;
+        border-right: none;
+      }
+
+      .left-side .info-num-circle,
+      .right-side .info-num-circle {
+        left: -10px;
+        right: auto;
+      }
+    }
+
+    /* ── MNC DARK TECH MATRIX SECTION ── */
+    .pro-skills-section {
+      padding: 80px 0;
+      background: #f8fafc;
+    }
+
+    .pro-skills-card-banner {
+      background: linear-gradient(135deg, #0f172a 0%, #0b1329 100%);
+      border-radius: 28px;
+      padding: 60px 48px;
+      box-shadow: 0 25px 60px rgba(15, 23, 42, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pro-skills-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 18px;
+      border-radius: 20px;
+      background: rgba(10, 191, 158, 0.15);
+      border: 1px solid rgba(10, 191, 158, 0.35);
+      color: #0abf9e;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .pro-skills-main-title {
+      font-family: var(--font-head);
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 14px;
+      letter-spacing: -0.6px;
+    }
+
+    .pro-skills-sub-title {
+      font-family: var(--font-body);
+      font-size: 1.05rem;
+      color: #94a3b8;
+      max-width: 650px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .pro-skills-categories-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
+      margin-top: 40px;
+    }
+
+    .pro-domain-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 28px;
+      transition: all 0.35s ease;
+    }
+
+    .pro-domain-card:hover {
+      background: rgba(255, 255, 255, 0.07);
+      border-color: rgba(10, 191, 158, 0.3);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    }
+
+    .pro-domain-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .pro-domain-icon {
+      font-size: 1.6rem;
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .pro-domain-title {
+      font-family: var(--font-head);
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin: 0 0 2px 0;
+    }
+
+    .pro-domain-subtitle {
+      font-size: 0.8rem;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      font-weight: 700;
+    }
+
+    .pro-domain-pills {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .pro-glow-pill {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 12px 18px;
+      color: #e2e8f0;
+      font-family: var(--font-body);
+      font-size: 0.94rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .pro-glow-pill i {
+      font-size: 1.15rem;
+    }
+
+    .pro-glow-pill:hover {
+      transform: translateX(6px);
+      background: rgba(15, 23, 42, 0.9);
+      color: #ffffff;
+    }
+
+    /* Hover Brand Glow Accents */
+    .pill-react:hover {
+      border-color: rgba(56, 189, 248, 0.5);
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+    }
+
+    .pill-js:hover {
+      border-color: rgba(245, 158, 11, 0.5);
+      box-shadow: 0 0 15px rgba(245, 158, 11, 0.2);
+    }
+
+    .pill-figma:hover {
+      border-color: rgba(192, 132, 252, 0.5);
+      box-shadow: 0 0 15px rgba(192, 132, 252, 0.2);
+    }
+
+    .pill-web:hover {
+      border-color: rgba(10, 191, 158, 0.5);
+      box-shadow: 0 0 15px rgba(10, 191, 158, 0.2);
+    }
+
+    .pill-node:hover {
+      border-color: rgba(52, 211, 153, 0.5);
+      box-shadow: 0 0 15px rgba(52, 211, 153, 0.2);
+    }
+
+    .pill-db:hover {
+      border-color: rgba(56, 189, 248, 0.5);
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+    }
+
+    .pill-sec:hover {
+      border-color: rgba(248, 113, 113, 0.5);
+      box-shadow: 0 0 15px rgba(248, 113, 113, 0.2);
+    }
+
+    .pill-aws:hover {
+      border-color: rgba(251, 191, 36, 0.5);
+      box-shadow: 0 0 15px rgba(251, 191, 36, 0.2);
+    }
+
+    .pill-git:hover {
+      border-color: rgba(251, 146, 60, 0.5);
+      box-shadow: 0 0 15px rgba(251, 146, 60, 0.2);
+    }
+
+    .pill-docker:hover {
+      border-color: rgba(56, 189, 248, 0.5);
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+    }
+
+    .pill-agile:hover {
+      border-color: rgba(192, 132, 252, 0.5);
+      box-shadow: 0 0 15px rgba(192, 132, 252, 0.2);
+    }
+
+    .pill-qa:hover {
+      border-color: rgba(248, 113, 113, 0.5);
+      box-shadow: 0 0 15px rgba(248, 113, 113, 0.2);
+    }
+
+    .pill-corp:hover {
+      border-color: rgba(148, 163, 184, 0.5);
+      box-shadow: 0 0 15px rgba(148, 163, 184, 0.2);
+    }
+
+    @media (max-width: 992px) {
+      .pro-skills-categories-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .pro-skills-card-banner {
+        padding: 40px 24px;
+      }
+
+      .pro-skills-main-title {
+        font-size: 2.2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ══════════ HEADER / NAV ══════════ -->
+  <header class="ag-header" id="agHeader">
+    <nav class="ag-nav container">
+      <a href="index.html" class="ag-logo">
+        <img src="./logos/LOGO-removebg-preview.png" alt="Arshith Logo" class="ag-logo-img" />
+      </a>
+      <ul class="ag-nav-links" id="agNavLinks">
+        <li class="ag-nav-item ag-has-drop">
+          <a href="aboutgroup.html">About Us <i class="fa-solid fa-chevron-down ag-caret"></i></a>
+          <div class="ag-dropdown">
+            <a href="aboutgroup.html">About Arshith Group</a>
+            <a href="aboutceo.html">Executive Biographies</a>
+          </div>
+        </li>
+        <li class="ag-nav-item ag-has-drop">
+          <a href="index.html#companies">Businesses <i class="fa-solid fa-chevron-down ag-caret"></i></a>
+          <div class="ag-dropdown">
+            <a href="http://arshithinfotech.com/">IT Services &amp; IT Consulting</a>
+            <a href="https://arshithfresh.com/" target="_blank">E-Commerce</a>
+            <a href="https://seller.arshithfresh.com/" target="_blank">Multi sellers</a>
+            <a href="https://suntechorganization.com/" target="_blank">Business Consulting &amp; Services</a>
+            <a href="https://suntechorganization.com/" target="_blank">Digital Marketing</a>
+          </div>
+        </li>
+        <li class="ag-nav-item">
+          <a href="LatestNews.html">News</a>
+        </li>
+        <li class="ag-nav-item ag-has-drop">
+          <a href="#" class="active">Careers <i class="fa-solid fa-chevron-down ag-caret"></i></a>
+          <div class="ag-dropdown">
+            <a href="internship.html">Internship Program</a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSeuJ0Gypsx9tuPK9jHDwNQchAXFtykeKWD7NPBb_VxilLdYwA/viewform?usp=publish-editor"
+              target="_blank">Technical Confirmation</a>
+            <a href="https://quizzory.in/id/69f8284ef7e103e112b455ef" target="_blank">Online Assessment</a>
+          </div>
+        </li>
+        <li class="ag-nav-item"><a href="index.html#contact">Contact Us</a></li>
+      </ul>
+      <div class="ag-nav-right">
+        <button class="ag-hamburger" id="agHamburger" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+
+  <!-- ══════════ SECTION 1: CINEMATIC HIGH-TECH HERO SECTION ══════════ -->
+  <section class="cinematic-hero-section">
+    <!-- Background Media Backdrop (High Visibility Team Workspace) -->
+    <img src="./logos/arshith_team_office.jpg" alt="Arshith Group Engineering Team Workspace" class="cinematic-hero-bg"
+      onerror="this.onerror=null; this.src='logos/arshith_culture_team.jpg';" />
+    <div class="cinematic-hero-overlay"></div>
+
+    <div class="container cinematic-hero-container">
+      <div class="cinematic-badge-live">
+        <i class="fa-solid fa-circle" style="font-size: 0.65rem; color: #34d399;"></i>
+        Certified Internship &amp; Training Program
+      </div>
+
+      <h1 class="cinematic-hero-h1">
+        Welcome to Arshith Group <br />
+        <span class="cinematic-bracket">{</span>
+        <span class="cinematic-bracket-highlight">Internship Corner</span>
+        <span class="cinematic-bracket">}</span>
+      </h1>
+
+      <p class="cinematic-hero-sub">
+        Launch your career in web development across frontend, backend, and full-stack roles through hands-on enterprise
+        projects, practical learning, and expert executive mentorship.
+      </p>
+
+      <div class="cinematic-hero-actions">
+        <a href="apply-internship.html" class="mint-btn-primary"
+          style="background: linear-gradient(135deg, #0284c7 0%, #0d9488 100%); padding: 16px 36px; font-size: 1.1rem; font-weight: 800; box-shadow: 0 10px 30px rgba(2, 132, 199, 0.45);">
+          <span>Apply for Internship</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+        <a href="#why-us" class="mint-btn-secondary"
+          style="background: rgba(255, 255, 255, 0.18); color: #ffffff !important; border-color: rgba(255, 255, 255, 0.4); backdrop-filter: blur(12px);">
+          <i class="fa-solid fa-arrow-right"></i>
+          <span>Why Arshith Group?</span>
+        </a>
+      </div>
+
+      <!-- Quick Stats Ticker Bar (High Visibility Glass Cards) -->
+      <div class="hero-stats-row" style="margin-top: 20px;">
+        <div class="hero-stat-card hero-stat-card-glass anim-card">
+          <div class="hero-stat-num" style="color: #38bdf8; font-size: 2.2rem; font-weight: 900;">50+</div>
+          <div class="hero-stat-lbl" style="color: #ffffff; font-weight: 700; font-size: 0.95rem;">Interns Mentored
+          </div>
+        </div>
+        <div class="hero-stat-card hero-stat-card-glass anim-card">
+          <div class="hero-stat-num" style="color: #34d399; font-size: 2.2rem; font-weight: 900;">98%</div>
+          <div class="hero-stat-lbl" style="color: #ffffff; font-weight: 700; font-size: 0.95rem;">Career Advancement
+          </div>
+        </div>
+        <div class="hero-stat-card hero-stat-card-glass anim-card">
+          <div class="hero-stat-num" style="color: #fbbf24; font-size: 2.2rem; font-weight: 900;">100%</div>
+          <div class="hero-stat-lbl" style="color: #ffffff; font-weight: 700; font-size: 0.95rem;">Real Production
+            Projects</div>
+        </div>
+        <div class="hero-stat-card hero-stat-card-glass anim-card">
+          <div class="hero-stat-num" style="color: #c084fc; font-size: 2.2rem; font-weight: 900;">PPO</div>
+          <div class="hero-stat-lbl" style="color: #ffffff; font-weight: 700; font-size: 0.95rem;">Fast-Track Pathways
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll Down Bounce Button -->
+    <a href="#why-us" class="scroll-bounce-btn" aria-label="Scroll Down">
+      <i class="fa-solid fa-chevron-down"></i>
+    </a>
+  </section>
+
+  <!-- ══════════ WHY ARSHITH GROUP SECTION ══════════ -->
+  <section class="why-arshith-section" id="why-us">
+    <div class="why-arshith-container">
+      <div class="why-arshith-header">
+        <span class="why-arshith-badge"><i class="fa-solid fa-star"></i> THE ARSHITH ADVANTAGE</span>
+        <h2 class="why-arshith-title">Why Choose <span class="gradient-text">Arshith Group?</span></h2>
+        <p class="why-arshith-subtitle">
+          We combine multi-industry innovation, real production engineering, and an empowering culture to build
+          sustainable digital solutions and accelerate career success.
+        </p>
+      </div>
+
+      <div class="why-arshith-grid">
+        <!-- Card 1: Multi-Domain Synergy -->
+        <div class="why-arshith-card"
+          style="--card-accent: #38bdf8; --icon-bg: rgba(56, 189, 248, 0.2); --icon-border: rgba(56, 189, 248, 0.5); --icon-color: #38bdf8; --icon-glow: rgba(56, 189, 248, 0.3);">
+          <div class="why-arshith-card-top">
+            <div class="why-arshith-icon-box">
+              <i class="fa-solid fa-layer-group"></i>
+            </div>
+            <span class="why-arshith-card-tag">SYNERGY</span>
+          </div>
+          <h3 class="why-arshith-card-title">Multi-Domain Ecosystem</h3>
+          <p class="why-arshith-card-desc">
+            From E-Commerce (Arshith Fresh) to enterprise IT Services (ArshithInfoTech) and Strategic Business
+            Consulting (Suntech), our multi-industry presence drives cross-sector strength and market resilience.
+          </p>
+        </div>
+
+        <!-- Card 2: Enterprise Engineering -->
+        <div class="why-arshith-card"
+          style="--card-accent: #34d399; --icon-bg: rgba(52, 211, 153, 0.2); --icon-border: rgba(52, 211, 153, 0.5); --icon-color: #34d399; --icon-glow: rgba(52, 211, 153, 0.3);">
+          <div class="why-arshith-card-top">
+            <div class="why-arshith-icon-box">
+              <i class="fa-solid fa-code-branch"></i>
+            </div>
+            <span class="why-arshith-card-tag">PRODUCTION</span>
+          </div>
+          <h3 class="why-arshith-card-title">Real Production Standards</h3>
+          <p class="why-arshith-card-desc">
+            We don't deal in hypothetical code. We build, deploy, and manage live enterprise software, robust cloud
+            setups, and scalable web solutions that serve real consumers daily.
+          </p>
+        </div>
+
+        <!-- Card 3: Innovation & Technology -->
+        <div class="why-arshith-card"
+          style="--card-accent: #fbbf24; --icon-bg: rgba(251, 191, 36, 0.2); --icon-border: rgba(251, 191, 36, 0.5); --icon-color: #fbbf24; --icon-glow: rgba(251, 191, 36, 0.3);">
+          <div class="why-arshith-card-top">
+            <div class="why-arshith-icon-box">
+              <i class="fa-solid fa-rocket"></i>
+            </div>
+            <span class="why-arshith-card-tag">INNOVATION</span>
+          </div>
+          <h3 class="why-arshith-card-title">Future-Ready Tech Stack</h3>
+          <p class="why-arshith-card-desc">
+            Leveraging modern web stacks, cloud microservices, AI integrations, and responsive UI frameworks to deliver
+            agile digital transformation and competitive advantage.
+          </p>
+        </div>
+
+        <!-- Card 4: Executive Mentorship -->
+        <div class="why-arshith-card"
+          style="--card-accent: #c084fc; --icon-bg: rgba(192, 132, 252, 0.2); --icon-border: rgba(192, 132, 252, 0.5); --icon-color: #c084fc; --icon-glow: rgba(192, 132, 252, 0.3);">
+          <div class="why-arshith-card-top">
+            <div class="why-arshith-icon-box">
+              <i class="fa-solid fa-user-graduate"></i>
+            </div>
+            <span class="why-arshith-card-tag">MENTORSHIP</span>
+          </div>
+          <h3 class="why-arshith-card-title">Dedicated Growth & Mentorship</h3>
+          <p class="why-arshith-card-desc">
+            Structured 1-on-1 executive mentorship and practical guidance empower our team members and interns with
+            direct career pathways, PPO opportunities, and rapid skill acceleration.
+          </p>
+        </div>
+
+        <!-- Card 5: Uncompromising Integrity -->
+        <div class="why-arshith-card"
+          style="--card-accent: #60a5fa; --icon-bg: rgba(96, 165, 250, 0.2); --icon-border: rgba(96, 165, 250, 0.5); --icon-color: #60a5fa; --icon-glow: rgba(96, 165, 250, 0.3);">
+          <div class="why-arshith-card-top">
+            <div class="why-arshith-icon-box">
+              <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <span class="why-arshith-card-tag">TRUST</span>
+          </div>
+          <h3 class="why-arshith-card-title">Ethics & Client Commitment</h3>
+          <p class="why-arshith-card-desc">
+            Founded on integrity, transparency, and reliable execution. We build lasting relationships with our clients
+            and employees by consistently delivering on our promises.
+          </p>
+        </div>
+
+        <!-- Card 6: Agile Execution -->
+        <div class="why-arshith-card"
+          style="--card-accent: #f472b6; --icon-bg: rgba(244, 114, 182, 0.2); --icon-border: rgba(244, 114, 182, 0.5); --icon-color: #f472b6; --icon-glow: rgba(244, 114, 182, 0.3);">
+          <div class="why-arshith-card-top">
+            <div class="why-arshith-icon-box">
+              <i class="fa-solid fa-chart-line"></i>
+            </div>
+            <span class="why-arshith-card-tag">AGILITY</span>
+          </div>
+          <h3 class="why-arshith-card-title">Agile & Collaborative Culture</h3>
+          <p class="why-arshith-card-desc">
+            We foster an inclusive, supportive hybrid workspace where every team member's voice is valued and work-life
+            balance goes hand in hand with high-velocity execution.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════ SECTION 2: BENEFITS OF WORKING WITH US (UNIFIED CYBER NAVY THEME) ══════════ -->
+  <section class="mint-section" id="benefits"
+    style="background: linear-gradient(180deg, #090e1a 0%, #0d1527 100%); padding: 100px 0; color: #ffffff;">
+    <div class="container">
+      <div class="mint-heading-center">
+        <span class="mint-tag"
+          style="background: rgba(16, 185, 129, 0.2); color: #34d399; border-color: rgba(16, 185, 129, 0.4);"><i
+            class="fa-solid fa-heart-pulse"></i> READY TO JOIN OUR TEAM?</span>
+        <h2 class="mint-title-lg" style="color: #ffffff;">Benefits of Working With Us</h2>
+        <p class="mint-desc-md" style="color: #cbd5e1;">
+          We provide an environment where you are supported, challenged, and empowered to build real enterprise
+          products.
+        </p>
+      </div>
+
+      <div class="benefits-grid">
+        <!-- Benefit 1 -->
+        <div class="benefit-card-float anim-card">
+          <div class="benefit-icon-box">
+            <i class="fa-solid fa-lightbulb"></i>
+          </div>
+          <h3>Company Culture</h3>
+          <p>We believe you thrive when you are supported. Be it work, life, or technical learning — we've got your back
+            every step of the way.</p>
+        </div>
+
+        <!-- Benefit 2 -->
+        <div class="benefit-card-float anim-card">
+          <div class="benefit-icon-box">
+            <i class="fa-solid fa-bullhorn"></i>
+          </div>
+          <h3>Your Voice Matters</h3>
+          <p>We know that good ideas come from all levels of our organization and we value that input from our interns
+            from day one.</p>
+        </div>
+
+        <!-- Benefit 3 -->
+        <div class="benefit-card-float anim-card">
+          <div class="benefit-icon-box">
+            <i class="fa-solid fa-laptop-code"></i>
+          </div>
+          <h3>Remote-First &amp; Hybrid</h3>
+          <p>We offer flexible remote and hybrid setups, allowing you to learn and build enterprise software without the
+            stress of a commute.</p>
+        </div>
+
+        <!-- Benefit 4 -->
+        <div class="benefit-card-float anim-card">
+          <div class="benefit-icon-box">
+            <i class="fa-solid fa-calendar-days"></i>
+          </div>
+          <h3>Flexible Schedule</h3>
+          <p>We recognize you have college commitments and exams — shift your hours or modify your schedule seamlessly
+            to get work done.</p>
+        </div>
+
+        <!-- Benefit 5 -->
+        <div class="benefit-card-float anim-card">
+          <div class="benefit-icon-box">
+            <i class="fa-solid fa-mountain"></i>
+          </div>
+          <h3>Professional Growth</h3>
+          <p>We promote from within. Our structured 1-on-1 mentorship is focused on helping you achieve your career
+            goals and PPO pathways.</p>
+        </div>
+
+        <!-- Benefit 6 -->
+        <div class="benefit-card-float anim-card">
+          <div class="benefit-icon-box">
+            <i class="fa-solid fa-users-gear"></i>
+          </div>
+          <h3>Teamwork &amp; Mentorship</h3>
+          <p>When you succeed, we succeed. Our senior engineering leads and consultants are always ready to jump in and
+            pair with you.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════ SECTION 3: OUR CORE VALUES (DARK FLOATING CONTRAST CARDS) ══════════ -->
+  <section class="mint-section" id="values"
+    style="background: linear-gradient(180deg, #090e1a 0%, #0f172a 100%); padding: 100px 0; color: #ffffff;">
+    <div class="container">
+      <div class="mint-heading-center">
+        <span class="mint-tag"
+          style="background: rgba(2, 132, 199, 0.2); color: #38bdf8; border-color: rgba(2, 132, 199, 0.4);"><i
+            class="fa-solid fa-shield-halved"></i> WOULD YOU LIKE TO KNOW MORE?</span>
+        <h2 class="mint-title-lg" style="color: #ffffff;">Our Core Values</h2>
+        <p class="mint-desc-md" style="color: #94a3b8;">
+          The principles that drive our engineering standards, company culture, and client relationships.
+        </p>
+      </div>
+
+      <div class="values-grid-dark">
+        <!-- Value 1 -->
+        <div class="value-card-dark anim-card">
+          <div class="value-icon-dark">
+            <i class="fa-solid fa-lightbulb"></i>
+          </div>
+          <h3>Efficiency &amp; Innovation</h3>
+          <p>We look for team members who value cultural addition, diversity of thought, and building optimized, clean
+            software solutions.</p>
+        </div>
+
+        <!-- Value 2 -->
+        <div class="value-card-dark anim-card">
+          <div class="value-icon-dark">
+            <i class="fa-solid fa-chart-line"></i>
+          </div>
+          <h3>Simplicity &amp; Impact</h3>
+          <p>We strive to create a better world through our work — delivering simple, elegant tools that solve real
+            business and technical challenges.</p>
+        </div>
+
+        <!-- Value 3 -->
+        <div class="value-card-dark anim-card">
+          <div class="value-icon-dark">
+            <i class="fa-solid fa-handshake-angle"></i>
+          </div>
+          <h3>Superior Mentorship &amp; Trust</h3>
+          <p>Our interns, clients, and executive partners trust us implicitly because there are no secrets or surprises
+            — only complete transparency and shared success.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ SECTION 4: INTERACTIVE DOMAINS & OPPORTUNITIES PORTAL (GEO-CIVIX / JOB PORTAL GRID STYLE) ══════════ -->
+  <section class="mint-section" id="domains"
+    style="background: linear-gradient(180deg, #0d1527 0%, #090e1a 100%); padding: 100px 0; color: #ffffff;">
+    <div class="container">
+      <div class="mint-heading-center">
+        <span class="mint-tag"
+          style="background: rgba(6, 182, 212, 0.2); color: #38bdf8; border-color: rgba(6, 182, 212, 0.4);"><i
+            class="fa-solid fa-briefcase"></i> INTERNSHIP OPPORTUNITIES</span>
+        <h2 class="mint-title-lg" style="color: #ffffff;">Explore Internship Roles &amp; Domains</h2>
+        <p class="mint-desc-md" style="color: #cbd5e1;">
+          Search and filter open positions across group companies by technology stack, category, and work model.
+        </p>
+      </div>
+
+      <!-- SEARCH & FILTER CONTROLS BAR (SCREENSHOT MATCHING) -->
+      <div class="portal-search-bar anim-card">
+        <div class="portal-search-input-wrap">
+          <i class="fa-solid fa-magnifying-glass portal-search-icon"></i>
+          <input type="text" id="roleSearchInput" class="portal-search-input"
+            placeholder="Search roles, technologies, or keywords (e.g. React, Node, UI/UX, Web Dev)..."
+            onkeyup="filterPortalRoles()" />
+        </div>
+
+        <div class="portal-filter-pills">
+          <span
+            style="font-family: var(--font-head); font-weight: 800; font-size: 0.85rem; color: #94a3b8; letter-spacing: 0.8px;">FILTERS:</span>
+
+          <select id="filterDomain" class="filter-select-pill" onchange="filterPortalRoles()">
+            <option value="all">🔲 All Categories</option>
+            <option value="frontend">Web Development Intern</option>
+            <option value="backend">Backend Development Intern</option>
+            <option value="uiux">UI/UX Design Intern</option>
+            <option value="fullstack">Full-Stack Development Intern</option>
+            <option value="qa">Software Testing / QA Intern</option>
+            <option value="cloud">Cloud &amp; Deployment Intern</option>
+          </select>
+
+          <select id="filterWorkType" class="filter-select-pill" onchange="filterPortalRoles()">
+            <option value="all">📍 All Locations / Work Types</option>
+            <option value="remote">Remote</option>
+            <option value="hybrid">Remote / Hybrid</option>
+            <option value="onsite">On-Site Bengaluru</option>
+          </select>
+
+          <select id="filterBatch" class="filter-select-pill" onchange="filterPortalRoles()">
+            <option value="all">🎓 Education / Batch</option>
+            <option value="2027">2027 Freshers</option>
+            <option value="2026">2026 Graduates</option>
+            <option value="2025">2025 Graduates</option>
+          </select>
+
+          <button onclick="clearPortalFilters()" class="filter-select-pill"
+            style="border-color: rgba(239, 68, 68, 0.4); color: #f87171; background: rgba(239, 68, 68, 0.12);">
+            ✕ Clear Filters
+          </button>
+        </div>
+      </div>
+
+      <!-- DOMAINS & OPENINGS CARDS GRID (SCREENSHOT MATCHING) -->
+      <div class="role-grid-portal" id="portalRoleGrid">
+
+        <!-- Role 1: Web Development -->
+        <div class="role-card-portal anim-card" data-category="frontend" data-worktype="hybrid">
+          <div>
+            <div class="role-card-top">
+              <div class="role-brand-icon">
+                <i class="fa-brands fa-react" style="color: #38bdf8;"></i>
+              </div>
+              <span class="role-pill-badge">Internship</span>
+            </div>
+            <h3 class="role-portal-title">Web Development Intern</h3>
+            <div class="role-portal-meta">
+              <span><i class="fa-solid fa-building" style="color: #38bdf8;"></i> Arshith Group</span>
+              <span>•</span>
+              <span><i class="fa-solid fa-location-dot" style="color: #34d399;"></i> Bengaluru / Hybrid</span>
+            </div>
+            <p style="font-size: 0.94rem; line-height: 1.6; color: #cbd5e1; margin-bottom: 15px;">
+              Develop, enhance and maintain responsive websites and web applications while following professional
+              development practices.
+            </p>
+          </div>
+          <div class="role-btn-bar">
+            <a href="apply-internship.html?domain=frontend" class="role-btn-apply">
+              <i class="fa-solid fa-bolt"></i>
+              <span>Apply</span>
+            </a>
+            <button onclick="openRoleDetailsModal('frontend')" class="role-btn-details" style="cursor: pointer;">
+              <span>Details</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Role 2: Backend Development -->
+        <div class="role-card-portal anim-card" data-category="backend" data-worktype="remote">
+          <div>
+            <div class="role-card-top">
+              <div class="role-brand-icon"
+                style="background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.4); color: #34d399;">
+                <i class="fa-brands fa-node-js" style="color: #34d399;"></i>
+              </div>
+              <span class="role-pill-badge">Internship</span>
+            </div>
+            <h3 class="role-portal-title">Backend Development Intern</h3>
+            <div class="role-portal-meta">
+              <span><i class="fa-solid fa-building" style="color: #38bdf8;"></i> Arshith Group</span>
+              <span>•</span>
+              <span><i class="fa-solid fa-globe" style="color: #34d399;"></i> Remote / Hybrid</span>
+            </div>
+            <p style="font-size: 0.94rem; line-height: 1.6; color: #cbd5e1; margin-bottom: 15px;">
+              Develop server-side applications, APIs, databases, and backend services for web applications.
+            </p>
+          </div>
+          <div class="role-btn-bar">
+            <a href="apply-internship.html?domain=backend" class="role-btn-apply">
+              <i class="fa-solid fa-bolt"></i>
+              <span>Apply</span>
+            </a>
+            <button onclick="openRoleDetailsModal('backend')" class="role-btn-details" style="cursor: pointer;">
+              <span>Details</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Role 3: UI/UX Design -->
+        <div class="role-card-portal anim-card" data-category="uiux" data-worktype="hybrid">
+          <div>
+            <div class="role-card-top">
+              <div class="role-brand-icon"
+                style="background: rgba(192, 132, 252, 0.15); border-color: rgba(192, 132, 252, 0.4); color: #c084fc;">
+                <i class="fa-brands fa-figma" style="color: #c084fc;"></i>
+              </div>
+              <span class="role-pill-badge">Internship</span>
+            </div>
+            <h3 class="role-portal-title">UI/UX Design Intern</h3>
+            <div class="role-portal-meta">
+              <span><i class="fa-solid fa-building" style="color: #38bdf8;"></i> Arshith Group</span>
+              <span>•</span>
+              <span><i class="fa-solid fa-location-dot" style="color: #34d399;"></i> Remote / Hybrid</span>
+            </div>
+            <p style="font-size: 0.94rem; line-height: 1.6; color: #cbd5e1; margin-bottom: 15px;">
+              Design interactive user flows, Figma prototypes, design system components, and usability wireframes for
+              web and mobile platforms.
+            </p>
+          </div>
+          <div class="role-btn-bar">
+            <a href="apply-internship.html?domain=uiux" class="role-btn-apply">
+              <i class="fa-solid fa-bolt"></i>
+              <span>Apply</span>
+            </a>
+            <button onclick="openRoleDetailsModal('uiux')" class="role-btn-details" style="cursor: pointer;">
+              <span>Details</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Role 4: Full-Stack Development -->
+        <div class="role-card-portal anim-card" data-category="fullstack" data-worktype="remote">
+          <div>
+            <div class="role-card-top">
+              <div class="role-brand-icon"
+                style="background: rgba(251, 191, 36, 0.15); border-color: rgba(251, 191, 36, 0.4); color: #fbbf24;">
+                <i class="fa-solid fa-code" style="color: #fbbf24;"></i>
+              </div>
+              <span class="role-pill-badge">Internship</span>
+            </div>
+            <h3 class="role-portal-title">Full-Stack Development Intern</h3>
+            <div class="role-portal-meta">
+              <span><i class="fa-solid fa-building" style="color: #38bdf8;"></i> Arshith Group</span>
+              <span>•</span>
+              <span><i class="fa-solid fa-globe" style="color: #34d399;"></i> Remote / Hybrid</span>
+            </div>
+            <p style="font-size: 0.94rem; line-height: 1.6; color: #cbd5e1; margin-bottom: 15px;">
+              Work across frontend, backend and database layers to develop complete web applications.
+            </p>
+          </div>
+          <div class="role-btn-bar">
+            <a href="apply-internship.html?domain=fullstack" class="role-btn-apply">
+              <i class="fa-solid fa-bolt"></i>
+              <span>Apply</span>
+            </a>
+            <button onclick="openRoleDetailsModal('fullstack')" class="role-btn-details" style="cursor: pointer;">
+              <span>Details</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Role 5: Software Testing / QA -->
+        <div class="role-card-portal anim-card" data-category="qa" data-worktype="hybrid">
+          <div>
+            <div class="role-card-top">
+              <div class="role-brand-icon">
+                <i class="fa-solid fa-bug" style="color: #38bdf8;"></i>
+              </div>
+              <span class="role-pill-badge">Internship</span>
+            </div>
+            <h3 class="role-portal-title">Software Testing / QA Intern</h3>
+            <div class="role-portal-meta">
+              <span><i class="fa-solid fa-building" style="color: #38bdf8;"></i> Arshith Group</span>
+              <span>•</span>
+              <span><i class="fa-solid fa-location-dot" style="color: #34d399;"></i> Remote / Hybrid</span>
+            </div>
+            <p style="font-size: 0.94rem; line-height: 1.6; color: #cbd5e1; margin-bottom: 15px;">
+              Learn software testing, debugging, quality assurance and validation practices for web applications.
+            </p>
+          </div>
+          <div class="role-btn-bar">
+            <a href="apply-internship.html?domain=qa" class="role-btn-apply">
+              <i class="fa-solid fa-bolt"></i>
+              <span>Apply</span>
+            </a>
+            <button onclick="openRoleDetailsModal('qa')" class="role-btn-details" style="cursor: pointer;">
+              <span>Details</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Role 6: Cloud & Deployment -->
+        <div class="role-card-portal anim-card" data-category="cloud" data-worktype="hybrid">
+          <div>
+            <div class="role-card-top">
+              <div class="role-brand-icon"
+                style="background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.4); color: #34d399;">
+                <i class="fa-solid fa-cloud-arrow-up" style="color: #34d399;"></i>
+              </div>
+              <span class="role-pill-badge">Internship</span>
+            </div>
+            <h3 class="role-portal-title">Cloud &amp; Deployment Intern</h3>
+            <div class="role-portal-meta">
+              <span><i class="fa-solid fa-building" style="color: #38bdf8;"></i> Arshith Group</span>
+              <span>•</span>
+              <span><i class="fa-solid fa-location-dot" style="color: #34d399;"></i> Remote / Hybrid</span>
+            </div>
+            <p style="font-size: 0.94rem; line-height: 1.6; color: #cbd5e1; margin-bottom: 15px;">
+              Gain practical exposure to application deployment, hosting, version control and basic cloud technologies.
+            </p>
+          </div>
+          <div class="role-btn-bar">
+            <a href="apply-internship.html?domain=cloud" class="role-btn-apply">
+              <i class="fa-solid fa-bolt"></i>
+              <span>Apply</span>
+            </a>
+            <button onclick="openRoleDetailsModal('cloud')" class="role-btn-details" style="cursor: pointer;">
+              <span>Details</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════ SECTION 5.5: LIFE AT ARSHITH GROUP CULTURE (CORPORATELY X DUAL-TONE SPLIT) ══════════ -->
+  <section class="corp-culture-wrapper">
+    <div class="corp-culture-bg-dark"></div>
+    <div class="corp-culture-container">
+      <div class="corp-culture-grid">
+        <!-- Left Column -->
+        <div class="corp-culture-left">
+          <div class="corp-culture-tag">
+            <i class="fa-solid fa-camera"></i> WORKPLACE CULTURE
+          </div>
+          <h2 class="corp-culture-title">Life &amp; Environment at Arshith Group</h2>
+          <p class="corp-culture-desc">
+            A vibrant workspace where innovation, mentorship, and team collaboration come together every day. Experience
+            a hands-on learning environment with real-world impact.
+          </p>
+          <a href="#domains" class="corp-culture-btn">
+            Browse open positions <i class="fa-solid fa-arrow-right"></i>
+          </a>
+          <div class="corp-culture-img-left-wrap anim-card">
+            <img src="logos/arshith_team_handshake.jpg" alt="Team Mentorship & Collaboration"
+              class="corp-culture-img-left" onerror="this.onerror=null; this.src='work-culture.jpg';" />
+          </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="corp-culture-right">
+          <div class="corp-culture-img-right-wrap anim-card">
+            <img src="logos/arshith_team_collaboration.jpg" alt="Interns and Software Engineers Collaborating"
+              class="corp-culture-img-right" onerror="this.onerror=null; this.src='job oppurtunity.jpg';" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- ══════════ SECTION 6: INTERNSHIP JOURNEY & 6-STAGE INFOGRAPHIC ROADMAP ══════════ -->
+  <section class="info-roadmap-section" id="roadmap">
+    <div class="container">
+      <div class="mint-heading-center">
+        <span class="mint-tag"><i class="fa-solid fa-route"></i> THE ROADMAP</span>
+        <h2 class="mint-title-lg">Your Internship Journey</h2>
+        <p class="mint-desc-md">
+          A clear, structured 6-stage roadmap designed to take you from applicant to confident industry professional.
+        </p>
+      </div>
+
+      <div class="info-roadmap-grid">
+        <!-- Left Column: Stages 1, 2, 3 -->
+        <div class="info-column">
+          <!-- Stage 1 -->
+          <div class="info-card-wrap left-side stage-1 anim-card">
+            <div class="info-capsule-card">
+              <div class="info-content">
+                <span class="info-pill-tag">STAGE 01</span>
+                <h4 class="info-title">Apply &amp; Assess</h4>
+                <p class="info-desc">Submit your application &amp; take our domain assessment test.</p>
+              </div>
+            </div>
+            <div class="info-num-circle">1</div>
+            <div class="info-connector"></div>
+          </div>
+
+          <!-- Stage 2 -->
+          <div class="info-card-wrap left-side stage-2 anim-card">
+            <div class="info-capsule-card">
+              <div class="info-content">
+                <span class="info-pill-tag">STAGE 02</span>
+                <h4 class="info-title">Onboarding</h4>
+                <p class="info-desc">Executive orientation, tool setup &amp; mentor assignment.</p>
+              </div>
+            </div>
+            <div class="info-num-circle">2</div>
+            <div class="info-connector"></div>
+          </div>
+
+          <!-- Stage 3 -->
+          <div class="info-card-wrap left-side stage-3 anim-card">
+            <div class="info-capsule-card">
+              <div class="info-content">
+                <span class="info-pill-tag">STAGE 03</span>
+                <h4 class="info-title">Project Allocation</h4>
+                <p class="info-desc">Get assigned to a live project team &amp; repository access.</p>
+              </div>
+            </div>
+            <div class="info-num-circle">3</div>
+            <div class="info-connector"></div>
+          </div>
+        </div>
+
+        <!-- Central Hub -->
+        <div class="info-hub-wrapper">
+          <div class="info-hub-circle">
+            <span class="info-hub-num">6</span>
+            <span class="info-hub-text">STAGES ROADMAP</span>
+            <div class="info-hub-dots">
+              <span class="info-hub-dot active"></span>
+              <span class="info-hub-dot active"></span>
+              <span class="info-hub-dot active"></span>
+              <span class="info-hub-dot active"></span>
+              <span class="info-hub-dot active"></span>
+              <span class="info-hub-dot active"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Stages 4, 5, 6 -->
+        <div class="info-column">
+          <!-- Stage 4 -->
+          <div class="info-card-wrap right-side stage-4 anim-card">
+            <div class="info-num-circle">4</div>
+            <div class="info-capsule-card">
+              <div class="info-content">
+                <span class="info-pill-tag">STAGE 04</span>
+                <h4 class="info-title">Agile Sprints</h4>
+                <p class="info-desc">Daily standups, code reviews, and weekly milestone demos.</p>
+              </div>
+            </div>
+            <div class="info-connector"></div>
+          </div>
+
+          <!-- Stage 5 -->
+          <div class="info-card-wrap right-side stage-5 anim-card">
+            <div class="info-num-circle">5</div>
+            <div class="info-capsule-card">
+              <div class="info-content">
+                <span class="info-pill-tag">STAGE 05</span>
+                <h4 class="info-title">Capstone Demo</h4>
+                <p class="info-desc">Present your final project to senior group leadership.</p>
+              </div>
+            </div>
+            <div class="info-connector"></div>
+          </div>
+
+          <!-- Stage 6 -->
+          <div class="info-card-wrap right-side stage-6 anim-card">
+            <div class="info-num-circle">6</div>
+            <div class="info-capsule-card">
+              <div class="info-content">
+                <span class="info-pill-tag">STAGE 06</span>
+                <h4 class="info-title">Cert &amp; Hiring</h4>
+                <p class="info-desc">Receive Verifiable Certificate, LOR, &amp; PPO evaluation.</p>
+              </div>
+            </div>
+            <div class="info-connector"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════ SECTION 7: MASTER THE TECHNOLOGIES THAT DRIVE MODERN MNCs ══════════ -->
+  <section class="pro-skills-section" id="skills">
+    <div class="container">
+      <div class="pro-skills-card-banner anim-card">
+        <div class="mint-heading-center" style="margin-bottom: 36px;">
+          <span class="pro-skills-badge"><i class="fa-solid fa-layer-group"></i> PRODUCTION TECH MATRIX</span>
+          <h2 class="pro-skills-main-title">Master the Technologies</h2>
+          <p class="pro-skills-sub-title">
+            Acquire high-demand technical capabilities, production frameworks, and agile methodologies valued by global
+            tech leaders.
+          </p>
+        </div>
+
+        <div class="pro-skills-categories-grid">
+          <!-- Domain 1: Frontend & UI Architecture -->
+          <div class="pro-domain-card">
+            <div class="pro-domain-header">
+              <i class="fa-solid fa-code pro-domain-icon" style="color: #38bdf8;"></i>
+              <div>
+                <h4 class="pro-domain-title">Frontend &amp; UI Architecture</h4>
+                <span class="pro-domain-subtitle">Client-side Engineering</span>
+              </div>
+            </div>
+            <div class="pro-domain-pills">
+              <div class="pro-glow-pill pill-react">
+                <i class="fa-brands fa-react" style="color: #38bdf8;"></i>
+                <span>React.js &amp; Redux Toolkit</span>
+              </div>
+              <div class="pro-glow-pill pill-js">
+                <i class="fa-brands fa-js" style="color: #fbbf24;"></i>
+                <span>Modern ES6+ JavaScript &amp; TypeScript</span>
+              </div>
+              <div class="pro-glow-pill pill-figma">
+                <i class="fa-brands fa-figma" style="color: #c084fc;"></i>
+                <span>Figma Design Systems &amp; Tokens</span>
+              </div>
+              <div class="pro-glow-pill pill-web">
+                <i class="fa-solid fa-gauge-high" style="color: #34d399;"></i>
+                <span>Performance Optimization &amp; Web Vitals</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Domain 2: Backend & Distributed Systems -->
+          <div class="pro-domain-card">
+            <div class="pro-domain-header">
+              <i class="fa-solid fa-server pro-domain-icon" style="color: #34d399;"></i>
+              <div>
+                <h4 class="pro-domain-title">Backend &amp; Data Systems</h4>
+                <span class="pro-domain-subtitle">Server-side Infrastructure</span>
+              </div>
+            </div>
+            <div class="pro-domain-pills">
+              <div class="pro-glow-pill pill-node">
+                <i class="fa-brands fa-node-js" style="color: #34d399;"></i>
+                <span>Node.js, Express &amp; Microservices</span>
+              </div>
+              <div class="pro-glow-pill pill-db">
+                <i class="fa-solid fa-database" style="color: #38bdf8;"></i>
+                <span>RESTful APIs, GraphQL &amp; MongoDB</span>
+              </div>
+              <div class="pro-glow-pill pill-sec">
+                <i class="fa-solid fa-shield-halved" style="color: #f87171;"></i>
+                <span>OAuth2.0, JWT &amp; OWASP Security</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Domain 3: Cloud & DevOps Engineering -->
+          <div class="pro-domain-card">
+            <div class="pro-domain-header">
+              <i class="fa-solid fa-cloud pro-domain-icon" style="color: #fbbf24;"></i>
+              <div>
+                <h4 class="pro-domain-title">Cloud &amp; DevOps Engineering</h4>
+                <span class="pro-domain-subtitle">Deployment &amp; Automation</span>
+              </div>
+            </div>
+            <div class="pro-domain-pills">
+              <div class="pro-glow-pill pill-aws">
+                <i class="fa-brands fa-aws" style="color: #fbbf24;"></i>
+                <span>AWS Infrastructure (EC2, S3, CloudFront)</span>
+              </div>
+              <div class="pro-glow-pill pill-git">
+                <i class="fa-brands fa-git-alt" style="color: #fb923c;"></i>
+                <span>Git Workflows &amp; CI/CD Pipelines</span>
+              </div>
+              <div class="pro-glow-pill pill-docker">
+                <i class="fa-brands fa-docker" style="color: #38bdf8;"></i>
+                <span>Docker Containerization Basics</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Domain 4: Agile Governance & Leadership -->
+          <div class="pro-domain-card">
+            <div class="pro-domain-header">
+              <i class="fa-solid fa-list-check pro-domain-icon" style="color: #c084fc;"></i>
+              <div>
+                <h4 class="pro-domain-title">Agile &amp; Executive Leadership</h4>
+                <span class="pro-domain-subtitle">Professional Competencies</span>
+              </div>
+            </div>
+            <div class="pro-domain-pills">
+              <div class="pro-glow-pill pill-agile">
+                <i class="fa-solid fa-rotate" style="color: #c084fc;"></i>
+                <span>Agile/Scrum &amp; Sprint Governance</span>
+              </div>
+              <div class="pro-glow-pill pill-qa">
+                <i class="fa-solid fa-bug" style="color: #f87171;"></i>
+                <span>Automated Testing &amp; Peer Code Reviews</span>
+              </div>
+              <div class="pro-glow-pill pill-corp">
+                <i class="fa-solid fa-comments" style="color: #94a3b8;"></i>
+                <span>Executive Docs &amp; Tech Leadership</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+  <!-- ══════════ SECTION 9: WHAT WE LOOK FOR ══════════ -->
+  <section class="mint-section mint-section-alt">
+    <div class="container">
+      <div class="mint-heading-center">
+        <span class="mint-tag"><i class="fa-solid fa-magnifying-glass"></i> CANDIDATE PROFILE</span>
+        <h2 class="mint-title-lg">What We Look For</h2>
+        <p class="mint-desc-md">
+          We don't expect you to know everything on Day 1. We value curiosity, drive, and a strong problem-solving
+          mindset.
+        </p>
+      </div>
+
+      <div class="lookfor-grid">
+        <div class="lookfor-card anim-card">
+          <div>
+            <div class="lookfor-icon-box">
+              <i class="fa-solid fa-lightbulb"></i>
+            </div>
+            <h4>Growth Mindset</h4>
+            <p>Eagerness to learn new tech stacks, embrace challenges, and adapt quickly to feedback.</p>
+          </div>
+          <span class="lookfor-badge" style="background: #dcfce7; color: #059669;">ADAPTABILITY</span>
+        </div>
+
+        <div class="lookfor-card anim-card">
+          <div>
+            <div class="lookfor-icon-box">
+              <i class="fa-solid fa-puzzle-piece"></i>
+            </div>
+            <h4>Problem Solver</h4>
+            <p>Analytical thinking, structured logic, and persistence when debugging complex systems.</p>
+          </div>
+          <span class="lookfor-badge" style="background: #e0f2fe; color: #0284c7;">ANALYTICS</span>
+        </div>
+
+        <div class="lookfor-card anim-card">
+          <div>
+            <div class="lookfor-icon-box">
+              <i class="fa-solid fa-users-gear"></i>
+            </div>
+            <h4>Team Player</h4>
+            <p>Clear communication, cross-functional reliability, and a collaborative agile attitude.</p>
+          </div>
+          <span class="lookfor-badge" style="background: #ede9fe; color: #7e22ce;">COLLABORATION</span>
+        </div>
+
+        <div class="lookfor-card anim-card">
+          <div>
+            <div class="lookfor-icon-box">
+              <i class="fa-solid fa-book-open"></i>
+            </div>
+            <h4>Core Fundamentals</h4>
+            <p>Strong baseline grasp in computer science fundamentals, web tech, or design principles.</p>
+          </div>
+          <span class="lookfor-badge" style="background: #fef3c7; color: #d97706;">FOUNDATIONS</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════ SECTION 10: INTERNSHIP BENEFITS & PERKS ══════════ -->
+  <section class="mint-section">
+    <div class="container">
+      <div class="mint-heading-center">
+        <span class="mint-tag"><i class="fa-solid fa-gift"></i> PERKS &amp; BENEFITS</span>
+        <h2 class="mint-title-lg">Internship Benefits &amp; Perks</h2>
+        <p class="mint-desc-md">
+          Everything you receive when completing an internship program at Arshith Group.
+        </p>
+      </div>
+
+      <div class="benefit-grid">
+        <!--<div class="benefit-card anim-card">-->
+        <!--  <div class="benefit-icon"><i class="fa-solid fa-certificate"></i></div>-->
+        <!--  <h4>Verifiable Certificate</h4>-->
+        <!--  <p>Official Certificate of Completion with verifiable serial code for your LinkedIn and CV.</p>-->
+        <!--</div>-->
+        <div class="benefit-card anim-card"
+              onclick="window.location.href='certificate-verification.html'"
+              role="link"
+              tabindex="0"
+              onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();window.location.href='certificate-verification.html'}">
+
+            <div class="benefit-icon">
+              <i class="fa-solid fa-certificate"></i>
+            </div>
+
+            <h4>Verifiable Certificate</h4>
+
+            <p>
+              Official Certificate of Completion with verifiable serial code
+              for your LinkedIn and CV.
+            </p>
+
+          </div>
+
+        <div class="benefit-card anim-card">
+          <div class="benefit-icon"><i class="fa-solid fa-file-signature"></i></div>
+          <h4>Executive LOR</h4>
+          <p>Personalized Letter of Recommendation signed by senior group directors for top performers.</p>
+        </div>
+
+        <div class="benefit-card anim-card">
+          <div class="benefit-icon"><i class="fa-solid fa-briefcase"></i></div>
+          <h4>PPO Opportunities</h4>
+          <p>Fast-track evaluation for full-time job offers (Pre-Placement Offers) across Arshith companies.</p>
+        </div>
+
+        <div class="benefit-card anim-card">
+          <div class="benefit-icon"><i class="fa-solid fa-clock"></i></div>
+          <h4>Flexible Hybrid Model</h4>
+          <p>Remote and hybrid working schedules tailored to balance your academic commitments.</p>
+        </div>
+
+        <div class="benefit-card anim-card">
+          <div class="benefit-icon"><i class="fa-solid fa-network-wired"></i></div>
+          <h4>Industry Networking</h4>
+          <p>Direct exposure to senior leaders, engineering leads, and alumni networks.</p>
+        </div>
+
+        <div class="benefit-card anim-card">
+          <div class="benefit-icon"><i class="fa-solid fa-folder-open"></i></div>
+          <h4>Portfolio Work</h4>
+          <p>Live project contributions that you can showcase on GitHub and in your design portfolio.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ ENRICHED CONTENT: PROGRAM FAQ & DETAILS ══════════ -->
+  <section class="mint-section" id="faq">
+    <div class="container">
+      <div class="mint-heading-center">
+        <span class="mint-tag"><i class="fa-solid fa-circle-question"></i> FREQUENTLY ASKED QUESTIONS</span>
+        <h2 class="mint-title-lg">Everything You Need to Know</h2>
+        <p class="mint-desc-md">
+          Clear answers regarding eligibility, mentorship structure, stipends, and certificate verification.
+        </p>
+      </div>
+
+      <div class="faq-mint-wrapper anim-card">
+        <!-- Category 1: General & Eligibility -->
+        <div class="faq-category-group">
+          <div class="faq-category-label">General &amp; Eligibility</div>
+          <div class="faq-accordion-list">
+            <div class="faq-accordion-item active">
+              <div class="faq-accordion-header" onclick="toggleFaq(this)">
+                <h4>Who is eligible to apply?</h4>
+                <i class="fa-solid fa-chevron-down"></i>
+              </div>
+              <div class="faq-accordion-content">
+                <p>
+                  Pre-final year students, final year undergraduates, postgraduates, and recent graduates in
+                  Engineering, MCA, BCA, Design, and Business streams are eligible to apply.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-accordion-item">
+              <div class="faq-accordion-header" onclick="toggleFaq(this)">
+                <h4>Is the internship Remote or On-site?</h4>
+                <i class="fa-solid fa-chevron-down"></i>
+              </div>
+              <div class="faq-accordion-content">
+                <p>
+                  We offer Remote, Hybrid, and On-site options depending on your location and domain track. Daily
+                  standups are conducted via Microsoft Teams and Discord.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category 2: Certification & Benefits -->
+        <div class="faq-category-group">
+          <div class="faq-category-label">Certification &amp; Career Benefits</div>
+          <div class="faq-accordion-list">
+            <div class="faq-accordion-item">
+              <div class="faq-accordion-header" onclick="toggleFaq(this)">
+                <h4>Do I get a certificate and LOR?</h4>
+                <i class="fa-solid fa-chevron-down"></i>
+              </div>
+              <div class="faq-accordion-content">
+                <p>
+                  Yes! Every intern receives an official, digitally verifiable Certificate of Completion. Exceptional
+                  performers receive a personalized Executive LOR and PPO interview fast-tracking.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category 3: Process & Selection -->
+        <div class="faq-category-group">
+          <div class="faq-category-label">Selection Process &amp; Timeline</div>
+          <div class="faq-accordion-list">
+            <div class="faq-accordion-item">
+              <div class="faq-accordion-header" onclick="toggleFaq(this)">
+                <h4>What is the selection process timeline?</h4>
+                <i class="fa-solid fa-chevron-down"></i>
+              </div>
+              <div class="faq-accordion-content">
+                <p>
+                  After submitting your application form, our talent acquisition team evaluates profiles within 24-48
+                  hours, followed by a short technical assessment task and interview.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ SECTION 11.5: MEET OUR ALUMNI INTERNS (SUCCESS STORIES - AFTER FAQ) ══════════ -->
+  <section class="mint-section mint-section-alt" id="testimonials">
+    <div class="container">
+      <div class="mint-heading-center">
+        <span class="mint-tag"><i class="fa-solid fa-heart"></i> SUCCESS STORIES</span>
+        <h2 class="mint-title-lg">Meet Our Alumni Interns</h2>
+        <p class="mint-desc-md">
+          Hear directly from past interns who built live features, gained industry confidence, and advanced their
+          careers.
+        </p>
+      </div>
+
+      <div class="testi-grid">
+        <!-- Testimonial 1 -->
+        <div class="testi-card anim-card">
+          <div>
+            <div class="testi-header-top">
+              <i class="fa-solid fa-quote-left testi-quote-icon"></i>
+              <div class="testi-stars">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+              </div>
+            </div>
+            <p class="testi-quote">
+              "My internship gave me hands-on experience with real projects from the very beginning.
+              Working with Git, participating in code reviews, and solving real development challenges helped me grow
+              from a frontend intern into a more confident software engineer."
+            </p>
+          </div>
+          <div class="testi-footer-info">
+            <h5 class="testi-author-name">Bhavana</h5>
+            <span class="testi-role-badge">Frontend Intern → Software Engineer</span>
+          </div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="testi-card anim-card">
+          <div>
+            <div class="testi-header-top">
+              <i class="fa-solid fa-quote-left testi-quote-icon"></i>
+              <div class="testi-stars">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+              </div>
+            </div>
+            <p class="testi-quote">
+              "Working on the Arshith Fresh e-commerce platform gave me hands-on experience in designing for real users and understanding how e-commerce products work at scale.
+              It helped me strengthen my UI/UX skills and taught me how thoughtful design can improve the overall user experience."
+            </p>
+          </div>
+          <div class="testi-footer-info">
+            <h5 class="testi-author-name">Kavya</h5>
+            <span class="testi-role-badge">UI/UX &amp; Web Intern</span>
+          </div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="testi-card anim-card">
+          <div>
+            <div class="testi-header-top">
+              <i class="fa-solid fa-quote-left testi-quote-icon"></i>
+              <div class="testi-stars">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+              </div>
+            </div>
+            <p class="testi-quote">
+              "Working on real backend projects gave me valuable experience with APIs, databases, and server-side
+              development.
+              I learned how to build reliable solutions, solve real-world problems, and work effectively with the
+              development team."
+            </p>
+          </div>
+          <div class="testi-footer-info">
+            <h5 class="testi-author-name">Priya</h5>
+            <span class="testi-role-badge">Back end developer intern</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- ══════════ FOOTER ══════════ -->
+  <footer class="ag-footer" id="footer">
+    <div class="container ag-footer-inner">
+      <div class="ag-footer-brand">
+        <a href="index.html"><img src="./logos/LOGO-removebg-preview.png" alt="Arshith Group Logo"
+            class="ag-footer-logo-img" /></a>
+        <p>
+          Arshith Group is committed to innovation, sustainability, and
+          excellence across multiple industries including E-Commerce,
+          Technology, and Digital Services. We empower communities and deliver
+          trusted solutions.
+        </p>
+        <div class="ag-footer-social">
+          <a href="https://www.linkedin.com/in/farook-n-2bb2b5344/" target="_blank" aria-label="LinkedIn"><i
+              class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://www.linkedin.com/company/arshith-fresh-india-pvt-ltd/posts/?feedView=all" target="_blank"
+            aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://www.linkedin.com/in/pallavi-n-4578033ab/" target="_blank" aria-label="LinkedIn"><i
+              class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://www.linkedin.com/company/suntech-it-solution/" target="_blank" aria-label="LinkedIn"><i
+              class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://www.instagram.com/arshithgroup?igsh=MWRnNXN0NDRpeWQ1bg==" target="_blank"
+            aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://youtube.com/@vamikadurbar?si=mvXxo3HM8Qe4liD9" target="_blank" aria-label="YouTube"><i
+              class="fa-brands fa-youtube"></i></a>
+          <a href="https://youtube.com/@arshithfresh?si=ZjvzneHlriAxv322" target="_blank" aria-label="YouTube"><i
+              class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="ag-footer-cols">
+        <div class="ag-footer-col">
+          <h5>About Us</h5>
+          <ul>
+            <li><a href="aboutceo.html">About Arshith Group</a></li>
+            <li><a href="aboutceo.html">Executive Biographies</a></li>
+            <li><a href="aboutceo.html">Leadership</a></li>
+            <li><a href="index.html#journey">Our Journey</a></li>
+            <li><a href="aboutceo.html">Awards</a></li>
+          </ul>
+        </div>
+        <div class="ag-footer-col">
+          <h5>Businesses</h5>
+          <ul>
+            <li><a href="https://arshithfresh.com/" target="_blank">E-Commerce</a></li>
+            <li><a href="https://suntechorganization.com/" target="_blank">Business Consulting &amp; Services</a></li>
+            <li><a href="https://suntechorganization.com/" target="_blank">Digital &amp; Marketing</a></li>
+            <li><a href="http://arshithinfotech.com/" target="_blank">Software Development</a></li>
+          </ul>
+        </div>
+        <div class="ag-footer-col">
+          <h5>Connect</h5>
+          <ul>
+            <li><a href="aboutceo.html">About Us</a></li>
+            <li><a href="LatestNews.html">News</a></li>
+            <li><a href="index.html#companies">Business</a></li>
+            <li><a href="internship.html">Careers</a></li>
+            <li><a href="index.html#contact">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="ag-footer-col">
+          <h5>Need Help?</h5>
+          <ul style="gap: 15px">
+            <li style="display: flex; align-items: flex-start; gap: 10px">
+              <i class="fa-solid fa-location-dot" style="
+                    margin-top: 4px;
+                    color: transparent;
+                    -webkit-text-stroke: 1.5px #555;
+                  "></i>
+              <span style="font-size: 0.88rem; color: #666">Bengaluru, Karnataka, India - 560076</span>
+            </li>
+            <li style="display: flex; align-items: center; gap: 10px">
+              <i class="fa-solid fa-phone" style="color: transparent; -webkit-text-stroke: 1.5px #555"></i>
+              <span style="font-size: 0.88rem; color: #666">+91 8618471424</span>
+            </li>
+            <li style="display: flex; align-items: center; gap: 10px">
+              <i class="fa-regular fa-envelope" style="color: #555"></i>
+              <span style="font-size: 0.88rem; color: #666">info@arshithgroup.com</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Animated Background Beetle & Cyclist -->
+    <div class="footer_bg">
+      <div class="footer_bg_one">
+        <div class="car-logo">Let’s start with Arshith<span>.</span></div>
+      </div>
+      <div class="footer_bg_two">
+        <div class="cyclist-logo">Others</div>
+      </div>
+    </div>
+
+    <div class="ag-footer-bottom">
+      <div class="container ag-footer-bottom-inner">
+        <p>&copy; 2026 Arshith Group. All rights reserved.</p>
+        <div class="ag-footer-legal">
+          <a href="#">Legal Disclaimer</a>
+          <a href="#">Privacy Notice</a>
+          <a href="#">Terms &amp; Conditions</a>
+          <a href="#">Cookie Policy</a>
+        </div>
+        <button class="ag-back-top" id="agBackTop" aria-label="Back to top">
+          <i class="fa-solid fa-arrow-up"></i>
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ══════════ ROLE DETAILS GLASSMORPHIC MODAL ══════════ -->
+  <div class="role-modal-overlay" id="roleModalOverlay" onclick="if(event.target === this) closeRoleDetailsModal();">
+    <div class="role-modal-container">
+      <button class="modal-close-btn" onclick="closeRoleDetailsModal()" aria-label="Close modal">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <span class="modal-header-badge" id="modalRoleBadge">INTERNSHIP PROGRAM</span>
+      <h2 id="modalRoleTitle"
+        style="font-family: var(--font-head); font-size: 2.1rem; font-weight: 900; color: #ffffff; margin-bottom: 8px;">
+        Role Title</h2>
+      <div id="modalRoleMeta"
+        style="font-size: 0.95rem; color: #cbd5e1; margin-bottom: 24px; display: flex; gap: 14px; align-items: center; flex-wrap: wrap;">
+        <!-- Meta info inserted via JS -->
+      </div>
+
+      <!-- 1. About the Internship -->
+      <div class="modal-section-title"><i class="fa-solid fa-circle-info"></i> About the Internship</div>
+      <p id="modalAboutText" style="font-size: 0.98rem; line-height: 1.7; color: #cbd5e1; margin-bottom: 16px;"></p>
+
+      <!-- 2. What You'll Do -->
+      <div class="modal-section-title"><i class="fa-solid fa-list-check"></i> What You'll Do</div>
+      <ul id="modalWhatYouWillDoList"
+        style="line-height: 1.8; color: #cbd5e1; padding-left: 20px; font-size: 0.96rem; margin-bottom: 16px;"></ul>
+
+      <!-- 3. Technologies You'll Work With -->
+      <div class="modal-section-title"><i class="fa-solid fa-code"></i> Technologies You'll Work With</div>
+      <div id="modalTechStackContainer" style="margin-top: 8px; margin-bottom: 16px;"></div>
+
+      <!-- 4. What You'll Learn -->
+      <div class="modal-section-title"><i class="fa-solid fa-graduation-cap"></i> What You'll Learn</div>
+      <ul id="modalWhatYouWillLearnList"
+        style="line-height: 1.8; color: #cbd5e1; padding-left: 20px; font-size: 0.96rem; margin-bottom: 16px;"></ul>
+
+      <!-- 5. Project Experience -->
+      <div class="modal-section-title"><i class="fa-solid fa-rocket"></i> Project Experience</div>
+      <p id="modalProjectExpText" style="font-size: 0.98rem; line-height: 1.7; color: #cbd5e1; margin-bottom: 16px;">
+      </p>
+
+      <!-- 6. Eligibility -->
+      <div class="modal-section-title"><i class="fa-solid fa-user-check"></i> Eligibility</div>
+      <p id="modalEligibilityText" style="font-size: 0.98rem; line-height: 1.7; color: #cbd5e1; margin-bottom: 16px;">
+      </p>
+
+      <!-- 7. Stipend & Benefits -->
+      <div class="modal-section-title"><i class="fa-solid fa-hand-holding-dollar"></i> Stipend &amp; Fee Policy</div>
+      <div class="modal-stipend-box-online">
+        <h4
+          style="color: #34d399; font-size: 1.05rem; font-weight: 800; margin-bottom: 6px; display: flex; align-items: center; gap: 8px;">
+          <i class="fa-solid fa-laptop"></i> Online (Remote) Internship: 100% Free ($0 / ₹0 Fee)
+        </h4>
+        <p style="margin: 0; font-size: 0.94rem; color: #e2e8f0; line-height: 1.6;">
+          If candidate chooses the <strong>Online / Remote mode</strong>, there is <strong>NO NEED TO PAY ANY
+            AMOUNT</strong>. The online program is completely free of charge ($0 / ₹0 fee).
+        </p>
+      </div>
+
+      <div class="modal-stipend-box-offline">
+        <h4
+          style="color: #38bdf8; font-size: 1.05rem; font-weight: 800; margin-bottom: 6px; display: flex; align-items: center; gap: 8px;">
+          <i class="fa-solid fa-building-user"></i> Offline (In-Office / On-Site) Internship: Nominal Facility Fee
+        </h4>
+        <p style="margin: 0; font-size: 0.94rem; color: #e2e8f0; line-height: 1.6;">
+          If candidate chooses the <strong>Offline / On-Site mode</strong>, a nominal facility and hardware
+          infrastructure training fee applies for in-office dedicated workstation setup, physical laboratory access,
+          dedicated in-person mentorship &amp; enterprise networking.
+        </p>
+      </div>
+
+      <!-- 8. Selection Process -->
+      <div class="modal-section-title"><i class="fa-solid fa-route"></i> Selection Process</div>
+      <ol id="modalSelectionProcessList"
+        style="line-height: 1.8; color: #cbd5e1; padding-left: 20px; font-size: 0.96rem; margin-bottom: 20px;"></ol>
+
+      <!-- Modal Footer Action Bar -->
+      <div style="margin-top: 34px; display: flex; gap: 14px; justify-content: flex-end; flex-wrap: wrap;">
+        <button onclick="closeRoleDetailsModal()" class="role-btn-details" style="padding: 14px 26px; cursor: pointer;">
+          Close
+        </button>
+        <a id="modalApplyBtn" href="apply-internship.html" class="role-btn-apply"
+          style="padding: 14px 30px; text-decoration: none;">
+          <i class="fa-solid fa-bolt"></i>
+          <span>Apply Now For This Role</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ JAVASCRIPT LOGIC ══════════ -->
+  <script>
+    // Ensure content sections are 100% visible immediately while keeping modal hidden
+    document.querySelectorAll('.mint-section, .anim-card, .mint-title-lg, .mint-desc-md').forEach(el => {
+      if (el.classList.contains('reveal')) {
+        el.classList.remove('reveal');
+      }
+      el.style.opacity = '1';
+      el.style.visibility = 'visible';
+    });
+
+    // Header shadow on scroll
+    const header = document.getElementById("agHeader");
+    window.addEventListener("scroll", () => {
+      if (header) header.classList.toggle("ag-header--scrolled", window.scrollY > 40);
+    });
+
+    // Mobile Navigation Menu Toggle
+    const hamburger = document.getElementById("agHamburger");
+    const navLinks = document.getElementById("agNavLinks");
+    if (hamburger && navLinks) {
+      hamburger.addEventListener("click", () => {
+        navLinks.classList.toggle("ag-nav-open");
+        hamburger.classList.toggle("ag-ham-open");
+      });
+    }
+
+    // Back to top button
+    const backTop = document.getElementById("agBackTop");
+    if (backTop) {
+      backTop.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    }
+
+    // Comprehensive Role Details Data Object
+    const ROLE_DETAILS_DATA = {
+      frontend: {
+        title: "Web Development Intern",
+        badge: "FRONTEND TRACK",
+        entity: "Arshith Group / ArshithInfoTech",
+        workType: "Remote / Hybrid / On-Site",
+        duration: "3 - 6 Months",
+        about: "As a Web Development Intern at Arshith Group, you will work directly on responsive user interfaces, corporate websites, and enterprise web applications. You will collaborate with senior developers to transform Figma wireframes into high-performance, pixel-perfect code.",
+        whatYouWillDo: [
+          "Develop responsive, mobile-first web pages using HTML5, CSS3, JavaScript (ES6+), and React.js.",
+          "Optimize website loading speed, image assets, and cross-browser compatibility.",
+          "Integrate RESTful APIs and backend services with dynamic frontend components.",
+          "Participate in daily Agile standups, code review sessions, and Git version control workflows."
+        ],
+        techStack: ["HTML5", "CSS3", "JavaScript (ES6+)", "React.js", "Tailwind CSS", "Git / GitHub", "REST APIs"],
+        whatYouWillLearn: [
+          "Enterprise frontend architecture and component-based design systems.",
+          "Professional Git branching strategies, pull requests, and code review etiquette.",
+          "Performance optimization, SEO best practices, and responsive layout engineering."
+        ],
+        projectExperience: "You will contribute directly to the Arshith Fresh E-Commerce web portal and ArshithInfoTech client management dashboards.",
+        eligibility: "Pre-final year or final year B.Tech/BE, BCA, MCA, B.Sc Computer Science students or recent graduates with strong HTML, CSS, and JS fundamentals.",
+        selectionProcess: [
+          "Online Application Submission",
+          "Profile & Resume Screening (24-48 Hours)",
+          "Frontend Coding Assessment Task",
+          "Technical Discussion & Interview",
+          "Official Offer Letter & Onboarding"
+        ],
+        applyUrl: "apply-internship.html?domain=frontend"
+      },
+      backend: {
+        title: "Backend Development Intern",
+        badge: "BACKEND TRACK",
+        entity: "Arshith Group ",
+        workType: "Remote / Hybrid",
+        duration: "3 - 6 Months",
+        about: "The Backend Development Internship focuses on server-side architecture, RESTful API design, database management, and cloud integrations. You will build secure, scalable backend services that power Arshith Group's enterprise applications.",
+        whatYouWillDo: [
+          "Architect and maintain RESTful APIs and microservices using Node.js and Express.",
+          "Design and optimize relational and NoSQL database schemas (MongoDB / PostgreSQL / MySQL).",
+          "Implement user authentication, JWT token validation, and data encryption standards.",
+          "Write unit tests, debug server bottlenecks, and monitor server logs."
+        ],
+        techStack: ["Node.js", "Express.js", "MongoDB", "PostgreSQL / SQL", "RESTful APIs", "JWT Auth", "Postman"],
+        whatYouWillLearn: [
+          "Scalable backend API design and asynchronous event-driven architecture.",
+          "Database indexing, ORM/ODM integration, and transaction management.",
+          "Secure authentication protocols and server-side performance tuning."
+        ],
+        projectExperience: "You will develop core API endpoints for Arshith Group's central authentication service and multi-seller inventory management engine.",
+        eligibility: "B.Tech/BE (CS/IT/ECE), MCA, or M.Tech students with knowledge of JavaScript/Node.js or Python and database concepts.",
+        selectionProcess: [
+          "Online Application Submission",
+          "Profile & Resume Screening",
+          "Backend Problem-Solving Assessment",
+          "Technical Interview",
+          "Official Offer Letter & Onboarding"
+        ],
+        applyUrl: "apply-internship.html?domain=backend"
+      },
+      uiux: {
+        title: "UI/UX Design Intern",
+        badge: "PRODUCT DESIGN TRACK",
+        entity: "Arshith Group",
+        workType: "Remote / Hybrid",
+        duration: "3 - 6 Months",
+        about: "As a UI/UX Design Intern, you will shape the visual experience and user journeys across Arshith Group's web platforms and mobile apps. You will conduct user research, craft wireframes, build Figma prototypes, and establish unified design systems.",
+        whatYouWillDo: [
+          "Create user personas, wireframes, user flow diagrams, and interactive prototypes in Figma.",
+          "Design clean, intuitive user interfaces for web applications and mobile dashboards.",
+          "Maintain and expand the Arshith Group unified UI component design system.",
+          "Collaborate closely with frontend engineers to ensure design fidelity during implementation."
+        ],
+        techStack: ["Figma", "Adobe XD", "Wireframing", "User Research", "Prototyping", "Design Systems", "Usability Testing"],
+        whatYouWillLearn: [
+          "Human-centered design principles, accessibility guidelines (WCAG), and visual hierarchy.",
+          "Design-to-engineering handoff workflows and component library management.",
+          "Real user feedback gathering, A/B testing methods, and product iteration."
+        ],
+        projectExperience: "You will redesign user journeys for Arshith Fresh e-commerce mobile checkout and corporate portal interfaces.",
+        eligibility: "Students or graduates in Design, Fine Arts, Computer Science, or related fields with a portfolio showcasing UI/UX projects or Figma work.",
+        selectionProcess: [
+          "Online Application Submission",
+          "Portfolio Review & Screening",
+          "UI/UX Design Challenge",
+          "Design Review Interview",
+          "Official Offer Letter & Onboarding"
+        ],
+        applyUrl: "apply-internship.html?domain=uiux"
+      },
+      fullstack: {
+        title: "Full-Stack Development Intern",
+        badge: "FULL-STACK TRACK",
+        entity: "Arshith Group",
+        workType: "Remote / Hybrid",
+        duration: "3 - 6 Months",
+        about: "The Full-Stack Development Internship offers end-to-end software development experience. You will work across both client-side interfaces and server-side infrastructure, building complete features from database schema to user interface.",
+        whatYouWillDo: [
+          "Develop complete web applications using React on the frontend and Node.js/Express on the backend.",
+          "Design database models in MongoDB or SQL and connect them via REST APIs.",
+          "Deploy web applications to cloud hosting platforms (AWS / Vercel / Render).",
+          "Participate in full software development lifecycle (SDLC) from requirements to deployment."
+        ],
+        techStack: ["React.js", "Node.js", "Express.js", "MongoDB / SQL", "JavaScript (ES6+)", "Git / GitHub", "Cloud Deploy"],
+        whatYouWillLearn: [
+          "Full-stack web application development and end-to-end feature ownership.",
+          "State management, API integration, and full lifecycle debugging.",
+          "DevOps basics, environment configuration, and continuous deployment."
+        ],
+        projectExperience: "You will build and deploy end-to-end internal automation tools and client management modules for Suntech Solutions.",
+        eligibility: "B.Tech/BE, MCA, or M.Tech students with foundational knowledge of both frontend (HTML/CSS/JS) and backend (Node/Python/SQL) development.",
+        selectionProcess: [
+          "Online Application Submission",
+          "Profile & Resume Screening",
+          "Full-Stack Practical Project Task",
+          "Technical Interview",
+          "Official Offer Letter & Onboarding"
+        ],
+        applyUrl: "apply-internship.html?domain=fullstack"
+      },
+      qa: {
+        title: "Software Testing / QA Intern",
+        badge: "QUALITY ASSURANCE TRACK",
+        entity: "Arshith Group",
+        workType: "Remote / Hybrid",
+        duration: "3 - 6 Months",
+        about: "As a Software Testing & QA Intern, you will ensure the reliability, performance, and security of Arshith Group's software products. You will write manual test cases, execute automated test scripts, and log defect reports.",
+        whatYouWillDo: [
+          "Create comprehensive test plans, test cases, and test scenarios for web applications.",
+          "Perform manual UI testing, regression testing, and cross-browser validation.",
+          "Write basic automated test scripts using Selenium, Cypress, or Postman API runner.",
+          "Document bugs, track defect lifecycles in Jira/GitHub Issues, and verify bug fixes."
+        ],
+        techStack: ["Manual Testing", "Postman", "Cypress / Selenium", "Jira / Bug Tracking", "API Testing", "Test Case Design"],
+        whatYouWillLearn: [
+          "Professional Software Quality Assurance methodologies and Bug Lifecycle management.",
+          "API testing techniques, performance validation, and automated testing frameworks.",
+          "Quality standards in enterprise production releases."
+        ],
+        projectExperience: "You will perform end-to-end regression testing on Arshith Group's e-commerce and corporate web portals before major releases.",
+        eligibility: "BE/B.Tech, BCA, MCA students or graduates with an analytical mindset, attention to detail, and interest in software quality.",
+        selectionProcess: [
+          "Online Application Submission",
+          "Profile & Resume Screening",
+          "QA & Bug Hunting Scenario Test",
+          "Technical Discussion Interview",
+          "Official Offer Letter & Onboarding"
+        ],
+        applyUrl: "apply-internship.html?domain=qa"
+      },
+      cloud: {
+        title: "Cloud & Deployment Intern",
+        badge: "DEVOPS & CLOUD TRACK",
+        entity: "Arshith Group",
+        workType: "Remote / Hybrid",
+        duration: "3 - 6 Months",
+        about: "The Cloud & Deployment Internship provides hands-on experience in cloud infrastructure, application hosting, CI/CD automation pipelines, and server environment management.",
+        whatYouWillDo: [
+          "Configure cloud hosting servers on AWS, DigitalOcean, or Azure for web applications.",
+          "Set up automated CI/CD deployment pipelines using GitHub Actions.",
+          "Manage Nginx web server configurations, SSL certificates, and domain DNS settings.",
+          "Monitor server health, CPU/Memory metrics, and application error logs."
+        ],
+        techStack: ["AWS", "Nginx", "Linux / Bash", "Docker Basics", "GitHub Actions", "SSL / DNS", "CI/CD Pipelines"],
+        whatYouWillLearn: [
+          "Cloud infrastructure setup, Linux server administration, and security hardening.",
+          "Automated build and deployment workflows with GitHub Actions.",
+          "Production server monitoring, domain routing, and disaster recovery basics."
+        ],
+        projectExperience: "You will assist in managing deployment pipelines and cloud servers hosting Arshith Group's live web applications.",
+        eligibility: "B.Tech/BE (CS/IT/ECE), MCA, or M.Tech students interested in DevOps, Linux system administration, and cloud platforms.",
+        selectionProcess: [
+          "Online Application Submission",
+          "Profile & Resume Screening",
+          "DevOps & Linux Command Task",
+          "Technical Interview",
+          "Official Offer Letter & Onboarding"
+        ],
+        applyUrl: "apply-internship.html?domain=cloud"
+      }
+    };
+
+    // Modal Interaction Functions
+    function openRoleDetailsModal(roleId) {
+      const data = ROLE_DETAILS_DATA[roleId] || ROLE_DETAILS_DATA.frontend;
+      const overlay = document.getElementById("roleModalOverlay");
+
+      if (!overlay) return;
+
+      // Populate Modal Fields
+      document.getElementById("modalRoleBadge").innerText = data.badge || "INTERNSHIP PROGRAM";
+      document.getElementById("modalRoleTitle").innerText = data.title;
+
+      document.getElementById("modalRoleMeta").innerHTML = `
+        <span><i class="fa-solid fa-building" style="color: #38bdf8;"></i> ${data.entity}</span>
+        <span>•</span>
+        <span><i class="fa-solid fa-location-dot" style="color: #34d399;"></i> ${data.workType}</span>
+        <span>•</span>
+        <span><i class="fa-solid fa-clock" style="color: #fbbf24;"></i> ${data.duration}</span>
+      `;
+
+      document.getElementById("modalAboutText").innerText = data.about;
+
+      // What You'll Do
+      const doList = document.getElementById("modalWhatYouWillDoList");
+      doList.innerHTML = (data.whatYouWillDo || []).map(item => `<li>${item}</li>`).join("");
+
+      // Tech Stack
+      const techBox = document.getElementById("modalTechStackContainer");
+      techBox.innerHTML = (data.techStack || []).map(tech => `<span class="modal-tech-tag">${tech}</span>`).join("");
+
+      // What You'll Learn
+      const learnList = document.getElementById("modalWhatYouWillLearnList");
+      learnList.innerHTML = (data.whatYouWillLearn || []).map(item => `<li>${item}</li>`).join("");
+
+      // Project Experience & Eligibility
+      document.getElementById("modalProjectExpText").innerText = data.projectExperience;
+      document.getElementById("modalEligibilityText").innerText = data.eligibility;
+
+      // Selection Process
+      const selList = document.getElementById("modalSelectionProcessList");
+      selList.innerHTML = (data.selectionProcess || []).map(step => `<li>${step}</li>`).join("");
+
+      // Apply Button
+      const applyBtn = document.getElementById("modalApplyBtn");
+      if (applyBtn) applyBtn.href = data.applyUrl || "apply-internship.html";
+
+      // Show Modal with Animation
+      overlay.classList.add("active");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeRoleDetailsModal() {
+      const overlay = document.getElementById("roleModalOverlay");
+      if (overlay) {
+        overlay.classList.remove("active");
+        document.body.style.overflow = "";
+      }
+    }
+
+    // Portal Search & Filtering Functions (GeoCivix Style)
+    function filterPortalRoles() {
+      const searchInput = document.getElementById("roleSearchInput");
+      const query = searchInput ? searchInput.value.toLowerCase().trim() : "";
+      const domainFilter = document.getElementById("filterDomain") ? document.getElementById("filterDomain").value : "all";
+      const workFilter = document.getElementById("filterWorkType") ? document.getElementById("filterWorkType").value : "all";
+
+      document.querySelectorAll(".role-card-portal").forEach(card => {
+        const text = card.textContent.toLowerCase();
+        const category = card.dataset.category || "";
+        const worktype = card.dataset.worktype || "";
+
+        const matchesQuery = !query || text.includes(query);
+        const matchesCategory = domainFilter === "all" || category === domainFilter;
+        const matchesWork = workFilter === "all" || worktype === workFilter;
+
+        if (matchesQuery && matchesCategory && matchesWork) {
+          card.style.display = "flex";
+        } else {
+          card.style.display = "none";
+        }
+      });
+    }
+
+    function clearPortalFilters() {
+      if (document.getElementById("roleSearchInput")) document.getElementById("roleSearchInput").value = "";
+      if (document.getElementById("filterDomain")) document.getElementById("filterDomain").value = "all";
+      if (document.getElementById("filterWorkType")) document.getElementById("filterWorkType").value = "all";
+      if (document.getElementById("filterBatch")) document.getElementById("filterBatch").value = "all";
+      filterPortalRoles();
+    }
+
+    function toggleFaq(headerElement) {
+      const item = headerElement.parentElement;
+      const isAlreadyActive = item.classList.contains('active');
+
+      // Close all active items in the FAQ
+      document.querySelectorAll('.faq-accordion-item').forEach(el => {
+        el.classList.remove('active');
+      });
+
+      // Toggle active state for clicked item
+      if (!isAlreadyActive) {
+        item.classList.add('active');
+      }
+    }
+  </script>
+</body>
+
+</html>

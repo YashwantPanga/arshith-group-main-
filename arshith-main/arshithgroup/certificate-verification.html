@@ -1,0 +1,303 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Certificate Verification | Arshith Group</title>
+
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 30px 16px;
+      font-family: Arial, sans-serif;
+      background: #f4f7f5;
+      color: #17211c;
+    }
+
+    .container {
+      max-width: 760px;
+      margin: 25px auto;
+      background: white;
+      border: 1px solid #e0e7e2;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+    }
+
+    .header {
+      background: linear-gradient(135deg, #315e4d, #0d3828);
+      color: white;
+      padding: 30px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 25px;
+    }
+
+    .brand-icon {
+      background: white;
+      color: #267351;
+      border-radius: 12px;
+      width: 65px;
+      height: 65px;
+      display: grid;
+      place-items: center;
+      font-size: 30px;
+    }
+
+    .brand h2 {
+      margin: 0 0 8px;
+    }
+
+    .brand p {
+      margin: 0;
+      color: #d6e9de;
+    }
+
+    .header h1 {
+      font-size: 30px;
+      margin: 15px 0;
+    }
+
+    .header .subtitle {
+      font-size: 17px;
+      line-height: 1.6;
+      color: #e1eee7;
+    }
+
+    .content {
+      padding: 30px;
+    }
+
+    label {
+      display: block;
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 14px;
+    }
+
+    input {
+      width: 100%;
+      padding: 18px;
+      border: 2px solid #dce3df;
+      border-radius: 12px;
+      font-size: 17px;
+      margin-bottom: 16px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #267351;
+    }
+
+    button {
+      width: 100%;
+      padding: 18px;
+      background: #176b49;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #105639;
+    }
+
+    .result {
+      margin-top: 28px;
+      padding-top: 25px;
+      border-top: 1px solid #ddd;
+    }
+
+    .result h3 {
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .verified {
+      color: #198754;
+    }
+
+    .invalid {
+      color: #c0392b;
+    }
+
+    .issuer {
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+
+    .detail {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 14px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .detail span {
+      color: #666;
+    }
+
+    .detail strong {
+      text-align: right;
+      overflow-wrap: anywhere;
+    }
+
+    .message {
+      margin-top: 20px;
+      padding: 14px;
+      border-radius: 8px;
+      line-height: 1.5;
+    }
+
+    .error {
+      background: #fff0f0;
+      color: #a32323;
+    }
+
+    .success {
+      background: #eaf7ef;
+      color: #176b49;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 24px;
+      color: #176b49;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    footer {
+      text-align: center;
+      color: #777;
+      font-size: 13px;
+      padding: 20px;
+      border-top: 1px solid #eee;
+    }
+
+    @media (max-width: 500px) {
+      body {
+        padding: 10px;
+      }
+
+      .container {
+        margin: 10px auto;
+      }
+
+      .header, .content {
+        padding: 22px;
+      }
+
+      .header h1 {
+        font-size: 25px;
+      }
+
+      .detail {
+        flex-direction: column;
+        gap: 7px;
+      }
+
+      .detail strong {
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="container">
+
+    <header class="header">
+      <div class="brand">
+        <div class="brand-icon">
+          <i class="fa-solid fa-graduation-cap"></i>
+        </div>
+
+        <div>
+          <h2>ARSHITH GROUP</h2>
+          <p>Internship &amp; Career Development</p>
+        </div>
+      </div>
+
+      <h1>Certificate Verification</h1>
+
+      <p class="subtitle">
+        Verify an internship certificate issued by our company.
+      </p>
+    </header>
+
+    <section class="content">
+
+      <form id="verifyForm">
+        <label for="certificateNumber">
+          Enter Certificate Number
+        </label>
+
+        <input
+          type="text"
+          id="certificateNumber"
+          placeholder="Example: AFI/INT/2026/001"
+          autocomplete="off"
+          required
+        >
+
+        <button type="submit">
+          <i class="fa-solid fa-shield-halved"></i>
+          Verify Certificate
+        </button>
+      </form>
+
+      <section id="result" class="result hidden" aria-live="polite">
+        <h3>Verification Result</h3>
+        <div id="resultContent"></div>
+      </section>
+
+      <a href="internship.html" class="back-link">
+        <i class="fa-solid fa-arrow-left"></i>
+        Back to Internship Page
+      </a>
+
+    </section>
+
+    <footer>
+      &copy; 2026 Arshith Group. All rights reserved.
+    </footer>
+
+  </main>
+
+  <script src="certificate-verification.js"></script>
+
+</body>
+</html>

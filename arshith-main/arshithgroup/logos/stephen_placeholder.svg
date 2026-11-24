@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e2e8f0"/>
+      <stop offset="100%" stop-color="#cbd5e1"/>
+    </linearGradient>
+    <linearGradient id="avatar" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#64748b"/>
+      <stop offset="100%" stop-color="#475569"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="600" fill="url(#bg)"/>
+  <!-- Head -->
+  <circle cx="300" cy="230" r="95" fill="url(#avatar)"/>
+  <!-- Body/Shoulders -->
+  <path d="M 140 520 C 140 380, 460 380, 460 520 Z" fill="url(#avatar)"/>
+  <text x="300" y="560" font-family="sans-serif" font-size="22" font-weight="bold" fill="#64748b" text-anchor="middle">Photo Pending</text>
+</svg>

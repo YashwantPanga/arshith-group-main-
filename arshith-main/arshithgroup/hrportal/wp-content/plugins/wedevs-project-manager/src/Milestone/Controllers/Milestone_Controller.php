@@ -1,0 +1,326 @@
+<?php
+
+namespace WeDevs\PM\Milestone\Controllers;
+
+use WP_REST_Request;
+use WeDevs\PM\Milestone\Models\Milestone;
+use League\Fractal;
+use League\Fractal\Resource\Item as Item;
+use League\Fractal\Resource\Collection as Collection;
+use League\Fractal\Pagination\IlluminatePaginatorAdapter;
+use WeDevs\PM\Common\Traits\Transformer_Manager;
+use WeDevs\PM\Milestone\Transformers\Milestone_Transformer;
+use WeDevs\PM\Common\Traits\Request_Filter;
+use WeDevs\PM\Common\Models\Meta;
+use WeDevs\PM\Common\Models\Boardable;
+use Carbon\Carbon;
+use Illuminate\Database\Capsule\Manager as DB;
+use Illuminate\Pagination\Paginator;
+
+class Milestone_Controller {
+
+    use Transformer_Manager, Request_Filter;
+
+    private static $_instance;
+
+    public static function getInstance() {
+        if ( !self::$_instance ) {
+            self::$_instance = new self();
+        }
+
+        return self::$_instance;
+    }
+
+    public function index( WP_REST_Request $request ) {
+        $project_id = intval( $request->get_param( 'project_id' ) );
+        $per_page   = intval( $request->get_param( 'per_page' ) );
+        $status     = sanitize_text_field($request->get_param( 'status' ) );
+        $per_page   = $per_page ? $per_page : -1;
+
+        $page       = intval( $request->get_param( 'page' ) );
+        $page       = $page ? $page : 1;
+
+        Paginator::currentPageResolver(function () use ($page) {
+            return $page;
+        });
+
+        $milestones = Milestone::with('metas')
+            ->where( 'project_id', $project_id );
+
+        if ( ! empty( $status ) ) {
+            $milestones = $milestones->where( 'status',  $status);
+        }
+
+        $milestones = apply_filters( "wedevs_pm_milestone_index_query", $milestones, $project_id, $request );
+
+        if ( $per_page == '-1' ) {
+            $per_page = $milestones->count();
+        }
+
+        $milestones = $milestones->paginate( $per_page );
+
+        $milestone_collection = $milestones->getCollection();
+
+        $resource = new Collection( $milestone_collection, new Milestone_Transformer );
+        $resource->setPaginator( new IlluminatePaginatorAdapter( $milestones ) );
+        return $this->get_response( $resource );
+    }
+
+    private function get_milestone_collection( $metas = [] ) {
+        $milestones = [];
+
+        foreach ($metas as $meta) {
+            $milestones[] = $meta->milestone;
+        }
+
+        return $milestones;
+    }
+
+    public function show( WP_REST_Request $request ) {
+        $project_id   = intval( $request->get_param( 'project_id' ) );
+        $milestone_id = intval( $request->get_param( 'milestone_id' ) );
+
+        $milestone = Milestone::where( 'id', $milestone_id )
+            ->where( 'project_id', $project_id );
+        $milestone = apply_filters( "wedevs_pm_milestone_show_query", $milestone, $project_id, $request );
+        $milestone = $milestone->first();
+        if ( $milestone == NULL ) {
+            return $this->get_response( null,  [
+                'message' => __( 'No elements found.', 'wedevs-project-manager' )
+            ] );
+        }
+        $resource = new Item( $milestone, new Milestone_Transformer );
+
+        return $this->get_response( $resource );
+    }
+
+    public static function create_milestone( $data ) {
+        $self = self::getInstance();
+        $is_private    = $data[ 'privacy' ];
+        $data['is_private']    = $is_private == 'true' || $is_private === true ? 1 : 0;
+        // Milestone achieve date
+        $achieve_date = $data['achieve_date'];
+
+        // Create a milestone
+        $milestone    = Milestone::create( $data );
+
+        // Set 'achieve_date' as milestone meta data
+        // phpcs:disable WordPress.DB.SlowDBQuery.slow_db_query_meta_key, WordPress.DB.SlowDBQuery.slow_db_query_meta_value -- Custom Eloquent model table (pm_meta), not WordPress core meta tables.
+        Meta::create([
+            'entity_id'   => $milestone->id,
+            'entity_type' => 'milestone',
+            'meta_key'    => 'achieve_date',
+            'meta_value'  => $achieve_date ? gmdate( 'Y-m-d H:i:s', strtotime( $achieve_date ) ) : null,
+            'project_id'  => $milestone->project_id,
+        ]);
+        // phpcs:enable WordPress.DB.SlowDBQuery.slow_db_query_meta_key, WordPress.DB.SlowDBQuery.slow_db_query_meta_value
+
+        do_action( "wedevs_pm_new_milestone_before_response", $milestone, $data );
+        // Transform milestone data
+        $resource  = new Item( $milestone, new Milestone_Transformer );
+
+        $message = [
+            'message' => __( 'A new milestone has been created successfully.', 'wedevs-project-manager' )
+        ];
+        $response = $self->get_response( $resource, $message );
+
+        do_action( 'wedevs_cpm_milestone_new', $milestone->id, $data[ 'project_id' ], $data );
+        do_action( "wedevs_pm_after_new_milestone", $response, $data );
+
+        return $response;
+    }
+
+    public function store( WP_REST_Request $request ) {
+        // Grab non empty user input
+        $data = $this->extract_non_empty_values( $request );
+        $is_private    = sanitize_text_field( $request->get_param( 'privacy' ) );
+        $data['is_private']    = $is_private == 'true' || $is_private === true ? 1 : 0;
+
+        // Milestone achieve date
+        $achieve_date = $request->get_param( 'achieve_date' );
+
+        // Create a milestone
+        $milestone    = Milestone::create( $data );
+
+        // Set 'achieve_date' as milestone meta data
+        // phpcs:disable WordPress.DB.SlowDBQuery.slow_db_query_meta_key, WordPress.DB.SlowDBQuery.slow_db_query_meta_value -- Custom Eloquent model table (pm_meta), not WordPress core meta tables.
+        Meta::create([
+            'entity_id'   => $milestone->id,
+            'entity_type' => 'milestone',
+            'meta_key'    => 'achieve_date',
+            'meta_value'  => $achieve_date ? gmdate( 'Y-m-d H:i:s', strtotime( $achieve_date ) ) : null,
+            'project_id'  => $milestone->project_id,
+        ]);
+        // phpcs:enable WordPress.DB.SlowDBQuery.slow_db_query_meta_key, WordPress.DB.SlowDBQuery.slow_db_query_meta_value
+
+        do_action( "wedevs_pm_new_milestone_before_response", $milestone, $request->get_params() );
+        // Transform milestone data
+        $resource  = new Item( $milestone, new Milestone_Transformer );
+
+        $message = [
+            'message' => __( 'A new milestone has been created successfully.', 'wedevs-project-manager' )
+        ];
+        $response = $this->get_response( $resource, $message );
+
+        do_action( 'wedevs_cpm_milestone_new', $milestone->id, $request->get_param( 'project_id' ), $request->get_params() );
+        do_action( "wedevs_pm_after_new_milestone", $response, $request->get_params() );
+
+        return $response;
+    }
+
+    public function update( WP_REST_Request $request ) {
+        // Grab non empty user data
+        $data         = $this->extract_non_empty_values( $request );
+        $achieve_date = $request->get_param( 'achieve_date' );
+        $status       = $request->get_param( 'status' );
+
+        $is_private    = $request->get_param( 'privacy' );
+        $data['is_private']    = $is_private == 'true' || $is_private === true ? 1 : 0;
+
+        // Set project id from url parameter
+        $project_id   = intval( $request->get_param( 'project_id' ) );
+
+        // Set milestone id from url parameter
+        $milestone_id = $request->get_param( 'milestone_id' );
+
+        // Find milestone associated with project id and milestone id
+        $milestone    = Milestone::where( 'id', $milestone_id )
+            ->where( 'project_id', $project_id )
+            ->first();
+
+        if ( $milestone ) {
+            $milestone->update_model( $data );
+        }
+
+        if ( $milestone && $achieve_date ) {
+            // phpcs:disable WordPress.DB.SlowDBQuery.slow_db_query_meta_key -- Custom Eloquent model table (pm_meta), not WordPress core meta tables.
+            $meta = Meta::firstOrCreate([
+                'entity_id'   => $milestone->id,
+                'entity_type' => 'milestone',
+                'meta_key'    => 'achieve_date',
+                'project_id'  => $milestone->project_id,
+            ]);
+            // phpcs:enable WordPress.DB.SlowDBQuery.slow_db_query_meta_key
+
+            $meta->meta_value = gmdate( 'Y-m-d H:i:s', strtotime( $achieve_date ) );
+            $meta->save();
+        }
+
+        do_action( 'wedevs_cpm_milestone_update', $milestone_id, $project_id, $request->get_params() );
+        do_action( "wedevs_pm_update_milestone_before_response", $milestone, $request->get_params() );
+        $resource = new Item( $milestone, new Milestone_Transformer );
+
+        $message = [
+            'message' => __( 'A milestone has been updated successfully.', 'wedevs-project-manager' )
+        ];
+
+        $response = $this->get_response( $resource, $message );
+        do_action( "wedevs_pm_after_update_milestone", $response, $request->get_params() );
+
+        return $response;
+    }
+
+    public function destroy( WP_REST_Request $request ) {
+        $project_id   = intval( $request->get_param( 'project_id' ) );
+        $milestone_id = $request->get_param( 'milestone_id' );
+
+        $milestone = Milestone::where( 'id', $milestone_id )
+            ->where( 'project_id', $project_id )
+            ->first();
+
+        $milestone->boardables()->delete();
+        $milestone->metas()->delete();
+        $milestone->delete();
+
+        $message = [
+            'message' => __( 'A milestone has been deleted successfully.', 'wedevs-project-manager' )
+        ];
+        do_action( 'wedevs_cpm_milestone_delete', $milestone_id, false );
+
+        return $this->get_response(false, $message);
+    }
+    public function attach_tasks( WP_REST_Request $request ) {
+        $project_id   = intval( $request->get_param( 'project_id' ) );
+        $milestone_id = intval( $request->get_param( 'milestone_id' ) );
+        $task_ids     = $request->get_param( 'task_ids' );
+
+        if ( empty( $task_ids ) || ! is_array( $task_ids ) ) {
+            return $this->get_response( null, [
+                'message' => __( 'No tasks provided.', 'wedevs-project-manager' ),
+            ] );
+        }
+
+        $milestone = Milestone::where( 'id', $milestone_id )
+            ->where( 'project_id', $project_id )
+            ->first();
+
+        if ( ! $milestone ) {
+            return $this->get_response( null, [
+                'message' => __( 'Milestone not found.', 'wedevs-project-manager' ),
+            ] );
+        }
+
+        foreach ( $task_ids as $task_id ) {
+            $task_id = intval( $task_id );
+            if ( ! $task_id ) {
+                continue;
+            }
+
+            Boardable::firstOrCreate( [
+                'board_id'       => $milestone->id,
+                'board_type'     => 'milestone',
+                'boardable_id'   => $task_id,
+                'boardable_type' => 'task',
+            ] );
+        }
+
+        $resource = new Item( $milestone->fresh(), new Milestone_Transformer );
+
+        return $this->get_response( $resource, [
+            'message' => __( 'Tasks linked to milestone.', 'wedevs-project-manager' ),
+        ] );
+    }
+
+    public function detach_task( WP_REST_Request $request ) {
+        $project_id   = intval( $request->get_param( 'project_id' ) );
+        $milestone_id = intval( $request->get_param( 'milestone_id' ) );
+        $task_id      = intval( $request->get_param( 'task_id' ) );
+
+        // Bind the milestone + task to the gated project (IDOR guard).
+        if ( ! Milestone::where( 'id', $milestone_id )->where( 'project_id', $project_id )->exists()
+            || ! \WeDevs\PM\Task\Models\Task::where( 'id', $task_id )->where( 'project_id', $project_id )->exists() ) {
+            return new \WP_Error( 'pm_milestone', __( 'Milestone or task not found in this project.', 'wedevs-project-manager' ), [ 'status' => 404 ] );
+        }
+
+        Boardable::where( 'board_id', $milestone_id )
+            ->where( 'board_type', 'milestone' )
+            ->where( 'boardable_id', $task_id )
+            ->where( 'boardable_type', 'task' )
+            ->delete();
+
+        return $this->get_response( null, [
+            'message' => __( 'Task unlinked from milestone.', 'wedevs-project-manager' ),
+        ] );
+    }
+
+    public function privacy( WP_REST_Request $request ) {
+        $project_id   = intval( $request->get_param( 'project_id' ) );
+        $milestone_id = intval( $request->get_param( 'milestone_id' ) );
+        // Stored in pm_meta and read back through unserialize(); anything but an
+        // int here is a PHP object injection vector.
+        $privacy      = (int) filter_var( $request->get_param( 'is_private' ), FILTER_VALIDATE_BOOLEAN );
+
+        // Bind the milestone to the gated project (IDOR guard).
+        $milestone = Milestone::where( 'id', $milestone_id )->where( 'project_id', $project_id )->first();
+
+        if ( ! $milestone ) {
+            return new \WP_Error( 'pm_milestone', __( 'Milestone not found in this project.', 'wedevs-project-manager' ), [ 'status' => 404 ] );
+        }
+
+        $milestone->update_model( [
+            'is_private' => $privacy
+        ] );
+        wedevs_pm_update_meta( $milestone_id, $project_id, 'milestone', 'privacy', $privacy );
+        return $this->get_response( NULL);
+    }
+}

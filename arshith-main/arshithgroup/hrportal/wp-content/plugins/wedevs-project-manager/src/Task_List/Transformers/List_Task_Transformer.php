@@ -1,0 +1,230 @@
+<?php
+
+namespace WeDevs\PM\Task_List\Transformers;
+
+use League\Fractal\TransformerAbstract;
+use WeDevs\PM\Task\Models\Task;
+use WeDevs\PM\User\Helper\Avatar;
+
+class List_Task_Transformer extends TransformerAbstract {
+    public $list_task_transormer_filter = true;
+    /**
+     * Turn this item object into a generic array
+     *
+     * @return array
+     */
+    public function transform( Task $item ) {
+
+        $task = [
+            'id'          => (int) $item->id,
+            'title'       => html_entity_decode( $item->title, ENT_QUOTES, 'UTF-8' ),
+            'description' => [ 'html' => wedevs_pm_get_content( $item->description ), 'content' => $item->description ],
+            'estimation'  => $item->estimation,
+            'start_at'    => wedevs_pm_format_date( $item->start_at ),
+            'due_date'    => wedevs_pm_format_date( $item->due_date ),
+            'complexity'  => $item->complexity,
+            'priority'    => $item->priority,
+            'payable'     => $item->payable,
+            'recurrent'   => $item->recurrent,
+            'parent_id'   => $item->parent_id,     
+            'status'      => $item->status,
+            'project_id'  => $item->project_id,
+            'category_id' => $item->category_id,
+            'created_at'  => wedevs_pm_format_date( $item->created_at ),
+            'completed_at' => wedevs_pm_format_date( $item->completed_at ),
+            'updated_at'  => wedevs_pm_format_date( $item->updated_at ),
+            'task_list_id' => $item->task_list,
+            'meta'        => $this->meta( $item ),
+            'assignees'   => $this->assignees( $item ),
+            'creator'     => $this->get_creator( $item ),
+            'type'        => $this->get_type( $item->id ),
+        ];
+        
+        if ( $this->list_task_transormer_filter ) {
+            return apply_filters( 'wedevs_pm_list_task_transormer', $task, $item );  
+        }
+        
+        return $task;
+    }
+
+    public function get_creator( $item ) {
+        
+        if ( empty( $item->created_by ) ) {
+            $project = wedevs_pm_get_projects( [ 'id' => $item->project_id ] );
+
+            if ( empty( $project['data']['created_by'] ) ) {
+                $item->created_by = get_current_user_id();
+            } else {
+                $item->created_by = $project['data']['created_by'];
+            }  
+        } 
+
+        $user = get_user_by( 'id', $item->created_by );
+        
+        if ( ! $user ) {
+            return [];
+        }
+
+        $data = [
+            'id'                => (int) $user->ID,
+            'username'          => $user->user_login,
+            'nicename'          => $user->user_nicename,
+            'email'             => $user->user_email,
+            'profile_url'       => $user->user_url,
+            'display_name'      => $user->display_name,
+            'manage_capability' => (int) wedevs_pm_has_manage_capability($user->ID),
+            'create_capability' => (int) wedevs_pm_has_project_create_capability($user->ID),
+            'avatar_url'        => Avatar::get_url( $user->ID ),
+        ];
+
+        return [ 'data' => $data ];
+    }
+    
+    public function meta( Task $item ) {
+        $metas = [
+            'can_complete_task' => $this->wedevs_pm_user_can_complete_task( $item ),
+            'total_comment'     => (int) $item->total_comment,
+            'total_sub_task'    => 0,
+            'privacy'           => (int) $item->is_private,
+        ];
+
+	    return $metas;
+    }
+
+    function wedevs_pm_user_can_complete_task( $task ) {
+        
+        if(!$task) {
+            return false;
+        }
+        $user_id = get_current_user_id();
+
+        if ( wedevs_pm_has_manage_capability( $user_id ) ) {
+            return true;
+        }
+
+        if ( wedevs_pm_is_manager( $task->project_id, $user_id ) ) {
+            return true;
+        }
+
+        if ( $task->created_by == $user_id ) {
+            return true;
+        }
+
+        $assignees = $this->get_task_assignee_ids( $task ); //pluck( 'assigned_to' )->all();
+        $in_array = in_array( $user_id, $assignees );
+
+        if ( !empty( $in_array ) ) {
+            return true;
+        }
+
+        return false;
+    }
+
+    // Eager-loaded relation, or the legacy GROUP_CONCAT string if an extension still selects it.
+    private function assignee_rows( $item ) {
+        $assignees = $item->assignees;
+
+        if ( empty( $assignees ) ) {
+            return [];
+        }
+
+        if ( is_string( $assignees ) ) {
+            $rows = [];
+
+            foreach ( explode( '|', $assignees ) as $assign ) {
+                $assign = json_decode( str_replace( '`', '"', $assign ) );
+
+                if ( $assign ) {
+                    $rows[] = $assign;
+                }
+            }
+
+            return $rows;
+        }
+
+        $rows = [];
+
+        foreach ( $assignees as $assign ) {
+            $row = (object) array_intersect_key(
+                $assign->getAttributes(),
+                array_flip( [ 'assigned_to', 'assigned_at', 'completed_at', 'started_at', 'status' ] )
+            );
+
+            $rows[ wp_json_encode( $row ) ] = $row;
+        }
+
+        return array_values( $rows );
+    }
+
+    public function get_task_assignee_ids( $item ) {
+        $assigness = [];
+
+        foreach ( $this->assignee_rows( $item ) as $assign ) {
+            if ( !empty( $assign->assigned_to ) ) {
+                $assigness[] = $assign->assigned_to;
+            }
+            
+        }
+
+        return $assigness;
+    }
+
+    public function get_type( $item_id ) {
+        global $wpdb;
+
+        $tb_task_types     = esc_sql( wedevs_pm_tb_prefix() . 'pm_task_types' );
+        $tb_task_type_task = esc_sql( wedevs_pm_tb_prefix() . 'pm_task_type_task' );
+        $tb_tasks          = esc_sql( wedevs_pm_tb_prefix() . 'pm_tasks' );
+
+        $result = $wpdb->get_row(
+            $wpdb->prepare(
+                "SELECT DISTINCT typ.id as type_id, typ.title, typ.description, tk.id as task_id
+                FROM {$tb_task_types} as typ
+                LEFT JOIN {$tb_task_type_task} as typt ON typ.id = typt.type_id
+                LEFT JOIN {$tb_tasks} as tk ON tk.id = typt.task_id
+                WHERE tk.id = %d",
+                absint( $item_id )
+            )
+        );
+
+        if ( $result ) {
+            $result->id = (int) $result->type_id;
+            unset( $result->type_id );
+        }
+
+        return $result;
+    }
+
+    public function assignees( $item ) {
+        $assignees = ['data'=>[]];
+
+        foreach ( $this->assignee_rows( $item ) as $assign ) {
+            if ( empty( $assign->assigned_to ) ) continue;
+            $user = get_user_by( 'id', $assign->assigned_to );
+            if ( empty( $user ) ) continue;
+            
+            $data = [
+                'id'                => (int) $user->ID,
+                'username'          => $user->user_login,
+                'nicename'          => $user->user_nicename,
+                'email'             => $user->user_email,
+                'profile_url'       => $user->user_url,
+                'display_name'      => $user->display_name,
+                'manage_capability' => (int) wedevs_pm_has_manage_capability($user->ID),
+                'create_capability' => (int) wedevs_pm_has_project_create_capability($user->ID),
+                'avatar_url'        => Avatar::get_url( $user->ID ),
+            ];
+
+            
+            $data['completed_at'] = empty( $assign->completed_at ) ? [] : wedevs_pm_format_date( $assign->completed_at );
+            $data['started_at'] = empty( $assign->started_at ) ? [] : wedevs_pm_format_date( $assign->started_at );
+            $data['assigned_at'] = empty( $assign->assigned_at ) ? [] : wedevs_pm_format_date( $assign->assigned_at );
+            $data['status'] = empty( $assign->status ) ? 0 : (int) $assign->status;
+
+            $assignees['data'][] = $data;
+            
+        }
+        
+        return $assignees;
+    }
+}

@@ -1,0 +1,487 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Difficulty {
+  EASY
+  MEDIUM
+  HARD
+}
+
+enum QuestionType {
+  MCQ
+  CODING
+}
+
+enum QuestionStatus {
+  DRAFT
+  PUBLISHED
+}
+
+enum AssessmentStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum ScheduleStatus {
+  DRAFT
+  PUBLISHED
+  PAUSED
+  CANCELLED
+  CLOSED
+}
+
+enum SetMode {
+  FIXED
+  ROTATE
+}
+
+enum AttemptStatus {
+  IN_PROGRESS
+  SUBMITTED
+  AUTO_SUBMITTED
+  TERMINATED
+}
+
+enum OtpPurpose {
+  VERIFY_EMAIL
+  RESET_PASSWORD
+}
+
+model Role {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  users User[]
+
+  @@map("roles")
+}
+
+model User {
+  id            String    @id @default(uuid())
+  email         String    @unique
+  passwordHash  String
+  roleId        Int
+  role          Role      @relation(fields: [roleId], references: [id])
+  isActive      Boolean   @default(true)
+  emailVerified Boolean   @default(false)
+  failedLogins  Int       @default(0)
+  lockedUntil   DateTime?
+  lastLoginAt   DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  student       StudentProfile?
+  admin         AdminProfile?
+  assignments   ExamAssignment[]
+  attempts      ExamAttempt[]
+  notifications Notification[]
+  otpCodes      OtpCode[]
+  auditLogs     AuditLog[]
+
+  @@map("users")
+}
+
+model AdminProfile {
+  id       String @id @default(uuid())
+  userId   String @unique
+  user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  fullName String
+
+  @@map("admin_profiles")
+}
+
+model Batch {
+  id          String           @id @default(uuid())
+  name        String           @unique
+  description String?
+  createdAt   DateTime         @default(now())
+  students    StudentProfile[]
+
+  @@map("batches")
+}
+
+model StudentProfile {
+  id             String   @id @default(uuid())
+  userId         String   @unique
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  fullName       String
+  mobile         String
+  college        String
+  regNo          String   @unique
+  branch         String
+  graduationYear Int
+  batchId        String?
+  batch          Batch?   @relation(fields: [batchId], references: [id], onDelete: SetNull)
+  createdAt      DateTime @default(now())
+
+  @@index([batchId])
+  @@index([fullName])
+  @@map("student_profiles")
+}
+
+model QuestionCategory {
+  id        String            @id @default(uuid())
+  code      String            @unique
+  name      String
+  position  Int               @default(0)
+  questions Question[]
+  sections  AssessmentSection[]
+
+  @@map("question_categories")
+}
+
+model Question {
+  id            String         @id @default(uuid())
+  categoryId    String
+  category      QuestionCategory @relation(fields: [categoryId], references: [id])
+  topic         String
+  subtopic      String?
+  text          String
+  explanation   String?
+  difficulty    Difficulty     @default(MEDIUM)
+  marks         Float          @default(1)
+  negativeMarks Float          @default(0.25)
+  status        QuestionStatus @default(PUBLISHED)
+  type          QuestionType   @default(MCQ)
+  title         String?
+  funcName      String?
+  paramNames    Json?
+  starterCode   String?
+  solution      String?
+  constraints   Json?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  testCases     QuestionTestCase[]
+  submissions   CodeSubmission[]
+  options       QuestionOption[]
+  usages        AssessmentQuestion[]
+  answers       StudentAnswer[]
+
+  @@index([categoryId, difficulty])
+  @@index([topic])
+  @@index([status])
+  @@map("questions")
+}
+
+model QuestionOption {
+  id         String   @id @default(uuid())
+  questionId String
+  question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  position   Int
+  text       String
+  isCorrect  Boolean  @default(false)
+
+  @@unique([questionId, position])
+  @@map("question_options")
+}
+
+model Assessment {
+  id              String           @id @default(uuid())
+  name            String
+  description     String?
+  durationMin     Int
+  passPercent     Float            @default(40)
+  negativeMarking Boolean          @default(true)
+  shuffleQuestions Boolean         @default(true)
+  shuffleOptions  Boolean          @default(true)
+  proctoring      Json
+  status          AssessmentStatus @default(DRAFT)
+  createdById     String?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+
+  sections        AssessmentSection[]
+  sets            PaperSet[]
+  schedules       ExamSchedule[]
+
+  @@map("assessments")
+}
+
+model AssessmentSection {
+  id             String           @id @default(uuid())
+  assessmentId   String
+  assessment     Assessment       @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
+  categoryId     String
+  category       QuestionCategory @relation(fields: [categoryId], references: [id])
+  questionCount  Int
+  marksPerQuestion Float          @default(1)
+  negativeMarks  Float            @default(0.25)
+  position       Int              @default(0)
+  questions      AssessmentQuestion[]
+
+  @@unique([assessmentId, categoryId])
+  @@map("assessment_sections")
+}
+
+model PaperSet {
+  id           String     @id @default(uuid())
+  assessmentId String
+  assessment   Assessment @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
+  code         String
+  createdAt    DateTime   @default(now())
+  questions    AssessmentQuestion[]
+  schedules    ExamSchedule[]
+  assignments  ExamAssignment[]
+  attempts     ExamAttempt[]
+
+  @@unique([assessmentId, code])
+  @@map("paper_sets")
+}
+
+model QuestionTestCase {
+  id         String   @id @default(uuid())
+  questionId String
+  question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  position   Int
+  args       Json
+  expected   Json
+  isHidden   Boolean  @default(false)
+  hint       String?
+
+  @@unique([questionId, position])
+  @@map("question_test_cases")
+}
+
+model CodeSubmission {
+  id         String      @id @default(uuid())
+  attemptId  String
+  attempt    ExamAttempt @relation(fields: [attemptId], references: [id], onDelete: Cascade)
+  questionId String
+  question   Question    @relation(fields: [questionId], references: [id])
+  kind       String
+  code       String
+  passed     Int
+  total      Int
+  ratio      Float
+  results    Json
+  runtimeMs  Float       @default(0)
+  memoryKb   Float       @default(0)
+  createdAt  DateTime    @default(now())
+
+  @@index([attemptId, questionId, createdAt])
+  @@map("code_submissions")
+}
+
+model AssessmentQuestion {
+  id            String            @id @default(uuid())
+  paperSetId    String
+  paperSet      PaperSet          @relation(fields: [paperSetId], references: [id], onDelete: Cascade)
+  questionId    String
+  question      Question          @relation(fields: [questionId], references: [id])
+  sectionId     String
+  section       AssessmentSection @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  position      Int
+  marks         Float
+  negativeMarks Float
+
+  @@unique([paperSetId, questionId])
+  @@index([questionId])
+  @@map("assessment_questions")
+}
+
+model ExamSchedule {
+  id               String         @id @default(uuid())
+  name             String
+  assessmentId     String
+  assessment       Assessment     @relation(fields: [assessmentId], references: [id])
+  paperSetId       String?
+  paperSet         PaperSet?      @relation(fields: [paperSetId], references: [id])
+  setMode          SetMode        @default(FIXED)
+  startAt          DateTime
+  endAt            DateTime
+  durationMin      Int
+  maxAttempts      Int            @default(1)
+  passPercent      Float?
+  instructions     String?
+  status           ScheduleStatus @default(DRAFT)
+  pausedAt         DateTime?
+  resultsPublished Boolean        @default(false)
+  openEntry        Boolean        @default(false)
+  startNotifiedAt  DateTime?
+  reminderSentAt   DateTime?
+  createdById      String?
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+
+  assignments      ExamAssignment[]
+  attempts         ExamAttempt[]
+  results          Result[]
+
+  @@index([startAt, endAt])
+  @@index([status])
+  @@map("exam_schedules")
+}
+
+model ExamAssignment {
+  id            String       @id @default(uuid())
+  scheduleId    String
+  schedule      ExamSchedule @relation(fields: [scheduleId], references: [id], onDelete: Cascade)
+  studentId     String
+  student       User         @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  paperSetId    String?
+  paperSet      PaperSet?    @relation(fields: [paperSetId], references: [id])
+  extraAttempts Int          @default(0)
+  assignedAt    DateTime     @default(now())
+
+  @@unique([scheduleId, studentId])
+  @@index([studentId])
+  @@map("exam_assignments")
+}
+
+model ExamAttempt {
+  id             String        @id @default(uuid())
+  scheduleId     String
+  schedule       ExamSchedule  @relation(fields: [scheduleId], references: [id])
+  studentId      String
+  student        User          @relation(fields: [studentId], references: [id])
+  paperSetId     String
+  paperSet       PaperSet      @relation(fields: [paperSetId], references: [id])
+  attemptNo      Int
+  status         AttemptStatus @default(IN_PROGRESS)
+  startedAt      DateTime      @default(now())
+  deadlineAt     DateTime
+  submittedAt    DateTime?
+  submitReason   String?
+  questionOrder  Json
+  optionOrder    Json
+  sessionToken   String
+  lastSeenAt     DateTime      @default(now())
+  startIp        String?
+  userAgent      String?
+  violationCount Int           @default(0)
+  tabSwitchCount Int           @default(0)
+  adminMessage   String?
+
+  answers        StudentAnswer[]
+  logs           ExamActivityLog[]
+  codeSubmissions CodeSubmission[]
+  result         Result?
+
+  @@unique([scheduleId, studentId, attemptNo])
+  @@index([status, deadlineAt])
+  @@index([studentId])
+  @@map("exam_attempts")
+}
+
+model StudentAnswer {
+  id               String      @id @default(uuid())
+  attemptId        String
+  attempt          ExamAttempt @relation(fields: [attemptId], references: [id], onDelete: Cascade)
+  questionId       String
+  question         Question    @relation(fields: [questionId], references: [id])
+  selectedOptionId String?
+  markedForReview  Boolean     @default(false)
+  visited          Boolean     @default(true)
+  code             String?
+  updatedAt        DateTime    @updatedAt
+
+  @@unique([attemptId, questionId])
+  @@map("student_answers")
+}
+
+model ExamActivityLog {
+  id        String      @id @default(uuid())
+  attemptId String
+  attempt   ExamAttempt @relation(fields: [attemptId], references: [id], onDelete: Cascade)
+  studentId String
+  type      String
+  severity  String      @default("INFO")
+  counted   Boolean     @default(false)
+  detail    Json?
+  ip        String?
+  createdAt DateTime    @default(now())
+
+  @@index([attemptId, createdAt])
+  @@index([severity])
+  @@map("exam_activity_logs")
+}
+
+model Result {
+  id             String       @id @default(uuid())
+  attemptId      String       @unique
+  attempt        ExamAttempt  @relation(fields: [attemptId], references: [id], onDelete: Cascade)
+  scheduleId     String
+  schedule       ExamSchedule @relation(fields: [scheduleId], references: [id])
+  studentId      String
+  totalQuestions Int
+  correct        Int
+  incorrect      Int
+  unattempted    Int
+  totalMarks     Float
+  obtainedMarks  Float
+  percentage     Float
+  accuracy       Float
+  passed         Boolean
+  sectionScores  Json
+  timeTakenSec   Int
+  createdAt      DateTime     @default(now())
+
+  @@index([scheduleId, obtainedMarks])
+  @@index([studentId])
+  @@map("results")
+}
+
+model Notification {
+  id        String    @id @default(uuid())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type      String
+  title     String
+  body      String
+  readAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  @@index([userId, createdAt])
+  @@map("notifications")
+}
+
+model EmailLog {
+  id        String   @id @default(uuid())
+  to        String
+  subject   String
+  body      String
+  status    String
+  error     String?
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+  @@map("email_logs")
+}
+
+model AuditLog {
+  id        String   @id @default(uuid())
+  actorId   String?
+  actor     User?    @relation(fields: [actorId], references: [id], onDelete: SetNull)
+  action    String
+  entity    String
+  entityId  String?
+  meta      Json?
+  ip        String?
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([entity, entityId])
+  @@map("audit_logs")
+}
+
+model OtpCode {
+  id         String     @id @default(uuid())
+  userId     String
+  user       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  purpose    OtpPurpose
+  codeHash   String
+  attempts   Int        @default(0)
+  expiresAt  DateTime
+  consumedAt DateTime?
+  createdAt  DateTime   @default(now())
+
+  @@index([userId, purpose])
+  @@map("otp_codes")
+}

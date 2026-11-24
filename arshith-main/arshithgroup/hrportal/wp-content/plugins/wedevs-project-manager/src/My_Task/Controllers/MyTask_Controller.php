@@ -1,0 +1,789 @@
+<?php
+
+namespace WeDevs\PM\My_Task\Controllers;
+
+use WP_REST_Request;
+use League\Fractal;
+use League\Fractal\Resource\Item as Item;
+use League\Fractal\Resource\Collection as Collection;
+use League\Fractal\Pagination\IlluminatePaginatorAdapter;
+use WeDevs\PM\Common\Traits\Transformer_Manager;
+use WeDevs\PM\Common\Traits\Request_Filter;
+use WeDevs\PM\User\Models\User;
+use WeDevs\PM\User\Transformers\User_Transformer;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Pagination\Paginator;
+use WeDevs\PM\Calendar\Transformers\Calendar_Transformer;
+use WeDevs\PM\User\Models\User_Role;
+use WeDevs\PM\Activity\Transformers\Activity_Transformer;
+use WeDevs\PM\User\Helper\Avatar;
+use WeDevs\PM\Common\Models\Assignee;
+use WeDevs\PM\Common\Models\Boardable;
+use WeDevs\PM\Common\Models\Meta;
+use WeDevs\PM\Project\Models\Project;
+use WeDevs\PM\Settings\Models\Settings;
+
+
+class MyTask_Controller {
+    use Transformer_Manager, Request_Filter;
+
+    public function user_tasks_by_type ( WP_REST_Request $request ) {
+        $id       = intval( $request->get_param( 'id' ) );
+        $taskType = sanitize_text_field( $request->get_param( 'task_type' ) );
+        
+        $today = gmdate( 'Y-m-d', strtotime( current_time( 'mysql' ) ) );
+
+        $user     = User::with( [
+            'projects' => function ( $query ) use ( $id, $taskType, $today ) {
+                $query->with( [
+                    'tasks' => function ( $task )  use ( $id, $taskType, $today ) {
+                        $task = $task->with( ['assignees', 'metas'] )
+                        ->parent()
+                        ->whereHas( 'assignees', function ( $assignees )  use ( $id ) {
+                            $assignees->where( 'assigned_to', $id );
+                        } );
+
+                        $task->whereHas('boards',function( $query ) {
+                            $query->where('status', '1');
+                        });
+
+                        /* get current task */
+                        if ( $taskType == 'current' ) {
+                            $task = $task->where( function( $q ) use ( $today ) {
+                                $q->where( 'due_date', '>=', $today )
+                                    ->orWhereNull( 'due_date' );
+                            });
+                        }
+                         /* get complete task*/
+                        if ( $taskType == 'complete' ) {
+                            $task = $task->where( 'status', 1);
+                        } else {
+                            $task = $task->where( 'status', '!=', 1);
+                        }
+
+                        /* get outstanding task */
+                        if ( $taskType == 'outstanding' ) {
+                            $task = $task->where( 'due_date', '<', $today );
+                        }
+
+                        if ( ! wedevs_pm_has_manage_capability() ) {
+                            /*exclude private tasks*/
+                            $task = $task->doesntHave( 'metas', 'and', function ($query) {
+                                    $query->where( 'meta_key', '=', 'privacy' )
+                                        ->where( 'meta_value', '!=', '0' );
+                                });
+                            /*exclude task private list*/
+                            $task = $task->doesntHave( 'task_lists.metas', 'and', function ($query) {
+                                $query->where( 'meta_key', '=', 'privacy' )
+                                        ->where( 'meta_value', '!=', '0' );
+                                });
+                        }
+                    }
+                ])
+                ->whereHas('tasks', function ( $task )  use ( $id, $taskType, $today ) {
+                    $task = $task->parent()
+                    ->whereHas( 'assignees', function ( $assignees )  use ( $id ) {
+                        $assignees->where( 'assigned_to', $id );
+                    } );
+                    $task->whereHas('boards',function( $query ) {
+                        $query->where('status', '1');
+                    });
+
+                    /* get current task */
+                    if ( $taskType == 'current' ) {
+                        $task = $task->where( function( $q ) use ( $today ) {
+                            $q->where( 'due_date', '>=', $today )
+                                ->orWhereNull( 'due_date' );
+                        });
+                    }
+                     /* get complete task*/
+                    if ( $taskType == 'complete' ) {
+                        $task = $task->where( 'status', 1);
+                    } else {
+                        $task = $task->where( 'status', '!=', 1);
+                    }
+                    /* get outstanding task */
+                    if ( $taskType == 'outstanding' ) {
+                        $task = $task->where( 'due_date', '<', $today );
+                    }
+                    if ( ! wedevs_pm_has_manage_capability() ) {
+                        /*exclude private tasks*/
+                        $task = $task->doesntHave( 'metas', 'and', function ($query) {
+                                $query->where( 'meta_key', '=', 'privacy' )
+                                    ->where( 'meta_value', '!=', '0' );
+                            });
+                        /*exclude task private list*/
+                        $task = $task->doesntHave( 'task_lists.metas', 'and', function ($query) {
+                            $query->where( 'meta_key', '=', 'privacy' )
+                                    ->where( 'meta_value', '!=', '0' );
+                            });
+                    }
+                } );
+            }
+        ] )->find( $id );
+
+        $resource = new Item( $user, new User_Transformer );
+        $resource = $this->get_response( $resource );
+
+        return $resource;
+    }
+
+    public function user_calender_tasks( WP_REST_Request $request ) {
+        global $wpdb;
+
+        // Get calender start date & handle sql injection.
+        $start = $request->get_param( 'start' );
+
+        try {
+            $date  = new \DateTimeImmutable( $start );
+            $start = $date->format( 'Y-m-d' );
+        } catch ( \Exception $exception ) {
+            return new \WP_Error( 400, esc_html__( 'Starting date is not valid. Please re-check your request.', 'wedevs-project-manager' ) );
+        }
+
+        $user_id       = get_current_user_id();
+        $tb_tasks      = esc_sql( wedevs_pm_tb_prefix() . 'pm_tasks' );
+        $tb_boards     = esc_sql( wedevs_pm_tb_prefix() . 'pm_boards' );
+        $tb_boardables = esc_sql( wedevs_pm_tb_prefix() . 'pm_boardables' );
+        $tb_assignees  = esc_sql( wedevs_pm_tb_prefix() . 'pm_assignees' );
+        $tb_meta       = esc_sql( wedevs_pm_tb_prefix() . 'pm_meta' );
+        $tb_projects   = esc_sql( wedevs_pm_tb_prefix() . 'pm_projects' );
+        $tb_settings   = esc_sql( wedevs_pm_tb_prefix() . 'pm_settings' );
+
+        $tb_users     = esc_sql( $wpdb->base_prefix . 'users' );
+        $tb_user_meta = esc_sql( $wpdb->base_prefix . 'usermeta' );
+
+        $tb_role_user    = esc_sql( wedevs_pm_tb_prefix() . 'pm_role_user' );
+        $current_user_id = get_current_user_id();
+
+        $user_id     = empty( $user_id ) ? absint( $current_user_id ) : absint( $user_id );
+        $project_ids = $this->get_current_user_project_ids( $user_id );
+
+        $get_boards = $wpdb->get_results(
+            $wpdb->prepare(
+                "SELECT id FROM {$tb_boards} WHERE type=%s and status=1", 'task_list'
+            )
+        );
+
+        $boards_id  = wp_list_pluck( $get_boards, 'id' );
+        $boards_id  = array_map( 'absint', $boards_id );
+
+        // Handle empty boards_id case
+        if ( empty( $boards_id ) ) {
+            $boards_id = array( 0 );
+        }
+
+        $boards_id_placeholders  = implode( ',', array_fill( 0, count( $boards_id ), '%d' ) );
+
+        // Ensure project_ids is safe and build placeholders
+        if ( empty( $project_ids ) ) {
+            $project_ids_array = array( 0 );
+        } else {
+            $project_ids_array = array_map( 'absint', $project_ids );
+        }
+        $project_ids_placeholders = implode( ', ', array_fill( 0, count( $project_ids_array ), '%d' ) );
+
+        if ( is_multisite() ) {
+            $meta_key = wedevs_pm_user_meta_key();
+
+            // Prepare parameters array
+            $prepare_params = array_merge(
+                array( $meta_key, $start, $start, $start, $start ),
+                $boards_id,
+                $project_ids_array,
+                array( $user_id )
+            );
+
+            $events = $wpdb->get_results( $wpdb->prepare(
+                "SELECT tsk.*
+
+                FROM {$tb_tasks} as tsk
+
+                LEFT JOIN {$tb_boardables} as boabl
+                    ON (tsk.id=boabl.boardable_id AND boabl.board_type='task_list' AND boabl.boardable_type='task')
+
+                LEFT JOIN {$tb_boards} as board
+                    ON (boabl.board_id=board.id AND board.type='task_list')
+
+                LEFT JOIN {$tb_projects} as pj ON (tsk.project_id=pj.id)
+
+                -- For getting multipule assignee users in individual task
+                LEFT JOIN {$tb_assignees} as asins ON tsk.id=asins.task_id
+
+                -- For filter user
+                LEFT JOIN {$tb_assignees} as asin ON tsk.id=asin.task_id
+
+                -- For getting all users information
+                LEFT JOIN {$tb_users} as usr ON asins.assigned_to=usr.ID
+                LEFT JOIN {$tb_user_meta} as umeta ON umeta.user_id = usr.ID
+
+                LEFT JOIN {$tb_meta} as tskmt
+                    ON (tsk.id=tskmt.entity_id AND tskmt.entity_type='task')
+
+                LEFT JOIN {$tb_meta} as boablmt
+                    ON ( boabl.board_id=boablmt.entity_id AND boablmt.entity_type='task_list')
+
+                LEFT JOIN {$tb_settings} as sett ON pj.id=sett.project_id AND sett.key='capabilities'
+
+                WHERE 1=1
+                    AND umeta.meta_key=%s
+                    AND
+                    (
+                        (tsk.due_date >= %s)
+                            or
+                        (tsk.due_date is null and tsk.start_at >= %s)
+                            or
+                        (tsk.start_at is null and tsk.due_date >= %s )
+                            or
+                        ((tsk.start_at is null AND tsk.due_date is null) and tsk.created_at >= %s)
+                    )
+                    AND
+                    board.id IN ({$boards_id_placeholders})
+                    AND pj.id IN ({$project_ids_placeholders})
+                    AND asin.assigned_to = %d
+
+                GROUP BY(tsk.id)",
+                $prepare_params
+            ) );
+        } else {
+
+            // Prepare parameters array
+            $prepare_params = array_merge(
+                array( $start, $start, $start, $start ),
+                $boards_id,
+                $project_ids_array,
+                array( $user_id )
+            );
+
+            $events = $wpdb->get_results( $wpdb->prepare(
+                "SELECT tsk.*
+
+                FROM {$tb_tasks} as tsk
+
+                LEFT JOIN {$tb_boardables} as boabl
+                    ON (tsk.id=boabl.boardable_id AND boabl.board_type='task_list' AND boabl.boardable_type='task')
+
+                LEFT JOIN {$tb_boards} as board
+                    ON (boabl.board_id=board.id AND board.type='task_list')
+
+                LEFT JOIN {$tb_projects} as pj ON (tsk.project_id=pj.id)
+
+                -- For getting multipule assignee users in individual task
+                LEFT JOIN {$tb_assignees} as asins ON tsk.id=asins.task_id
+
+                -- For filter user
+                LEFT JOIN {$tb_assignees} as asin ON tsk.id=asin.task_id
+
+                -- For getting all users information
+                LEFT JOIN {$tb_users} as usr ON asins.assigned_to=usr.ID
+
+                LEFT JOIN {$tb_meta} as tskmt
+                    ON (tsk.id=tskmt.entity_id AND tskmt.entity_type='task')
+
+                LEFT JOIN {$tb_meta} as boablmt
+                    ON ( boabl.board_id=boablmt.entity_id AND boablmt.entity_type='task_list')
+
+                LEFT JOIN {$tb_settings} as sett ON pj.id=sett.project_id AND sett.key='capabilities'
+
+                WHERE 1=1
+                    AND
+                    (
+                        (tsk.due_date >= %s)
+                            or
+                        (tsk.due_date is null and tsk.start_at >= %s)
+                            or
+                        (tsk.start_at is null and tsk.due_date >= %s )
+                            or
+                        ((tsk.start_at is null AND tsk.due_date is null) and tsk.created_at >= %s)
+                    )
+                    AND
+                    board.id IN ({$boards_id_placeholders})
+                    AND pj.id IN ({$project_ids_placeholders})
+                    AND asin.assigned_to = %d
+
+                GROUP BY(tsk.id)",
+                $prepare_params
+            ) );
+        }
+
+        $user_roles = $wpdb->get_results(
+            $wpdb->prepare(
+                "SELECT DISTINCT user_id, project_id, role_id FROM {$tb_role_user} WHERE user_id=%d", $current_user_id
+            )
+        );
+
+        $tasks = $this->Calendar_Transformer( $events, $user_roles );
+        wp_send_json_success( $tasks );
+    }
+
+    public function Calendar_Transformer( $events, $user_roles ) {
+        $current_user_id = get_current_user_id();
+        $has_manage_cap  = wedevs_pm_has_manage_capability();
+
+        $roles = [];
+        $tasks = [];
+
+        foreach ( $user_roles as $user_role ) {
+            $roles[ $user_role->project_id ][ $user_role->user_id ] = $user_role->role_id;
+        }
+
+        $related = $this->get_calendar_task_relations( $events );
+
+        foreach ( $events as $event ) {
+            $role = 0;
+
+            if ( ! empty( $roles[ $event->project_id ][ $current_user_id ] ) ) {
+                $role = $roles[ $event->project_id ][ $current_user_id ];
+            }
+
+            $list_id = $related['list_ids'][ $event->id ] ?? '';
+
+            $event->list_id       = $list_id;
+            $event->settings      = $related['settings'][ $event->project_id ] ?? '';
+            $event->assignees     = [ 'data' => $related['assignees'][ $event->id ] ?? [] ];
+            $event->task_privacy  = $related['task_privacy'][ $event->id ] ?? '';
+            $event->list_privacy  = '' === $list_id ? '' : ( $related['list_privacy'][ $list_id ] ?? '' );
+            $event->project_title = $related['project_titles'][ $event->project_id ] ?? '';
+
+
+            if ( ! $this->has_view_permission(
+                    $has_manage_cap,
+                    $role,
+                    $event->list_privacy,
+                    $event->task_privacy,
+                    $event->settings
+                )
+            ) {
+                continue;
+            }
+
+            $tasks[] = array(
+                'id'         => absint( $event->id ),
+                'end'        => $this->get_end( $event ),
+                'type'       => 'task',
+                'title'      => $event->title,
+                'start'      => $this->get_start( $event ),
+                'status'     => $event->status ? 'complete' : 'incomplete',
+                'assignees'  => $event->assignees,
+                'project_id' => $event->project_id,
+                'created_at' => wedevs_pm_format_date( $event->created_at ),
+                'updated_at' => wedevs_pm_format_date( $event->updated_at ),
+            );
+        }
+
+        return $tasks;
+    }
+
+    // Batch-loads per-task calendar data; replaces GROUP_CONCAT ... SEPARATOR, which SQLite cannot run.
+    public function get_calendar_task_relations( $events ) {
+        $related = [
+            'list_ids'       => [],
+            'task_privacy'   => [],
+            'list_privacy'   => [],
+            'assignees'      => [],
+            'settings'       => [],
+            'project_titles' => [],
+        ];
+
+        $task_ids    = array_values( array_unique( array_map( 'intval', wp_list_pluck( $events, 'id' ) ) ) );
+        $project_ids = array_values( array_unique( array_map( 'intval', wp_list_pluck( $events, 'project_id' ) ) ) );
+
+        if ( empty( $task_ids ) ) {
+            return $related;
+        }
+
+        $boardables = Boardable::select( 'board_id', 'boardable_id' )
+            ->whereIn( 'boardable_id', $task_ids )
+            ->where( 'board_type', 'task_list' )
+            ->where( 'boardable_type', 'task' )
+            ->orderBy( 'id' )
+            ->get();
+
+        foreach ( $boardables as $boardable ) {
+            if ( ! isset( $related['list_ids'][ $boardable->boardable_id ] ) ) {
+                $related['list_ids'][ $boardable->boardable_id ] = $boardable->board_id;
+            }
+        }
+
+        $related['task_privacy'] = $this->get_privacy_meta_values( 'task', $task_ids );
+        $related['list_privacy'] = $this->get_privacy_meta_values( 'task_list', array_values( $related['list_ids'] ) );
+
+        $assignees = Assignee::select( 'task_id', 'assigned_to' )
+            ->whereIn( 'task_id', $task_ids )
+            ->orderBy( 'id' )
+            ->get();
+
+        $user_ids = array_values( array_unique( array_map( 'intval', $assignees->pluck( 'assigned_to' )->all() ) ) );
+        $users    = [];
+
+        if ( ! empty( $user_ids ) ) {
+            // get_users() limits to members of the current site on multisite, like the old usermeta join.
+            foreach ( get_users( [ 'include' => $user_ids, 'fields' => [ 'ID', 'display_name' ] ] ) as $user ) {
+                $users[ (int) $user->ID ] = $user;
+            }
+        }
+
+        foreach ( $assignees as $assignee ) {
+            $user_id = (int) $assignee->assigned_to;
+
+            if ( empty( $users[ $user_id ] ) || isset( $related['assignees'][ $assignee->task_id ][ $user_id ] ) ) {
+                continue;
+            }
+
+            $related['assignees'][ $assignee->task_id ][ $user_id ] = [
+                'id'           => (string) $user_id,
+                'display_name' => $users[ $user_id ]->display_name,
+                'avatar_url'   => Avatar::get_url( $user_id ),
+            ];
+        }
+
+        foreach ( $related['assignees'] as $task_id => $task_users ) {
+            $related['assignees'][ $task_id ] = array_values( $task_users );
+        }
+
+        if ( ! empty( $project_ids ) ) {
+            $related['project_titles'] = Project::whereIn( 'id', $project_ids )->pluck( 'title', 'id' )->all();
+
+            $settings = Settings::select( 'project_id', 'value' )
+                ->whereIn( 'project_id', $project_ids )
+                ->where( 'key', 'capabilities' )
+                ->orderBy( 'id' )
+                ->get();
+
+            foreach ( $settings as $setting ) {
+                if ( ! isset( $related['settings'][ $setting->project_id ] ) ) {
+                    // Raw column, unserialized the same way get_settings_value() does.
+                    $value = $setting->getAttributes()['value'] ?? '';
+
+                    $related['settings'][ $setting->project_id ] = ! empty( $value ) ? wedevs_pm_safe_unserialize( $value ) : '';
+                }
+            }
+        }
+
+        return $related;
+    }
+
+    private function get_privacy_meta_values( $entity_type, $entity_ids ) {
+        $values = [];
+
+        if ( empty( $entity_ids ) ) {
+            return $values;
+        }
+
+        $metas = Meta::select( 'entity_id', 'meta_value' )
+            ->whereIn( 'entity_id', array_map( 'intval', $entity_ids ) )
+            ->where( 'entity_type', $entity_type )
+            ->where( 'meta_key', 'privacy' )
+            ->orderBy( 'id' )
+            ->get();
+
+        foreach ( $metas as $meta ) {
+            if ( ! isset( $values[ $meta->entity_id ] ) ) {
+                $values[ $meta->entity_id ] = $meta->getAttributes()['meta_value'] ?? '';
+            }
+        }
+
+        return $values;
+    }
+
+    public function get_current_user_project_ids( $user_id, $project_id = false ) {
+        global $wpdb;
+
+        $tb_role_user = esc_sql( wedevs_pm_tb_prefix() . 'pm_role_user' );
+
+        // IF empty project id
+        $project_ids = $wpdb->get_results(
+            $wpdb->prepare(
+                "SELECT DISTINCT project_id FROM {$tb_role_user} WHERE user_id=%d",
+                absint( $user_id )
+            )
+        );
+        $project_ids = wp_list_pluck( $project_ids, 'project_id' );
+
+        return $project_ids;
+    }
+
+    public function get_end( $event ) {
+
+        if ( ! empty( $event->due_date ) ) {
+            return wedevs_pm_format_date( $event->due_date );
+        } else if ( ! empty( $event->start_at )) {
+            return wedevs_pm_format_date( $event->start_at);
+        } else {
+            return wedevs_pm_format_date( $event->created_at );
+        }
+    }
+
+    public function get_start( $event ) {
+
+        if ( !empty( $event->start_at ) ) {
+            return wedevs_pm_format_date( $event->start_at);
+        } else if ( isset( $event->due_date ) ) {
+            return wedevs_pm_format_date( $event->due_date );
+        } else {
+            return wedevs_pm_format_date( $event->created_at );
+        }
+    }
+
+    public function has_view_permission(
+        $has_manage_cap,
+        $role,
+        $list_privacy,
+        $task_privacy,
+        $settings
+    ) {
+
+        if ( $has_manage_cap ||  $role == 1 ) {
+            return true;
+        }
+
+        if ( $list_privacy == 1 ) {
+            if ( $role == 2 ) {
+                if (
+                    ! empty( $settings['co_worker'] )
+                    &&
+                    ! $settings['co_worker']['view_private_list']
+                ) {
+                    return false;
+                }
+            }
+
+            if ( $role == 3 ) {
+                if (
+                    ! empty( $settings['client'] )
+                    &&
+                    ! $settings['client']['view_private_list']
+                ) {
+                    return false;
+                }
+            }
+        }
+
+        if ( $task_privacy == 1 ) {
+            if ( $role == 2 ) {
+                if (
+                    ! empty( $settings['co_worker'] )
+                    &&
+                    ! $settings['co_worker']['view_private_task']
+                ) {
+                    return false;
+                }
+            }
+
+            if ( $role == 3 ) {
+                if (
+                    ! empty( $settings['client'] )
+                    &&
+                    ! $settings['client']['view_private_task']
+                ) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    public function get_list_id( $boardables ) {
+        $boardables = explode( '|', $boardables );
+
+        foreach ( $boardables as $key => $boardable ) {
+            $boardable = str_replace('`', '"', $boardable);
+            $boardable = json_decode( $boardable );
+
+            if ( ! empty( $boardable->board_id ) ) {
+                return $boardable->board_id;
+            }
+        }
+
+        return '';
+    }
+
+    public function get_project_title( $projects ) {
+        $projects = explode( '|', $projects );
+
+        foreach ( $projects as $key => $project ) {
+            $project = str_replace('`', '"', $project);
+            $project = json_decode( $project );
+
+            if ( ! empty( $project->title ) ) {
+                return $project->title;
+            }
+        }
+
+        return '';
+    }
+
+    public function get_settings_value( $settings ) {
+        $settings = explode( '|', $settings );
+
+        foreach ( $settings as $key => $setting ) {
+            return !empty( $setting ) ? wedevs_pm_safe_unserialize( $setting ) : '';
+        }
+
+        return [];
+    }
+
+    public function get_assignees_value( $assignees, $users ) {
+        $expand_users = [];
+
+        // $assignees = explode( '|', $assignees );
+
+        // foreach ( $assignees as $key => $assignee ) {
+        //     $assignee = str_replace('`', '"', $assignee);
+        //     $assignee = json_decode( $assignee );
+
+        //     if ( ! empty( $assignee->assigned_to ) ) {
+        //         $return[] = $assignee->assigned_to;
+        //     }
+        // }
+
+        $users = explode( '|', $users );
+
+        foreach ( $users as $key => $user ) {
+            $user = str_replace('`', '"', $user);
+            $user = json_decode( $user );
+
+            if ( ! empty( $user->id ) ) {
+                $expand_users[] = [
+                    'id'           => $user->id,
+                    'display_name' => $user->display_name,
+                    'avatar_url'   => Avatar::get_url( $user->id )
+                ];
+            }
+        }
+
+        return [
+            'data' => $expand_users
+        ];
+
+    }
+
+    public function get_privacy_meta_value( $event_meta ) {
+        $metas = explode( '|', $event_meta );
+
+        foreach ( $metas as $key => $meta ) {
+            $meta = str_replace('`', '"', $meta);
+            $meta = json_decode( $meta );
+
+            if ( ! empty( $meta->meta_key ) && $meta->meta_key == 'privacy' ) {
+                return $meta->meta_value;
+            }
+
+        }
+
+        return '';
+    }
+
+    // public function user_calender_tasks_x( WP_REST_Request $request ) {
+    //     $id = intval( $request->get_param( 'id' ) );
+    //     $start      = $request->get_param( 'start' );
+    //     $end        = $request->get_param( 'end' );
+
+    //     $tasks = User::find( $id )->tasks()
+    //             ->whereHas('boards',function( $query ) {
+    //                 $query->where( wedevs_pm_tb_prefix() . 'pm_boards.status', '1');
+    //             })
+    //             ->with('assignees')
+    //             ->parent()
+    //             ->where( function( $query ) use ($start, $end) {
+
+    //                 $query->where( function ( $q2 ) use ($start, $end) {
+    //                     $q2->where( 'start_at', '>=', $start)
+    //                         ->where( 'due_date', '<=', $end );
+    //                 })
+
+    //                 ->orWhere( function ( $q3 ) use ($start, $end) {
+    //                     $q3->whereNull( 'due_date' )
+    //                         ->where( function ( $qsub ) use ($start, $end) {
+    //                             $qsub->where( 'start_at', '>=', $start )
+    //                                 ->where(  wedevs_pm_tb_prefix() . 'pm_tasks.created_at', '<=', $end );
+    //                         });
+    //                 } )
+
+    //                 ->orWhere( function ($q4) use ($start, $end) {
+    //                     $q4->whereNull( 'start_at' )
+    //                         ->where( function ( $qsub ) use ($start, $end) {
+    //                             $qsub->where( 'due_date', '>=', $start )
+    //                                 ->where(  wedevs_pm_tb_prefix() . 'pm_tasks.created_at', '<=', $end );
+    //                         });
+    //                 } )
+
+    //                 ->orWhere( function( $q5 ) use ($start, $end) {
+    //                     $q5->whereNull( 'start_at' )
+    //                         ->orWhereNull( 'due_date' )
+    //                         ->whereBetween( wedevs_pm_tb_prefix() . 'pm_tasks.created_at', array($start, $end) );
+    //                 } );
+    //             } );
+
+    //     if ( !wedevs_pm_has_manage_capability() ){
+    //         $tasks = $tasks->doesntHave( 'metas', 'and', function ($query) {
+    //                     $query->where( 'meta_key', '=', 'privacy' )
+    //                         ->where( 'meta_value', '!=', '0' );
+    //                 });
+
+    //         $tasks = $tasks->doesntHave( 'task_lists.metas', 'and', function ($query) {
+    //             $query->where( 'meta_key', '=', 'privacy' )
+    //                 ->where( 'meta_value', '!=', '0' );
+    //             });
+    //     }
+    //     $tasks = $tasks->get()->toArray();
+    //     $resource = New Collection( $tasks, new Calendar_Transformer );
+    //     return $this->get_response( $resource );
+    // }
+
+    public function assigned_users ( ?WP_REST_Request $request = null ) {
+        $project_id  = $request ? intval( $request->get_param( 'project_id' ) ) : 0;
+        $current_user = get_current_user_id();
+
+        if ( ! $current_user ) {
+            return new \WP_Error( 'permission_denied', __( 'You have no permission to access this project.', 'wedevs-project-manager' ), [ 'status' => 403 ] );
+        }
+
+        $is_manager = wedevs_pm_user_can_access( wedevs_pm_manager_cap_slug() );
+
+        $query = User_Role::select( 'user_id' );
+
+        if ( $project_id ) {
+            // Non-managers must be a member of the requested project.
+            if ( ! $is_manager && ! User_Role::where( 'user_id', $current_user )->where( 'project_id', $project_id )->exists() ) {
+                return new \WP_Error( 'permission_denied', __( 'You have no permission to access this project.', 'wedevs-project-manager' ), [ 'status' => 403 ] );
+            }
+            $query->where( 'project_id', $project_id );
+        } elseif ( ! $is_manager ) {
+            // Limit to projects the caller belongs to.
+            $query->whereIn( 'project_id', User_Role::where( 'user_id', $current_user )->pluck( 'project_id' ) );
+        }
+
+        $roles    = $query->get()->toArray();
+        $user_ids = array_unique( wp_list_pluck( $roles, 'user_id' ) );
+        $users    = User::find($user_ids);
+
+        $resource = new Collection( $users, new User_Transformer );
+
+        return $this->get_response( $resource );
+    }
+
+    public function user_activities ( WP_REST_Request $request ) {
+        $id       = intval( $request->get_param( 'id' ) );
+        $page     = $request->get_param( 'mytask_activities_page' );
+        $per_page = $request->get_param( 'mytask_activities_per_page' );
+        $page     = isset( $page ) ? $page : 1;
+        $per_page = isset( $per_page ) ? $per_page : 15;
+
+        Paginator::currentPageResolver(function () use ($page) {
+            return $page;
+        });
+
+        $activities = User::find($id)->activities()
+            ->orderBy( 'created_at', 'DESC' )
+            ->paginate( $per_page );
+
+        $activities_collection = $activities->getCollection();
+        $resource = New Collection( $activities_collection, new Activity_Transformer );
+
+        $resource->setPaginator( new IlluminatePaginatorAdapter( $activities ) );
+
+        return $this->get_response( $resource );
+    }
+}

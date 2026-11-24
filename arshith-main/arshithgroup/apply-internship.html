@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Internship Application Portal | Arshith Group Careers</title>
+  <meta name="description" content="Apply for domain-specific internship roles at Arshith Group. Web Engineering, Full-Stack, UI/UX, Digital Marketing, E-Commerce, and Business Consulting." />
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <!-- Google Fonts: Outfit & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet" />
+  
+  <!-- Site CSS -->
+  <link rel="stylesheet" href="styles.css?v=7" />
+  <link rel="stylesheet" href="styles2.css?v=7" />
+  <link rel="stylesheet" href="footer-premium.css?v=7" />
+
+  <style>
+    /* ============================================================
+       ARSHITH GROUP - DOMAIN SPECIFIC INTERNSHIP APPLICATION PORTAL
+       Theme: Fresh MNC Mint & Emerald (#C2EDC2, #0abf9e, #0f172a)
+       ============================================================ */
+    :root {
+      --mint-bg0: #090e1a;
+      --mint-bg1: #0d1527;
+      --mint-brand: #06b6d4;
+      --mint-brand-dark: #0284c7;
+      --mint-brand-light: rgba(6, 182, 212, 0.15);
+      --text-dark: #ffffff;
+      --text-muted: #cbd5e1;
+      --font-head: 'Outfit', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(180deg, #090e1a 0%, #0d1527 50%, #090e1a 100%);
+      color: #ffffff;
+      font-family: var(--font-body);
+      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* ── PORTAL HERO ── */
+    .portal-hero {
+      padding: 150px 0 50px 0;
+      text-align: center;
+    }
+
+    .portal-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 20px;
+      border-radius: 30px;
+      font-family: var(--font-head);
+      font-size: 0.88rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 16px;
+      background: rgba(6, 182, 212, 0.2);
+      color: #38bdf8;
+      border: 1.5px solid rgba(6, 182, 212, 0.4);
+      box-shadow: 0 0 20px rgba(6, 182, 212, 0.25);
+    }
+
+    .portal-title {
+      font-family: var(--font-head);
+      font-size: 3rem;
+      font-weight: 900;
+      color: #ffffff;
+      margin-bottom: 16px;
+      letter-spacing: -0.5px;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .portal-sub {
+      font-size: 1.1rem;
+      line-height: 1.65;
+      color: #cbd5e1;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* ── DOMAIN SELECTION TABS ── */
+    .domain-tabs-wrapper {
+      display: none !important;
+    }
+
+    .domain-tabs-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .domain-tab-btn {
+      background: rgba(15, 23, 42, 0.85);
+      border: 1.5px solid rgba(255, 255, 255, 0.16);
+      border-radius: 30px;
+      padding: 12px 22px;
+      font-family: var(--font-head);
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #cbd5e1;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+      transition: all 0.3s ease;
+    }
+
+    .domain-tab-btn:hover {
+      border-color: #06b6d4;
+      color: #ffffff;
+      background: rgba(6, 182, 212, 0.18);
+      transform: translateY(-2px);
+    }
+
+    .domain-tab-btn.active {
+      background: linear-gradient(135deg, #0284c7 0%, #0d9488 100%);
+      color: #ffffff !important;
+      border-color: #06b6d4;
+      box-shadow: 0 8px 25px rgba(2, 132, 199, 0.45);
+    }
+
+    .domain-tab-btn i {
+      font-size: 1.1rem;
+    }
+
+    /* ── MAIN APPLICATION CARD ── */
+    .apply-card-container {
+      max-width: 900px;
+      margin: 0 auto 90px auto;
+    }
+
+    .apply-card {
+      background: linear-gradient(145deg, rgba(15, 23, 42, 0.95) 0%, rgba(13, 21, 39, 0.98) 100%);
+      border-radius: 28px;
+      padding: 50px 45px;
+      box-shadow: 0 25px 65px rgba(0, 0, 0, 0.65), 0 0 30px rgba(6, 182, 212, 0.2);
+      border: 1.5px solid rgba(6, 182, 212, 0.4);
+      backdrop-filter: blur(20px);
+      position: relative;
+    }
+
+    .domain-banner-header {
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.15) 0%, rgba(16, 185, 129, 0.15) 100%);
+      border-radius: 18px;
+      padding: 24px 28px;
+      margin-bottom: 35px;
+      border: 1.5px solid rgba(6, 182, 212, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .domain-banner-info h3 {
+      font-family: var(--font-head);
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin: 0 0 6px 0;
+    }
+
+    .domain-banner-info p {
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      margin: 0;
+    }
+
+    .domain-badge-pill {
+      background: rgba(16, 185, 129, 0.2);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #34d399;
+      font-family: var(--font-head);
+      font-size: 0.8rem;
+      font-weight: 800;
+      padding: 6px 16px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    /* ── FORM ELEMENTS ── */
+    .form-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+
+    .form-group {
+      margin-bottom: 22px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+
+    .form-control {
+      width: 100%;
+      background: rgba(9, 14, 26, 0.85);
+      border: 1.5px solid rgba(255, 255, 255, 0.18);
+      border-radius: 14px;
+      padding: 14px 18px;
+      color: #ffffff;
+      font-family: var(--font-body);
+      font-size: 0.98rem;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    .form-control option {
+      background: #0f172a;
+      color: #ffffff;
+    }
+
+    .form-control:focus {
+      border-color: #06b6d4;
+      background: rgba(9, 14, 26, 0.95);
+      box-shadow: 0 0 25px rgba(6, 182, 212, 0.35);
+    }
+
+    .domain-dynamic-section {
+      background: rgba(9, 14, 26, 0.7);
+      border-radius: 18px;
+      padding: 26px;
+      border: 1.5px solid rgba(255, 255, 255, 0.14);
+      margin-bottom: 25px;
+    }
+
+    .domain-dynamic-title {
+      font-family: var(--font-head);
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #38bdf8;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .submit-btn-lg {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: linear-gradient(135deg, #0284c7 0%, #0d9488 100%);
+      color: #ffffff !important;
+      font-family: var(--font-head);
+      font-size: 1.15rem;
+      font-weight: 800;
+      padding: 18px 40px;
+      border-radius: 16px;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      box-shadow: 0 10px 30px rgba(2, 132, 199, 0.45);
+      transition: all 0.3s ease;
+    }
+
+    .submit-btn-lg:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(2, 132, 199, 0.65);
+    }
+
+    /* SUCCESS FEEDBACK CARD */
+    .success-card {
+      text-align: center;
+      padding: 40px 20px;
+      display: none;
+    }
+
+    .success-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: rgba(16, 185, 129, 0.2);
+      border: 1.5px solid rgba(16, 185, 129, 0.4);
+      color: #34d399;
+      font-size: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px auto;
+      box-shadow: 0 0 30px rgba(16, 185, 129, 0.35);
+    }
+
+    .success-card h3 {
+      font-family: var(--font-head);
+      font-size: 2rem;
+      font-weight: 900;
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+
+    .ref-badge {
+      display: inline-block;
+      background: #f1f5f9;
+      color: var(--mint-brand-dark);
+      font-family: monospace;
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 6px 18px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+
+    /* ── RESPONSIVE MEDIA QUERIES ── */
+    @media (max-width: 768px) {
+      .portal-title { font-size: 2.2rem; }
+      .form-grid-2 { grid-template-columns: 1fr; gap: 0; }
+      .apply-card { padding: 30px 20px; }
+      .domain-banner-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ══════════ HEADER / NAV ══════════ -->
+  <header class="ag-header" id="agHeader">
+    <nav class="ag-nav container">
+      <a href="index.html" class="ag-logo">
+        <img src="./logos/LOGO-removebg-preview.png" alt="Arshith Logo" class="ag-logo-img" />
+      </a>
+      <ul class="ag-nav-links" id="agNavLinks">
+        <li class="ag-nav-item ag-has-drop">
+          <a href="aboutgroup.html">About Us <i class="fa-solid fa-chevron-down ag-caret"></i></a>
+          <div class="ag-dropdown">
+            <a href="aboutgroup.html">About Arshith Group</a>
+            <a href="aboutceo.html">Executive Biographies</a>
+          </div>
+        </li>
+        <li class="ag-nav-item ag-has-drop">
+          <a href="index.html#companies">Businesses <i class="fa-solid fa-chevron-down ag-caret"></i></a>
+          <div class="ag-dropdown">
+            <a href="http://arshithinfotech.com/">IT Services &amp; IT Consulting</a>
+            <a href="https://arshithfresh.com/" target="_blank">E-Commerce</a>
+            <a href="https://seller.arshithfresh.com/" target="_blank">Multi sellers</a>
+            <a href="https://suntechorganization.com/" target="_blank">Business Consulting &amp; Services</a>
+            <a href="https://suntechorganization.com/" target="_blank">Digital Marketing</a>
+          </div>
+        </li>
+        <li class="ag-nav-item">
+          <a href="LatestNews.html">News</a>
+        </li>
+        <li class="ag-nav-item ag-has-drop">
+          <a href="#" class="active">Careers <i class="fa-solid fa-chevron-down ag-caret"></i></a>
+          <div class="ag-dropdown">
+            <a href="internship.html">Internship Program</a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSeuJ0Gypsx9tuPK9jHDwNQchAXFtykeKWD7NPBb_VxilLdYwA/viewform?usp=publish-editor" target="_blank">Technical Confirmation</a>
+            <a href="https://quizzory.in/id/69f8284ef7e103e112b455ef" target="_blank">Online Assessment</a>
+          </div>
+        </li>
+        <li class="ag-nav-item"><a href="index.html#contact">Contact Us</a></li>
+      </ul>
+      <div class="ag-nav-right">
+        <button class="ag-hamburger" id="agHamburger" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+
+  <!-- ══════════ PORTAL HERO ══════════ -->
+  <section class="portal-hero">
+    <div class="container">
+      <span class="portal-tag"><i class="fa-solid fa-paper-plane"></i> CAREER APPLICATION PORTAL</span>
+      <h1 class="portal-title">Internship Application Portal</h1>
+      <p class="portal-sub">
+        Select your specialized domain below. Submit your application details to join Arshith Group's enterprise internship program.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ══════════ DOMAIN SELECTION TABS ══════════ -->
+  <div class="container">
+    <div class="domain-tabs-wrapper">
+      <div class="domain-tabs-grid">
+        <button class="domain-tab-btn active" data-domain="frontend" onclick="switchDomain('frontend')">
+          <i class="fa-solid fa-code"></i> Web &amp; Frontend
+        </button>
+        <button class="domain-tab-btn" data-domain="fullstack" onclick="switchDomain('fullstack')">
+          <i class="fa-solid fa-server"></i> Full-Stack &amp; Cloud
+        </button>
+        <button class="domain-tab-btn" data-domain="uiux" onclick="switchDomain('uiux')">
+          <i class="fa-solid fa-pen-ruler"></i> UI/UX Design
+        </button>
+        <button class="domain-tab-btn" data-domain="marketing" onclick="switchDomain('marketing')">
+          <i class="fa-solid fa-bullhorn"></i> Digital Marketing
+        </button>
+        <button class="domain-tab-btn" data-domain="ecommerce" onclick="switchDomain('ecommerce')">
+          <i class="fa-solid fa-cart-shopping"></i> E-Commerce Tech
+        </button>
+        <button class="domain-tab-btn" data-domain="consulting" onclick="switchDomain('consulting')">
+          <i class="fa-solid fa-chart-line"></i> Business Consulting
+        </button>
+        <button class="domain-tab-btn" data-domain="general" onclick="switchDomain('general')">
+          <i class="fa-solid fa-graduation-cap"></i> General Program
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════ APPLICATION CARD CONTAINER ══════════ -->
+  <div class="container">
+    <div class="apply-card-container">
+      <div class="apply-card">
+        
+        <!-- DOMAIN BANNER HEADER -->
+        <div class="domain-banner-header">
+          <div class="domain-banner-info">
+            <h3 id="currentDomainTitle">Frontend Web Developer Internship</h3>
+            <p id="currentDomainDesc">Build responsive UI components using HTML5, CSS3, JavaScript (ES6+), and React for live Arshith portals.</p>
+          </div>
+          <span class="domain-badge-pill" id="currentDomainCompany">Arshith Group</span>
+        </div>
+
+        <!-- APPLICATION FORM -->
+        <form id="domainAppForm" onsubmit="submitDomainForm(event)">
+          <!-- Hidden selected domain field -->
+          <input type="hidden" id="hiddenSelectedDomain" value="Frontend Web Developer Intern" />
+
+          <!-- SECTION 1: PERSONAL DETAILS -->
+          <h4 style="font-family: var(--font-head); font-size: 1.15rem; font-weight: 800; color: var(--text-dark); margin-bottom: 18px;">
+            1. Personal &amp; Contact Details
+          </h4>
+
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label for="fullName">Full Name *</label>
+              <input type="text" id="fullName" class="form-control" placeholder="Enter your full name" required />
+            </div>
+            <div class="form-group">
+              <label for="emailAddr">Email Address *</label>
+              <input type="email" id="emailAddr" class="form-control" placeholder="name@example.com" required />
+            </div>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label for="phoneNum">Phone / WhatsApp Number *</label>
+              <input type="tel" id="phoneNum" class="form-control" placeholder="+91 98765 43210" required />
+            </div>
+            <div class="form-group">
+              <label for="collegeName">College / University / Degree *</label>
+              <input type="text" id="collegeName" class="form-control" placeholder="e.g. B.E. Computer Science, VTU" required />
+            </div>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label for="gradYear">Graduation Year *</label>
+              <select id="gradYear" class="form-control" required>
+                <option value="2026">2026 Batch</option>
+                <option value="2025">2025 Batch</option>
+                <option value="2027">2027 Batch</option>
+                <option value="Recent Graduate">Recent Graduate</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="prefDuration">Preferred Internship Duration *</label>
+              <select id="prefDuration" class="form-control" required>
+                <option value="3 Months">3 Months</option>
+                <option value="6 Months">6 Months</option>
+                <option value="Flexible">Flexible</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- SECTION 2: DOMAIN SPECIFIC TECHNICAL QUESTIONS -->
+          <div class="domain-dynamic-section" id="dynamicFieldsContainer">
+            <div class="domain-dynamic-title">
+              <i class="fa-solid fa-sliders"></i> <span id="dynamicSectionHeading">Domain Specific Technical Background</span>
+            </div>
+
+            <!-- Dynamic Question 1 -->
+            <div class="form-group">
+              <label id="dynLabel1">Primary Tech Stack / Skills in Web Development *</label>
+              <input type="text" id="dynInput1" class="form-control" placeholder="e.g. HTML5, CSS3, JavaScript, React.js" required />
+            </div>
+
+            <!-- Dynamic Question 2 -->
+            <div class="form-group">
+              <label id="dynLabel2">GitHub Repository / Portfolio / Code Link</label>
+              <input type="url" id="dynInput2" class="form-control" placeholder="https://github.com/username/project" />
+            </div>
+
+            <!-- Dynamic Question 3 -->
+            <div class="form-group" style="margin-bottom: 0;">
+              <label id="dynLabel3">Key Web Project You've Built (Brief Overview)</label>
+              <input type="text" id="dynInput3" class="form-control" placeholder="Describe the web app or UI project you created..." />
+            </div>
+          </div>
+
+          <!-- SECTION 3: RESUME & MOTIVATION -->
+          <h4 style="font-family: var(--font-head); font-size: 1.15rem; font-weight: 800; color: var(--text-dark); margin-bottom: 18px;">
+            3. Resume Link &amp; Motivation
+          </h4>
+
+          <div class="form-group">
+            <label for="resumeLink">Resume / CV Link (Google Drive / Dropbox / LinkedIn) *</label>
+            <input type="url" id="resumeLink" class="form-control" placeholder="https://drive.google.com/file/d/..." required />
+          </div>
+
+          <div class="form-group">
+            <label for="coverNote">Why do you want to intern at Arshith Group?</label>
+            <textarea id="coverNote" class="form-control" rows="4" placeholder="Share briefly what excites you about this internship role..."></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn-lg">
+            <span>Submit Application For This Domain</span>
+            <i class="fa-solid fa-paper-plane"></i>
+          </button>
+        </form>
+
+        <!-- SUCCESS CARD FEEDBACK -->
+        <div class="success-card" id="successFeedback">
+          <div class="success-icon">
+            <i class="fa-solid fa-check"></i>
+          </div>
+          <h3>Application Submitted Successfully!</h3>
+          <div class="ref-badge" id="appRefCode">REF-AG-2026-8942</div>
+          <p style="font-size: 1.05rem; color: #cbd5e1; max-width: 580px; margin: 0 auto 25px auto; line-height: 1.6;">
+            Thank you for applying for the <strong id="submittedDomainName" style="color: #38bdf8;">Frontend Web Developer Internship</strong> at Arshith Group. Our HR &amp; Domain Technical Leads will evaluate your details and schedule an assessment session shortly.
+          </p>
+
+          <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
+            <button onclick="resetDomainForm()" class="submit-btn-lg" style="width: auto; padding: 12px 28px;">
+              <span>Submit Another Application</span>
+            </button>
+            <a href="internship.html" class="submit-btn-lg" style="width: auto; padding: 12px 28px; background: rgba(255,255,255,0.1); border: 1.5px solid rgba(255,255,255,0.2); text-decoration: none;">
+              <span>Back to Internship Portal</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- NO CURRENT OPENINGS BANNER -->
+        <div id="noOpeningBanner" class="no-opening-card" style="display: none; text-align: center; padding: 45px 25px;">
+          <div style="width: 80px; height: 80px; border-radius: 50%; background: rgba(239, 68, 68, 0.15); border: 1.5px solid rgba(239, 68, 68, 0.4); color: #f87171; font-size: 2.3rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px auto; box-shadow: 0 0 30px rgba(239, 68, 68, 0.25);">
+            <i class="fa-solid fa-folder-closed"></i>
+          </div>
+          <h3 id="noOpeningTitle" style="font-family: var(--font-head); font-size: 1.8rem; font-weight: 800; color: #ffffff; margin-bottom: 12px;">
+            No Current Openings Available For This Role
+          </h3>
+          <p style="color: #cbd5e1; font-size: 0.98rem; line-height: 1.6; max-width: 580px; margin: 0 auto 24px auto;">
+            Applications for this specific role are currently paused or filled for the current cohort. Please check back soon or explore other active internship positions.
+          </p>
+          <a href="internship.html#domains" class="submit-btn-lg" style="display: inline-flex; width: auto; padding: 14px 30px; text-decoration: none;">
+            <i class="fa-solid fa-arrow-left"></i>
+            <span>Browse Active Internship Roles</span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+        <!-- ══════════ FOOTER ══════════ -->
+  <footer class="ag-footer" id="footer">
+    <div class="container ag-footer-inner">
+      <div class="ag-footer-brand">
+        <a href="index.html"><img src="./logos/LOGO-removebg-preview.png" alt="Arshith Group Logo"
+            class="ag-footer-logo-img" /></a>
+        <p>
+          Arshith Group is committed to innovation, sustainability, and
+          excellence across multiple industries including E-Commerce,
+          Technology, and Digital Services. We empower communities and deliver
+          trusted solutions.
+        </p>
+        <div class="ag-footer-social">
+          <a href="https://www.linkedin.com/in/farook-n-2bb2b5344/" target="_blank" aria-label="LinkedIn"><i
+              class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://www.linkedin.com/company/arshith-fresh-india-pvt-ltd/posts/?feedView=all" target="_blank"
+            aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://www.linkedin.com/in/pallavi-n-4578033ab/" target="_blank" aria-label="LinkedIn"><i
+              class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://www.linkedin.com/company/suntech-it-solution/" target="_blank" aria-label="LinkedIn"><i
+              class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://www.instagram.com/arshithgroup?igsh=MWRnNXN0NDRpeWQ1bg==" target="_blank"
+            aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://youtube.com/@vamikadurbar?si=mvXxo3HM8Qe4liD9" target="_blank" aria-label="YouTube"><i
+              class="fa-brands fa-youtube"></i></a>
+          <a href="https://youtube.com/@arshithfresh?si=ZjvzneHlriAxv322" target="_blank" aria-label="YouTube"><i
+              class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="ag-footer-cols">
+        <div class="ag-footer-col">
+          <h5>About Us</h5>
+          <ul>
+            <li><a href="aboutceo.html">About Arshith Group</a></li>
+            <li><a href="aboutceo.html">CEO Office</a></li>
+            <li><a href="aboutceo.html">Leadership</a></li>
+            <li><a href="index.html#journey">Our Journey</a></li>
+            <li><a href="aboutceo.html">Awards</a></li>
+          </ul>
+        </div>
+        <div class="ag-footer-col">
+          <h5>Businesses</h5>
+          <ul>
+            <li><a href="https://arshithfresh.com/" target="_blank">E-Commerce</a></li>
+            <li><a href="https://suntechorganization.com/" target="_blank">Business Consulting &amp; Services</a></li>
+            <li><a href="https://suntechorganization.com/" target="_blank">Digital &amp; Marketing</a></li>
+            <li><a href="http://arshithinfotech.com/" target="_blank">Software Development</a></li>
+          </ul>
+        </div>
+        <div class="ag-footer-col">
+          <h5>Connect</h5>
+          <ul>
+            <li><a href="aboutceo.html">About Us</a></li>
+            <li><a href="LatestNews.html">News</a></li>
+            <li><a href="index.html#companies">Business</a></li>
+            <li><a href="internship.html">Careers</a></li>
+            <li><a href="index.html#contact">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="ag-footer-col">
+          <h5>Need Help?</h5>
+          <ul style="gap: 15px">
+            <li style="display: flex; align-items: flex-start; gap: 10px">
+              <i class="fa-solid fa-location-dot" style="
+                    margin-top: 4px;
+                    color: transparent;
+                    -webkit-text-stroke: 1.5px #555;
+                  "></i>
+              <span style="font-size: 0.88rem; color: #666">Bengaluru, Karnataka, India - 560076</span>
+            </li>
+            <li style="display: flex; align-items: center; gap: 10px">
+              <i class="fa-solid fa-phone" style="color: transparent; -webkit-text-stroke: 1.5px #555"></i>
+              <span style="font-size: 0.88rem; color: #666">+91 8618471424</span>
+            </li>
+            <li style="display: flex; align-items: center; gap: 10px">
+              <i class="fa-regular fa-envelope" style="color: #555"></i>
+              <span style="font-size: 0.88rem; color: #666">info@arshithgroup.com</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Animated Background Beetle & Cyclist -->
+    <div class="footer_bg">
+      <div class="footer_bg_one">
+        <div class="car-logo">Let’s start with Arshith<span>.</span></div>
+      </div>
+      <div class="footer_bg_two">
+        <div class="cyclist-logo">Others</div>
+      </div>
+    </div>
+
+    <div class="ag-footer-bottom">
+      <div class="container ag-footer-bottom-inner">
+        <p>&copy; 2026 Arshith Group. All rights reserved.</p>
+        <div class="ag-footer-legal">
+          <a href="#">Legal Disclaimer</a>
+          <a href="#">Privacy Notice</a>
+          <a href="#">Terms &amp; Conditions</a>
+          <a href="#">Cookie Policy</a>
+        </div>
+        <button class="ag-back-top" id="agBackTop" aria-label="Back to top">
+          <i class="fa-solid fa-arrow-up"></i>
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ══════════ JAVASCRIPT LOGIC ══════════ -->
+  <script>
+    // Domain Configuration Data
+    const domainConfigs = {
+      frontend: {
+        title: "Web Development Internship",
+        desc: "Develop, enhance and maintain responsive websites and web applications while following professional development practices.",
+        company: "Arshith Group",
+        hiddenVal: "Web Development Intern",
+        hasOpening: true,
+        heading: "Web Development Technical Background",
+        q1Label: "Primary Frontend Technologies *",
+        q1Placeholder: "e.g. HTML5, CSS3, JavaScript, React.js, Tailwind",
+        q2Label: "GitHub Repository / Portfolio Link",
+        q2Placeholder: "https://github.com/username/frontend-project",
+        q3Label: "Key Web UI Project You've Built",
+        q3Placeholder: "Describe a responsive web layout or web app you developed..."
+      },
+      backend: {
+        title: "Backend Development Internship",
+        desc: "Develop server-side applications, APIs, databases, and backend services for web applications.",
+        company: "Arshith Group",
+        hiddenVal: "Backend Development Intern",
+        hasOpening: true,
+        heading: "Backend Development Technical Background",
+        q1Label: "Backend & Database Tech Stack *",
+        q1Placeholder: "e.g. Node.js, Express.js, MongoDB, PostgreSQL, REST APIs",
+        q2Label: "Backend Repository / API Link",
+        q2Placeholder: "https://github.com/username/backend-api-repo",
+        q3Label: "Key Server-Side System Built",
+        q3Placeholder: "Describe database schema, authentication, or API endpoints created..."
+      },
+      uiux: {
+        title: "UI/UX Product Design Internship",
+        desc: "Design interactive user flows, Figma prototypes, design system components, and usability wireframes for web and mobile platforms.",
+        company: "Arshith Group",
+        hiddenVal: "UI/UX Design Intern",
+        hasOpening: true,
+        heading: "Product Design & UX Background",
+        q1Label: "Design Tools & Prototyping Skills *",
+        q1Placeholder: "e.g. Figma, Adobe XD, Wireframing, User Journey Mapping",
+        q2Label: "Figma / Dribbble / Behance Portfolio Link *",
+        q2Placeholder: "https://figma.com/@username or https://behance.net/...",
+        q3Label: "Brief Description of a UX Case Study or UI Design",
+        q3Placeholder: "Explain the user problem you solved in a design prototype..."
+      },
+      fullstack: {
+        title: "Full-Stack Development Internship",
+        desc: "Work across frontend, backend and database layers to develop complete web applications.",
+        company: "Arshith Group",
+        hiddenVal: "Full-Stack Development Intern",
+        hasOpening: true,
+        heading: "Full-Stack & Cloud Technical Background",
+        q1Label: "Full-Stack Tech Stack *",
+        q1Placeholder: "e.g. React.js, Node.js, Express, MongoDB, SQL, AWS",
+        q2Label: "Full-Stack Project Repository Link",
+        q2Placeholder: "https://github.com/username/fullstack-app",
+        q3Label: "Key End-to-End Feature Implemented",
+        q3Placeholder: "Describe user auth, payment integration, or live deployment..."
+      },
+      qa: {
+        title: "Software Testing / QA Internship",
+        desc: "Learn software testing, debugging, quality assurance and validation practices for web applications.",
+        company: "Arshith Group",
+        hiddenVal: "Software Testing / QA Intern",
+        hasOpening: false,
+        heading: "Software Testing & QA Background",
+        q1Label: "Testing Tools & Methodologies *",
+        q1Placeholder: "e.g. Manual Testing, Jest, Cypress, Selenium, Postman API Testing",
+        q2Label: "Test Suite / Project / GitHub Link",
+        q2Placeholder: "https://github.com/username/qa-test-suite",
+        q3Label: "Key Testing or Bug Finding Experience",
+        q3Placeholder: "Describe how you identified and documented software bugs..."
+      },
+      cloud: {
+        title: "Cloud & Deployment Internship",
+        desc: "Gain hands-on experience in cloud infrastructure, CI/CD pipelines, containerization, and DevOps workflows.",
+        company: "Arshith Group",
+        hiddenVal: "Cloud & Deployment Intern",
+        hasOpening: false,
+        heading: "DevOps & Cloud Technical Background",
+        q1Label: "Cloud Platforms & DevOps Tools *",
+        q1Placeholder: "e.g. AWS, Docker, Kubernetes, GitHub Actions, Nginx, Linux",
+        q2Label: "DevOps Repository / Architecture Link",
+        q2Placeholder: "https://github.com/username/devops-configs",
+        q3Label: "Key Server Deployment or CI/CD Pipeline Configured",
+        q3Placeholder: "Describe a cloud server setup or automated pipeline built..."
+      },
+      marketing: {
+        title: "Digital Marketing & SEO Internship",
+        desc: "Master SEO auditing, search campaigns, performance analytics, and social media brand growth.",
+        company: "Arshith Group",
+        hiddenVal: "Digital Marketing & SEO Intern",
+        hasOpening: false,
+        heading: "Digital Marketing & SEO Background",
+        q1Label: "Marketing Competencies & Tools *",
+        q1Placeholder: "e.g. SEO, Content Marketing, Google Analytics, Social Ads",
+        q2Label: "Sample Campaign / Blog / Social Profile Link",
+        q2Placeholder: "https://linkedin.com or link to a campaign/article you wrote...",
+        q3Label: "Marketing Achievement or Strategy Sample",
+        q3Placeholder: "Share a campaign or SEO strategy you experimented with..."
+      },
+      ecommerce: {
+        title: "E-Commerce & Retail Tech Internship",
+        desc: "Dive into organic produce marketplace tech, seller admin portals, and retail inventory workflows.",
+        company: "Arshith Group",
+        hiddenVal: "E-Commerce & Retail Tech Intern",
+        hasOpening: false,
+        heading: "E-Commerce & Operations Background",
+        q1Label: "E-Commerce Platforms & Tools *",
+        q1Placeholder: "e.g. Shopify, Marketplace Logistics, Inventory Management",
+        q2Label: "Portfolio / LinkedIn Profile Link",
+        q2Placeholder: "https://linkedin.com/in/username",
+        q3Label: "Interest or Background in Retail/E-Commerce",
+        q3Placeholder: "Explain your interest in organic produce e-commerce operations..."
+      },
+      consulting: {
+        title: "Business Consulting & Strategy Internship",
+        desc: "Formulate growth strategies, analyze corporate workflows, and draft executive market reports.",
+        company: "Arshith Group",
+        hiddenVal: "Business Consulting & Strategy Intern",
+        hasOpening: false,
+        heading: "Business Analysis & Strategy Background",
+        q1Label: "Analytical & Business Tools *",
+        q1Placeholder: "e.g. Market Research, Excel/Data Analysis, Pitch Decks",
+        q2Label: "LinkedIn Profile / Case Study Link *",
+        q2Placeholder: "https://linkedin.com/in/username",
+        q3Label: "Problem Solving / Consulting Case Study Summary",
+        q3Placeholder: "Describe a business problem or market research task you analyzed..."
+      },
+      general: {
+        title: "General Internship Program",
+        desc: "Rotational internship exposure across engineering, product design, marketing, and business strategy.",
+        company: "Arshith Group",
+        hiddenVal: "General Internship Program",
+        hasOpening: true,
+        heading: "General Candidate Background",
+        q1Label: "Primary Areas of Interest *",
+        q1Placeholder: "e.g. Software, Web UI, Business Operations, Growth Marketing",
+        q2Label: "Portfolio / LinkedIn / GitHub Profile",
+        q2Placeholder: "https://linkedin.com/in/username",
+        q3Label: "What unique skills do you bring to Arshith Group?",
+        q3Placeholder: "Share your top strengths and learning goals..."
+      }
+    };
+
+    // Switch Domain Function
+    function switchDomain(domainKey) {
+      const config = domainConfigs[domainKey] || domainConfigs.frontend;
+
+      // Update Banner Info
+      if (document.getElementById("currentDomainTitle")) document.getElementById("currentDomainTitle").textContent = config.title;
+      if (document.getElementById("currentDomainDesc")) document.getElementById("currentDomainDesc").textContent = config.desc;
+      if (document.getElementById("currentDomainCompany")) document.getElementById("currentDomainCompany").textContent = config.company;
+      if (document.getElementById("hiddenSelectedDomain")) document.getElementById("hiddenSelectedDomain").value = config.hiddenVal;
+
+      const formEl = document.getElementById("domainAppForm");
+      const noOpeningEl = document.getElementById("noOpeningBanner");
+      const successEl = document.getElementById("successFeedback");
+
+      if (successEl) successEl.style.display = "none";
+
+      if (config.hasOpening !== false) {
+        // Show Form, Hide No Openings Banner
+        if (formEl) formEl.style.display = "block";
+        if (noOpeningEl) noOpeningEl.style.display = "none";
+
+        // Update Dynamic Question Labels & Placeholders
+        if (document.getElementById("dynamicSectionHeading")) document.getElementById("dynamicSectionHeading").textContent = config.heading;
+        if (document.getElementById("dynLabel1")) document.getElementById("dynLabel1").textContent = config.q1Label;
+        if (document.getElementById("dynInput1")) document.getElementById("dynInput1").placeholder = config.q1Placeholder;
+        if (document.getElementById("dynLabel2")) document.getElementById("dynLabel2").textContent = config.q2Label;
+        if (document.getElementById("dynInput2")) document.getElementById("dynInput2").placeholder = config.q2Placeholder;
+        if (document.getElementById("dynLabel3")) document.getElementById("dynLabel3").textContent = config.q3Label;
+        if (document.getElementById("dynInput3")) document.getElementById("dynInput3").placeholder = config.q3Placeholder;
+      } else {
+        // Hide Form, Show No Current Openings Banner
+        if (formEl) formEl.style.display = "none";
+        if (noOpeningEl) {
+          noOpeningEl.style.display = "block";
+          const titleEl = document.getElementById("noOpeningTitle");
+          if (titleEl) titleEl.textContent = "No Current Openings for " + config.title;
+        }
+      }
+    }
+
+    // Auto-select domain based on URL query parameter (e.g. ?domain=fullstack or ?role=UI/UX)
+    window.addEventListener("DOMContentLoaded", () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const paramDomain = urlParams.get("domain") || urlParams.get("role");
+
+      if (paramDomain) {
+        const lower = paramDomain.toLowerCase();
+        if (lower.includes("frontend") || lower.includes("web")) switchDomain("frontend");
+        else if (lower.includes("backend")) switchDomain("backend");
+        else if (lower.includes("fullstack") || lower.includes("node")) switchDomain("fullstack");
+        else if (lower.includes("ui") || lower.includes("ux") || lower.includes("design")) switchDomain("uiux");
+        else if (lower.includes("qa") || lower.includes("test")) switchDomain("qa");
+        else if (lower.includes("cloud") || lower.includes("deploy")) switchDomain("cloud");
+        else if (lower.includes("marketing") || lower.includes("seo")) switchDomain("marketing");
+        else if (lower.includes("ecommerce") || lower.includes("retail")) switchDomain("ecommerce");
+        else if (lower.includes("consulting") || lower.includes("business")) switchDomain("consulting");
+        else switchDomain("general");
+      } else {
+        switchDomain("frontend");
+      }
+    });
+
+    // Form Submission Handler
+    async function submitDomainForm(e) {
+      e.preventDefault();
+      const domainVal = document.getElementById("hiddenSelectedDomain").value;
+      const refCode = "REF-AG-2026-" + Math.floor(1000 + Math.random() * 9000);
+
+      const formData = {
+        refCode: refCode,
+        domain: domainVal,
+        fullName: document.getElementById("fullName").value,
+        email: document.getElementById("emailAddr").value,
+        phone: document.getElementById("phoneNum").value,
+        college: document.getElementById("collegeName").value,
+        gradYear: document.getElementById("gradYear").value,
+        duration: document.getElementById("prefDuration").value,
+        techStack: document.getElementById("dynInput1") ? document.getElementById("dynInput1").value : "",
+        portfolioGithub: document.getElementById("dynInput2") ? document.getElementById("dynInput2").value : "",
+        projectOverview: document.getElementById("dynInput3") ? document.getElementById("dynInput3").value : "",
+        resumeLink: document.getElementById("resumeLink").value,
+        coverNote: document.getElementById("coverNote").value
+      };
+
+      try {
+        // Send application data to server endpoint
+        await fetch('/api/apply', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData)
+        });
+      } catch (err) {
+        console.warn('Local server storage fallback:', err);
+      }
+
+      document.getElementById("submittedDomainName").textContent = domainVal;
+      document.getElementById("appRefCode").textContent = refCode;
+
+      document.getElementById("domainAppForm").style.display = "none";
+      document.getElementById("successFeedback").style.display = "block";
+    }
+
+    // Reset Form Handler
+    function resetDomainForm() {
+      document.getElementById("domainAppForm").reset();
+      document.getElementById("domainAppForm").style.display = "block";
+      document.getElementById("successFeedback").style.display = "none";
+    }
+
+    // Header shadow on scroll
+    const header = document.getElementById("agHeader");
+    window.addEventListener("scroll", () => {
+      header.classList.toggle("ag-header--scrolled", window.scrollY > 40);
+    });
+
+    // Mobile Navigation Menu Toggle
+    const hamburger = document.getElementById("agHamburger");
+    const navLinks = document.getElementById("agNavLinks");
+    if (hamburger && navLinks) {
+      hamburger.addEventListener("click", () => {
+        navLinks.classList.toggle("ag-nav-open");
+        hamburger.classList.toggle("ag-ham-open");
+      });
+    }
+
+    // Back to top button
+    const backTop = document.getElementById("agBackTop");
+    if (backTop) {
+      backTop.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    }
+  </script>
+</body>
+
+</html>

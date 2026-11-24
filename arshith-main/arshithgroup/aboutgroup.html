@@ -1,0 +1,754 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Arshith Group | Our Ecosystem & Pillars</title>
+  <meta name="description"
+    content="Discover Arshith Group — a high-growth corporate ecosystem built on innovation, digital transformation, and sustainable business solutions across E-Commerce, Technology, and Digital Services." />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Condensed:wght@700&family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,500;1,600&display=swap"
+    rel="stylesheet" />
+  <!-- Shared site styles -->
+  <link rel="stylesheet" href="styles.css?v=3" />
+  <link rel="stylesheet" href="styles2.css?v=3" />
+  <link rel="stylesheet" href="footer-premium.css?=3" />
+
+  <style>
+    /* ── ABOUT GROUP PAGE STYLES ── */
+    .ag-section-title {
+      font-family: "Roboto Condensed", sans-serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #222;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .ag-eyebrow {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #2563eb;
+      margin-bottom: 8px;
+    }
+
+    .ag-section {
+      padding: 96px 0;
+    }
+
+    /* ── ANIMATED HERO ── */
+    .ag-hero-ultra {
+      position: relative;
+      padding: 140px 0 100px;
+      background: #090d16;
+      color: #ffffff;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .glow-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      pointer-events: none;
+      opacity: 0.45;
+    }
+
+    .glow-orb-1 { width: 500px; height: 500px; background: #2563eb; top: -100px; left: -100px; }
+    .glow-orb-2 { width: 450px; height: 450px; background: #10b981; bottom: -100px; right: -50px; }
+    .glow-orb-3 { width: 350px; height: 350px; background: #f59e0b; top: 40%; left: 45%; }
+
+    .hero-ultra-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 64px;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-ultra-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 6px 16px;
+      border-radius: 30px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: #38bdf8;
+      margin-bottom: 24px;
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      background: #38bdf8;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #38bdf8;
+    }
+
+    .hero-ultra-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 3.4rem;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
+      color: #ffffff;
+    }
+
+    .shimmer-text {
+      background: linear-gradient(135deg, #38bdf8 0%, #34d399 50%, #fbbf24 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-ultra-desc {
+      font-size: 1.15rem;
+      color: #94a3b8;
+      line-height: 1.7;
+      margin-bottom: 36px;
+      font-weight: 400;
+    }
+
+    .hero-ultra-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    .btn-hero-primary {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: #ffffff;
+      padding: 14px 32px;
+      border-radius: 30px;
+      font-weight: 600;
+      text-decoration: none;
+      box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .btn-hero-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px rgba(37, 99, 235, 0.5);
+    }
+
+    .btn-hero-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+      padding: 14px 28px;
+      border-radius: 30px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .btn-hero-secondary:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .hero-ultra-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 28px;
+    }
+
+    .stat-box h4 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 2px;
+    }
+
+    .stat-box span {
+      font-size: 0.85rem;
+      color: #64748b;
+      font-weight: 500;
+    }
+
+    /* Floating Cards Stack */
+    .hero-ultra-cards-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .ultra-card {
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 20px;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .ultra-card:hover {
+      transform: translateX(8px);
+      border-color: rgba(255, 255, 255, 0.3);
+      background: rgba(30, 41, 59, 0.85);
+    }
+
+    .ultra-card-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .ultra-card-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+    }
+
+    .icon-teal { background: rgba(56, 189, 248, 0.15); color: #38bdf8; }
+    .icon-green { background: rgba(52, 211, 153, 0.15); color: #34d399; }
+    .icon-orange { background: rgba(251, 191, 36, 0.15); color: #fbbf24; }
+
+    .ultra-card-text h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 2px;
+    }
+
+    .ultra-card-text p {
+      font-size: 0.85rem;
+      color: #94a3b8;
+      margin: 0;
+    }
+
+    .ultra-badge-pill {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      padding: 6px 12px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.06);
+      color: #e2e8f0;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .badge-dot-teal { width: 6px; height: 6px; border-radius: 50%; background: #38bdf8; }
+    .badge-dot-green { width: 6px; height: 6px; border-radius: 50%; background: #34d399; }
+    .badge-dot-orange { width: 6px; height: 6px; border-radius: 50%; background: #fbbf24; }
+
+    /* ── STORY SECTION ── */
+    .ag-grid-50-50 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .ag-story-content p {
+      line-height: 1.8;
+      color: #475569;
+      margin-bottom: 20px;
+      font-size: 1.05rem;
+    }
+
+    .ag-story-img img {
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    }
+
+    /* ── STATS WRAP ── */
+    .ag-stats-wrap {
+      background: #0f172a;
+      color: #ffffff;
+      padding: 72px 0;
+    }
+
+    .ag-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      text-align: center;
+    }
+
+    .ag-stat-item h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: #38bdf8;
+      margin-bottom: 8px;
+    }
+
+    .ag-stat-item p {
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #94a3b8;
+    }
+
+    @media (max-width: 992px) {
+      .hero-ultra-grid, .ag-grid-50-50, .ag-leader-card-row, .ag-stats-grid {
+        grid-template-columns: 1fr !important;
+        gap: 40px !important;
+      }
+      .ag-exec-team-wrap > div:last-child {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 20px !important;
+      }
+      .hero-ultra-title { font-size: 2.6rem; }
+    }
+    @media (max-width: 576px) {
+      .ag-exec-team-wrap > div:last-child {
+        grid-template-columns: 1fr !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ══════════ HEADER / NAV ══════════ -->
+  <header class="ag-header" id="agHeader">
+    <nav class="ag-nav container">
+      <a href="index.html" class="ag-logo">
+        <img src="./logos/LOGO-removebg-preview.png" alt="Arshith Logo" class="ag-logo-img" />
+      </a>
+      <ul class="ag-nav-links" id="agNavLinks">
+        <li class="ag-nav-item ag-has-drop">
+          <a href="aboutgroup.html" class="active">About Us <i class="fa-solid fa-chevron-down ag-caret"></i></a>
+          <div class="ag-dropdown">
+            <a href="aboutgroup.html">About Arshith Group</a>
+            <a href="aboutceo.html">Executive Biographies</a>
+          </div>
+        </li>
+        <li class="ag-nav-item ag-has-drop">
+          <a href="index.html#companies">Businesses <i class="fa-solid fa-chevron-down ag-caret"></i></a>
+          <div class="ag-dropdown">
+            <a href="http://arshithinfotech.com/" target="_blank">IT Services & IT Consulting</a>
+            <a href="https://arshithfresh.com/" target="_blank">E-Commerce</a>
+            <a href="https://seller.arshithfresh.com/" target="_blank">Multi sellers</a>
+            <a href="https://suntechorganization.com/" target="_blank">Business Consulting &amp; Services</a>
+            <a href="https://suntechorganization.com/" target="_blank">Digital Marketing</a>
+          </div>
+        </li>
+        <li class="ag-nav-item">
+          <a href="LatestNews.html">News</a>
+        </li>
+        <li class="ag-nav-item ag-has-drop">
+          <a href="#">Careers <i class="fa-solid fa-chevron-down ag-caret"></i></a>
+          <div class="ag-dropdown">
+            <a href="https://arshithbootcamp.com/verify">Certifications</a>
+            <a href="internship.html">Internship</a>
+            <!--<a href="https://forms.gle/shX3ZvtgQDwAxoRK6">Technical Confirmation</a>-->
+            <a href="https://quizzory.in/id/6a2b84ce5e934acad6c24a53">Online Assessment</a>
+          </div>
+        </li>
+        <li class="ag-nav-item"><a href="index.html#contact">Contact Us</a></li>
+      </ul>
+      <div class="ag-nav-right">
+        <button class="ag-hamburger" id="agHamburger" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ══════════ HERO SECTION ══════════ -->
+    <section class="ag-hero-ultra">
+      <div class="glow-orb glow-orb-1"></div>
+      <div class="glow-orb glow-orb-2"></div>
+      <div class="glow-orb glow-orb-3"></div>
+
+      <div class="container">
+        <div class="hero-ultra-grid">
+          <!-- Left Content Column -->
+          <div class="hero-ultra-left">
+            <div class="hero-ultra-badge">
+              <span class="pulse-dot"></span>
+              <span>MULTI-SECTOR CONGLOMERATE</span>
+            </div>
+            <h1 class="hero-ultra-title">
+              Architecting Growth Across <span class="shimmer-text">3 Core Pillars</span>
+            </h1>
+            <p class="hero-ultra-desc">
+              <strong>Arshith Group</strong> is a high-growth corporate ecosystem built on innovation, digital
+              transformation, and sustainable business solutions. Through our three key entities, we empower enterprises
+              to scale, innovate, and succeed across global markets.
+            </p>
+
+            <div class="hero-ultra-actions">
+              <a href="#story" class="btn-hero-primary">
+                Explore Our Story <i class="fas fa-arrow-right"></i>
+              </a>
+              <a href="aboutceo.html" class="btn-hero-secondary">
+                Executive Biographies
+              </a>
+            </div>
+
+            <div class="hero-ultra-stats">
+              <div class="stat-box">
+                <h4>3 Distinct</h4>
+                <span>Strengths</span>
+              </div>
+              <div class="stat-box">
+                <h4>Est. 2019</h4>
+                <span>Innovation Legacy</span>
+              </div>
+              <div class="stat-box">
+                <h4>Global</h4>
+                <span>Digital Footprint</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Floating Cards Column -->
+          <div class="hero-ultra-cards-stack">
+            <!-- Card 1: InfoTech -->
+            <a href="http://arshithinfotech.com/" class="ultra-card">
+              <div class="ultra-card-left">
+                <div class="ultra-card-icon icon-teal">
+                  <i class="fas fa-laptop-code"></i>
+                </div>
+                <div class="ultra-card-text">
+                  <h3>Arshith InfoTech</h3>
+                  <p>IT & Software Solutions</p>
+                </div>
+              </div>
+              <span class="ultra-badge-pill">
+                <span class="badge-dot-teal"></span> Tech Pillar
+              </span>
+            </a>
+
+            <!-- Card 2: Fresh -->
+            <a href="https://arshithfresh.com/" target="_blank" class="ultra-card">
+              <div class="ultra-card-left">
+                <div class="ultra-card-icon icon-green">
+                  <i class="fas fa-leaf"></i>
+                </div>
+                <div class="ultra-card-text">
+                  <h3>Arshith Fresh</h3>
+                  <p>Sustainable Agri & E-Commerce</p>
+                </div>
+              </div>
+              <span class="ultra-badge-pill">
+                <span class="badge-dot-green"></span> Agri Pillar
+              </span>
+            </a>
+
+            <!-- Card 3: SunTech -->
+            <a href="https://suntechorganization.com/" target="_blank" class="ultra-card">
+              <div class="ultra-card-left">
+                <div class="ultra-card-icon icon-orange">
+                  <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="ultra-card-text">
+                  <h3>SunTech Solutions</h3>
+                  <p>Business Consulting & Services</p>
+                </div>
+              </div>
+              <span class="ultra-badge-pill">
+                <span class="badge-dot-orange"></span> Services Pillar
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ OUR JOURNEY / THE ARSHITH STORY ══════════ -->
+    <section class="ag-section ag-story" id="story" style="padding: 96px 0; background: #ffffff;">
+      <div class="container">
+        <div class="ag-grid-50-50" style="display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center;">
+          <div class="ag-story-content" style="line-height: 1.8; color: #475569; font-size: 1.02rem;">
+            <span class="ag-eyebrow" style="font-size: 0.85rem; font-weight: 800; color: #475569; letter-spacing: 2px; text-transform: uppercase; display: block; margin-bottom: 8px;">OUR JOURNEY</span>
+            <h2 class="ag-section-title" style="font-family: 'Outfit', sans-serif; font-size: 2.6rem; font-weight: 800; color: #0f172a; margin-bottom: 24px; text-transform: uppercase; letter-spacing: -0.5px;">THE ARSHITH STORY</h2>
+            <p style="margin-bottom: 20px;">
+              Founded in <strong>2019</strong> with the inception of <strong>SunTech Solutions</strong>, Arshith Group began as an ambitious enterprise dedicated to corporate consulting, operations management, and business scaling. By delivering backend operational support and strategic consulting, SunTech built a strong foundation of trust and client satisfaction.
+            </p>
+            <p style="margin-bottom: 20px;">
+              As service operations expanded into digital consulting and technical infrastructure, all business divisions were consolidated under the unified corporate identity of <strong>Arshith Group</strong> in <strong>2023</strong>—establishing a multi-sector conglomerate engineered for sustainable innovation.
+            </p>
+            <p style="margin-bottom: 20px;">
+              In <strong>2025</strong>, the group incorporated <strong>Arshith Fresh India Pvt Ltd</strong>, pioneering a direct-to-consumer e-commerce platform that connects farmers directly with consumers. By delivering 100% natural, farm-sourced products, Arshith Fresh empowers local agricultural communities while guaranteeing uncompromised purity to households.
+            </p>
+            <p style="margin-bottom: 0;">
+              Today, through <strong>Arshith InfoTech</strong> (scaled globally in <strong>2025</strong>), the organization engineers cutting-edge software solutions, cloud architectures, and digital transformations for enterprises worldwide. By uniting technology, sustainability, and trust, Arshith Group is building a future where innovation benefits everyone.
+            </p>
+          </div>
+          <div class="ag-story-img" style="position: relative;">
+            <img src="./logos/arshithgroupabout.png" alt="The Arshith Group Team Story" style="width: 100%; border-radius: 20px; box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12); object-fit: cover;" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ OUR TEAM / LEADERSHIP SECTION ══════════ -->
+    <section class="ag-section ag-leadership-section" id="leadership" style="padding: 96px 0; background: #ffffff;">
+      <div class="container">
+        <!-- Section Header -->
+        <div style="text-align: center; margin-bottom: 72px;">
+          <span class="ag-eyebrow" style="font-size: 0.85rem; font-weight: 800; color: #475569; letter-spacing: 2px; text-transform: uppercase; display: block; margin-bottom: 8px;">OUR TEAM</span>
+          <h2 class="ag-section-title" style="font-family: 'Outfit', sans-serif; font-size: 2.8rem; font-weight: 800; color: #0f172a; text-transform: uppercase; letter-spacing: -0.5px; margin: 0;">LEADERSHIP</h2>
+        </div>
+
+        <!-- CEO BLOCK (Farook N) -->
+        <div class="ag-leader-card-row" style="display: grid; grid-template-columns: 380px 1fr; gap: 56px; align-items: center; margin-bottom: 96px;">
+          <div class="ag-leader-img-wrap" style="position: relative;">
+            <img src="./logos/farook_executive.jpg" alt="Farook N - CEO, Arshith Group" style="width: 100%; height: 440px; object-fit: cover; object-position: center top; border-radius: 20px; box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);" />
+            <span class="leader-badge-pill" style="position: absolute; bottom: 16px; left: 16px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #1e293b; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(8px); padding: 8px 16px; border-radius: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); display: inline-flex; align-items: center;">
+              <i class="fa-solid fa-star" style="color: #059669; margin-right: 6px;"></i> EST. 10 YRS SOFTWARE &amp; SCALING
+            </span>
+          </div>
+          <div class="ag-leader-text-meta" style="line-height: 1.85; color: #475569; font-size: 1.02rem;">
+            <h3 style="font-family: 'Outfit', sans-serif; font-size: 2.4rem; font-weight: 800; color: #0f172a; margin: 0 0 4px;">Farook N</h3>
+            <p style="font-size: 1.1rem; font-weight: 600; color: #334155; margin-bottom: 24px;">CEO - Arshith Group</p>
+            <p style="margin-bottom: 20px;">
+              Arshith Group is a growing ecosystem of businesses united by one vision — to build with purpose, innovate with confidence, and create lasting value. Our portfolio spans Technology &amp; Software, E-Commerce, and Business Consulting &amp; Services, bringing together diverse capabilities under one group. Each business operates with its own expertise and identity, while benefiting from the strength of a shared vision. This enables us to combine technology, commerce, strategy, and execution to solve complex challenges and unlock new possibilities.
+            </p>
+            <p style="margin: 0;">
+              We are driven by an entrepreneurial mindset and a commitment to excellence — constantly evolving with changing markets, emerging technologies, and the needs of the businesses we serve. Our ambition goes beyond growth. It is to build businesses that matter, create value that endures, and leave a meaningful mark on the future.
+            </p>
+          </div>
+        </div>
+
+        <!-- MD BLOCK (Pallavi N) -->
+        <div class="ag-leader-card-row" style="display: grid; grid-template-columns: 1fr 380px; gap: 56px; align-items: center;">
+          <div class="ag-leader-text-meta" style="line-height: 1.85; color: #475569; font-size: 1.02rem;">
+            <h3 style="font-family: 'Outfit', sans-serif; font-size: 2.4rem; font-weight: 800; color: #0f172a; margin: 0 0 4px;">Pallavi N</h3>
+            <p style="font-size: 1.1rem; font-weight: 600; color: #334155; margin-bottom: 24px;">Managing Director - Arshith Group</p>
+            <p style="margin-bottom: 20px;">
+              Leadership at Arshith Group is driven by a commitment to innovation, excellence, and sustainable growth. Across Technology &amp; Software, E-Commerce, and Business Consulting &amp; Services, we focus on building businesses that are scalable, resilient, and future-ready.
+            </p>
+            <p style="margin: 0;">
+              Our leadership philosophy is built on integrity, strategic thinking, continuous innovation, and disciplined execution — empowering people, strengthening businesses, and creating lasting value. We don't just pursue growth. We build the foundation for what comes next.
+            </p>
+          </div>
+          <div class="ag-leader-img-wrap" style="position: relative;">
+            <img src="./logos/pallavi_wooden.jpg" alt="Pallavi N - Managing Director, Arshith Group" style="width: 100%; height: 440px; object-fit: cover; object-position: center top; border-radius: 20px; box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);" />
+            <span class="leader-badge-pill" style="position: absolute; bottom: 16px; left: 16px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #1e293b; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(8px); padding: 8px 16px; border-radius: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); display: inline-flex; align-items: center;">
+              <i class="fa-solid fa-star" style="color: #059669; margin-right: 6px;"></i> EST. 10 YRS OPERATIONAL SYSTEMS
+            </span>
+          </div>
+        </div>
+
+        <!-- EXECUTIVE TEAM 4-CARD GRID (P. Satyanarayan, K. Trinadh, P. Swapnika, I. Stephen) -->
+        <div class="ag-exec-team-wrap" style="margin-top: 88px; padding-top: 72px; border-top: 1px solid #e2e8f0;">
+          <div style="margin-bottom: 40px;">
+            <span class="ag-eyebrow" style="font-size: 0.85rem; font-weight: 700; color: #2563eb; letter-spacing: 1.5px; text-transform: uppercase; display: block; margin-bottom: 8px;">Our Team</span>
+            <h2 style="font-family: 'Outfit', sans-serif; font-size: 3rem; font-weight: 800; color: #1e293b; margin: 0 0 16px; letter-spacing: -0.5px;">Our Executive Team</h2>
+            <p style="font-size: 1.1rem; color: #64748b; margin: 0; max-width: 680px; line-height: 1.6;">
+              Our executive leadership drives strategic vision, commercial operations, marketing expansion, financial excellence, and operational delivery across Arshith Group.
+            </p>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px;">
+            <!-- Card 1: P. Satyanarayan -->
+            <div class="ag-exec-card" style="background: #ffffff; border-radius: 20px; overflow: hidden;">
+              <div style="width: 100%; height: 320px; border-radius: 20px; overflow: hidden; margin-bottom: 16px; background: #f1f5f9; box-shadow: 0 10px 25px rgba(0,0,0,0.06);">
+                <img src="./logos/satyanarayan.jpg" alt="P. Satyanarayan - CEO Arshith Commercial Business" style="width: 100%; height: 100%; object-fit: cover; object-position: center top;" />
+              </div>
+              <h4 style="font-family: 'Outfit', sans-serif; font-size: 1.3rem; font-weight: 800; color: #0f172a; margin: 0 0 4px;">P. Satyanarayan</h4>
+              <p style="font-size: 0.95rem; color: #64748b; font-weight: 500; margin: 0;">CEO - Arshith Commercial Business</p>
+            </div>
+
+            <!-- Card 2: K. Trinadh -->
+            <div class="ag-exec-card" style="background: #ffffff; border-radius: 20px; overflow: hidden;">
+              <div style="width: 100%; height: 320px; border-radius: 20px; overflow: hidden; margin-bottom: 16px; background: #f1f5f9; box-shadow: 0 10px 25px rgba(0,0,0,0.06);">
+                <img src="./logos/trinadh.png" alt="K. Trinadh - Chief Marketing Officer" style="width: 100%; height: 100%; object-fit: cover; object-position: center top;" />
+              </div>
+              <h4 style="font-family: 'Outfit', sans-serif; font-size: 1.3rem; font-weight: 800; color: #0f172a; margin: 0 0 4px;">K. Trinadh</h4>
+              <p style="font-size: 0.95rem; color: #64748b; font-weight: 500; margin: 0;">Chief Marketing Officer (CMO)</p>
+            </div>
+
+            <!-- Card 3: P. Swapnika -->
+            <div class="ag-exec-card" style="background: #ffffff; border-radius: 20px; overflow: hidden;">
+              <div style="width: 100%; height: 320px; border-radius: 20px; overflow: hidden; margin-bottom: 16px; background: #f1f5f9; box-shadow: 0 10px 25px rgba(0,0,0,0.06);">
+                <img src="./logos/swapnika.jpg" alt="P. Swapnika - Chief Financial Officer" style="width: 100%; height: 100%; object-fit: cover; object-position: center top;" />
+              </div>
+              <h4 style="font-family: 'Outfit', sans-serif; font-size: 1.3rem; font-weight: 800; color: #0f172a; margin: 0 0 4px;">P. Swapnika</h4>
+              <p style="font-size: 0.95rem; color: #64748b; font-weight: 500; margin: 0;">Chief Financial Officer (CFO)</p>
+            </div>
+
+            <!-- Card 4: I. Stephen -->
+            <div class="ag-exec-card" style="background: #ffffff; border-radius: 20px; overflow: hidden;">
+              <div style="width: 100%; height: 320px; border-radius: 20px; overflow: hidden; margin-bottom: 16px; background: #f1f5f9; box-shadow: 0 10px 25px rgba(0,0,0,0.06);">
+                <img src="./logos/stephen.png" alt="I. Stephen - Chief Operating Officer" style="width: 100%; height: 100%; object-fit: cover; object-position: center top;" />
+              </div>
+              <h4 style="font-family: 'Outfit', sans-serif; font-size: 1.3rem; font-weight: 800; color: #0f172a; margin: 0 0 4px;">I. Stephen</h4>
+              <p style="font-size: 0.95rem; color: #64748b; font-weight: 500; margin: 0;">Chief Operating Officer (COO)</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════ 4-COLUMN STATS SECTION ══════════ -->
+    <section class="ag-section ag-stats-wrap" style="background: #ffffff; border-top: 1px solid #f1f5f9; padding: 72px 0;">
+      <div class="container">
+        <div class="ag-stats-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; text-align: center;">
+          <div class="ag-stat-item">
+            <h3 style="font-family: 'Outfit', sans-serif; font-size: 3.8rem; font-weight: 800; color: #0f172a; margin-bottom: 6px;">7+</h3>
+            <p style="font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: #64748b; margin: 0;">YEARS OF EXPERIENCE</p>
+          </div>
+          <div class="ag-stat-item">
+            <h3 style="font-family: 'Outfit', sans-serif; font-size: 3.8rem; font-weight: 800; color: #0f172a; margin-bottom: 6px;">10+</h3>
+            <p style="font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: #64748b; margin: 0;">SERVICES &amp; SOLUTIONS</p>
+          </div>
+          <div class="ag-stat-item">
+            <h3 style="font-family: 'Outfit', sans-serif; font-size: 3.8rem; font-weight: 800; color: #0f172a; margin-bottom: 6px;">100+</h3>
+            <p style="font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: #64748b; margin: 0;">QUALITY PRODUCTS</p>
+          </div>
+          <div class="ag-stat-item">
+            <h3 style="font-family: 'Outfit', sans-serif; font-size: 3.8rem; font-weight: 800; color: #0f172a; margin-bottom: 6px;">30k+</h3>
+            <p style="font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: #64748b; margin: 0;">HAPPY CUSTOMERS</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ══════════ FOOTER ══════════ -->
+  <footer class="ag-footer" id="footer">
+    <div class="container ag-footer-inner">
+      <div class="ag-footer-brand">
+        <a href="index.html"><img src="./logos/LOGO-removebg-preview.png" alt="Arshith Group Logo"
+            class="ag-footer-logo-img" /></a>
+        <p>
+          Arshith Group is committed to innovation, sustainability, and
+          excellence across multiple industries including E-Commerce,
+          Technology, and Digital Services. We empower communities and deliver
+          trusted solutions.
+        </p>
+        <div class="ag-footer-social">
+          <a href="https://www.linkedin.com/in/farook-n-2bb2b5344/" target="_blank" aria-label="LinkedIn"><i
+              class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://www.linkedin.com/company/arshith-fresh-india-pvt-ltd/posts/?feedView=all" target="_blank"
+            aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://www.linkedin.com/in/pallavi-n-4578033ab/" target="_blank" aria-label="LinkedIn"><i
+              class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://www.linkedin.com/company/suntech-it-solution/" target="_blank" aria-label="LinkedIn"><i
+              class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://www.instagram.com/arshithgroup?igsh=MWRnNXN0NDRpeWQ1bg==" target="_blank"
+            aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://youtube.com/@vamikadurbar?si=mvXxo3HM8Qe4liD9" target="_blank" aria-label="YouTube"><i
+              class="fa-brands fa-youtube"></i></a>
+          <a href="https://youtube.com/@arshithfresh?si=ZjvzneHlriAxv322" target="_blank" aria-label="YouTube"><i
+              class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="ag-footer-cols">
+        <div class="ag-footer-col">
+          <h5>About Us</h5>
+          <ul>
+            <li><a href="aboutgroup.html">About Arshith Group</a></li>
+            <li><a href="aboutceo.html">Executive Biographies</a></li>
+            <li><a href="aboutceo.html#ceo-bio">Leadership</a></li>
+            <li><a href="index.html#journey">Our Journey</a></li>
+            <li><a href="aboutceo.html">Awards</a></li>
+          </ul>
+        </div>
+        <div class="ag-footer-col">
+          <h5>Businesses</h5>
+          <ul>
+            <li><a href="https://arshithfresh.com/" target="_blank">E-Commerce</a></li>
+            <li><a href="https://suntechorganization.com/" target="_blank">Business Consulting &amp; Services</a></li>
+            <li><a href="https://suntechorganization.com/" target="_blank">Digital &amp; Marketing</a></li>
+            <li><a href="http://arshithinfotech.com/" target="_blank">Software Development</a></li>
+          </ul>
+        </div>
+        <div class="ag-footer-col">
+          <h5>Connect</h5>
+          <ul>
+            <li><a href="aboutgroup.html">About Us</a></li>
+            <li><a href="lifeatarshith.html">Life at Arshith Group</a></li>
+            <li><a href="LatestNews.html">News</a></li>
+            <li><a href="index.html#companies">Business</a></li>
+            <li><a href="internship.html">Careers</a></li>
+            <li><a href="index.html#contact">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="ag-footer-col">
+          <h5>Need Help?</h5>
+          <ul style="gap: 15px">
+            <li style="display: flex; align-items: flex-start; gap: 10px">
+              <i class="fa-solid fa-location-dot" style="
+                  margin-top: 4px;
+                  color: transparent;
+                  -webkit-text-stroke: 1.5px #555;
+                "></i>
+              <span style="font-size: 0.88rem; color: #666">Bengaluru, Karnataka, India - 560076</span>
+            </li>
+            <li style="display: flex; align-items: center; gap: 10px">
+              <i class="fa-solid fa-phone" style="color: transparent; -webkit-text-stroke: 1.5px #555"></i>
+              <span style="font-size: 0.88rem; color: #666">+91 8618471424</span>
+            </li>
+            <li style="display: flex; align-items: center; gap: 10px">
+              <i class="fa-regular fa-envelope" style="color: #555"></i>
+              <span style="font-size: 0.88rem; color: #666">info@arshithgroup.com</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Animated Background Beetle & Cyclist -->
+    <div class="footer_bg">
+      <div class="footer_bg_one">
+        <div class="car-logo">Let’s start with Arshith<span>.</span></div>
+      </div>
+      <div class="footer_bg_two">
+        <div class="cyclist-logo">Others</div>
+      </div>
+    </div>
+
+    <div class="ag-footer-bottom">
+      <div class="container ag-footer-bottom-inner">
+        <p>&copy; 2026 Arshith Group. All rights reserved.</p>
+        <div class="ag-footer-legal">
+          <a href="#">Legal Disclaimer</a>
+          <a href="#">Privacy Notice</a>
+          <a href="#">Terms &amp; Conditions</a>
+          <a href="#">Cookie Policy</a>
+        </div>
+        <button class="ag-back-top" id="agBackTop" aria-label="Back to top">
+          <i class="fa-solid fa-arrow-up"></i>
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JS -->
+  <script src="script.js"></script>
+</body>
+
+</html>

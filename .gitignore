@@ -1,0 +1,20 @@
+# Dependencies (reinstall with npm install)
+node_modules/
+
+# Secrets / local configuration - never commit
+.env
+.env.*
+!env.template
+**/hrportal/wp-config.php
+*.pem
+*.key
+
+# Runtime data written by server.js (internship applications)
+applications.json
+
+# Local tooling
+.claude/
+__pycache__/
+*.log
+Thumbs.db
+desktop.ini

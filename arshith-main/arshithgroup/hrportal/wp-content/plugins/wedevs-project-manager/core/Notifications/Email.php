@@ -1,0 +1,304 @@
+<?php 
+
+namespace WeDevs\PM\Core\Notifications;
+
+
+class Email {
+    private static $_instance;
+
+    public static function getInstance() {
+        if ( !self::$_instance ) {
+            self::$_instance = new self();
+        }
+
+        return self::$_instance;
+    }
+
+    /**
+     * Get content html.
+     *
+     * @access public
+     * @return string
+     */
+    public function get_content_html( $template, $args ) {
+        
+        ob_start();
+        //$this->email_header();
+        $this->load_templae( $template, $args );
+        //$this->email_footer();
+        return ob_get_clean(); 
+    }
+
+
+    public function load_templae( $file, $args = null ) {
+        if ( $args && is_array( $args ) ) {
+            extract( $args );
+        }
+
+        $link = $this->pm_link();
+
+        if ( file_exists( $file ) ) {
+            include( $file );
+        }
+    }
+
+    public function get_template_path( $template_name, $module = null ) {
+
+        $child_theme_dir  = get_stylesheet_directory() . '/pm/emails';
+        $parent_theme_dir = get_template_directory() . '/pm/emails';
+        $mail_dir         = wedevs_pm_config('frontend.view_path'). '/emails';
+
+        if ( function_exists('wedevs_pm_pro_config') ) {
+            $pro_dir      = wedevs_pm_pro_config('define.view_path').'/emails';
+            if ( $module != null ) {
+                $module_path      = wedevs_pm_pro_config('define.module_path').'/'. $module . 'views/emails';
+            }
+        }
+        
+        if ( file_exists( $child_theme_dir . $template_name ) ) {
+            return $child_theme_dir . $template_name;
+        } else if ( file_exists( $parent_theme_dir . $template_name ) ) {
+            return $parent_theme_dir . $template_name;
+        } else if ( file_exists( $mail_dir . $template_name ) ) {
+            return $mail_dir . $template_name;
+        }else if ( isset($pro_dir) && file_exists( $pro_dir . $template_name ) ){
+            return  $pro_dir . $template_name;
+        }else if ( isset($module_path) &&  file_exists( $module_path . $template_name ) ){
+            return  $module_path . $template_name;
+        }
+    }
+
+    /**
+     * Get email header
+     *
+     * @param  string $action
+     *
+     * @since 2.0
+     *
+     * @return void
+     */
+    function email_header() {
+        $header_file = apply_filters( 'wedevs_pm_email_header_file', $this->get_template_path( '/html/header.php' ) );
+        $this->load_templae( $header_file );
+    }
+
+    /**
+     * Get email footer
+     *
+     * @param  string $action
+     *
+     * @since 2.0
+     *
+     * @return void
+     */
+    public function email_footer() {
+        $footer_file = apply_filters( 'wedevs_pm_email_footer_file', $this->get_template_path( '/html/footer.php' ) );
+        $this->load_templae( $footer_file );
+    }
+
+    /**
+     * A private task / message / list / file is only visible to roles holding the
+     * matching view_private_* capability. Notification recipients were taken
+     * straight from the notify list, so a user the REST API refuses could still be
+     * mailed the title and the comment body. Gate every recipient on the same
+     * capability the API enforces.
+     *
+     * @param int   $user_id
+     * @param array $request  Must carry commentable_type, commentable_id, project_id.
+     * @return bool
+     */
+    public function can_user_view_commentable( $user_id, $request ) {
+        $caps = [
+            'task'             => 'view_private_task',
+            'discussion_board' => 'view_private_message',
+            'task_list'        => 'view_private_list',
+            'file'             => 'view_private_file',
+            'milestone'        => 'view_private_milestone',
+        ];
+
+        $type       = isset( $request['commentable_type'] ) ? $request['commentable_type'] : '';
+        $project_id = isset( $request['project_id'] ) ? intval( $request['project_id'] ) : 0;
+        $entity_id  = isset( $request['commentable_id'] ) ? intval( $request['commentable_id'] ) : 0;
+
+        // Recipients must be able to open the project; otherwise any user id in
+        // the request was mailed the project, the item title and the comment.
+        if ( $project_id && ! wedevs_pm_user_can( 'view_project', $project_id, $user_id ) ) {
+            return false;
+        }
+
+        if ( ! isset( $caps[ $type ] ) ) {
+            return true;
+        }
+
+        if ( ! $project_id || ! $entity_id ) {
+            return true;
+        }
+
+        // Files keep their flag under 'private'; everything else under 'privacy'.
+        $is_private = false;
+        $meta       = wedevs_pm_get_meta( $entity_id, $project_id, $type, 'file' === $type ? 'private' : 'privacy' );
+
+        if ( $meta && isset( $meta->meta_value ) ) {
+            $is_private = intval( $meta->meta_value ) === 1;
+        }
+
+        // Tasks, lists, milestones and discussions also carry an is_private
+        // column, which is what create/update set.
+        if ( ! $is_private && 'task' === $type ) {
+            $task       = \WeDevs\PM\Task\Models\Task::find( $entity_id );
+            $is_private = $task ? intval( $task->is_private ) === 1 : false;
+        } elseif ( ! $is_private && in_array( $type, [ 'discussion_board', 'task_list', 'milestone' ], true ) ) {
+            $board      = \WeDevs\PM\Common\Models\Board::find( $entity_id );
+            $is_private = $board ? intval( $board->is_private ) === 1 : false;
+        }
+
+        if ( $is_private ) {
+            return wedevs_pm_user_can( $caps[ $type ], $project_id, $user_id );
+        }
+
+        // A public task inside a private list is hidden the same way the REST API hides it.
+        if ( 'task' === $type ) {
+            $boardable = \WeDevs\PM\Common\Models\Boardable::where( 'boardable_id', $entity_id )
+                ->whereIn( 'boardable_type', [ 'task', 'sub_task' ] )
+                ->where( 'board_type', 'task_list' )
+                ->first();
+
+            if ( $boardable ) {
+                $list_meta = wedevs_pm_get_meta( $boardable->board_id, $project_id, 'task_list', 'privacy' );
+                $list      = \WeDevs\PM\Common\Models\Board::find( $boardable->board_id );
+
+                if ( ( $list_meta && intval( $list_meta->meta_value ) === 1 ) || ( $list && intval( $list->is_private ) === 1 ) ) {
+                    return wedevs_pm_user_can( 'view_private_list', $project_id, $user_id );
+                }
+            }
+        }
+
+        return true;
+    }
+
+    public function is_enable_user_notification( $user_id ) {
+        if ( !is_numeric( $user_id ) ) {
+            return false;
+        }
+
+        $user_email_notification = get_user_meta( $user_id, '_cpm_email_notification', true );
+
+        if ( $user_email_notification == 'off' ) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public function is_enable_user_notification_for_notification_type( $user_id, $notification_type) {
+
+        if (!is_numeric( $user_id ) ) {
+            return false;
+        }
+
+        $user_email_notification = get_user_meta( $user_id, $notification_type, true );
+
+        if ( $user_email_notification == 'off' ) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public function from_email() {
+        $email = wedevs_pm_get_setting( 'from_email' );
+        $email = empty( $email ) ? get_bloginfo('admin_email'): $email; 
+        return apply_filters('wedevs_pm_from_email', $email);
+    }
+
+    public function is_bcc_enable() {
+        $enable_bcc = wedevs_pm_get_setting( 'enable_bcc' );
+        $enable_bcc = isset( $enable_bcc ) ? $enable_bcc == "true" : false;
+        return apply_filters( 'wedevs_pm_enable_bcc', $enable_bcc  ) ;
+    }
+
+    public function email_type() {
+        $email_type = wedevs_pm_get_setting('email_type');
+        $email_type = isset( $email_type ) ? $email_type : 'text/html';
+        return apply_filters( 'wedevs_pm_email_type', $email_type );
+    }
+
+    public function link_to_backend() {
+        $link_to_backend = wedevs_pm_get_setting('link_to_backend');
+
+        if ( $link_to_backend === null ) {
+            $pages = get_option('pm_pages', []);
+            $link_to_backend = empty( $pages['project'] );
+        } else {
+            $link_to_backend = filter_var( $link_to_backend, FILTER_VALIDATE_BOOLEAN );
+        }
+
+        return apply_filters('wedevs_pm_email_link_to_backend', $link_to_backend ) ;
+    }
+
+    public function pm_link() {
+        if( !$this->link_to_backend() ) {
+            $pages   = get_option('pm_pages', []);
+            $project = isset( $pages['project'] ) ? intval( $pages['project'] ) : '';
+
+            if ( $project ) {
+                return get_permalink( $project );
+            }
+        }
+        return admin_url( 'admin.php?page=pm_projects' );
+    }
+
+    function notify_manager() {
+        return apply_filters( 'wedevs_notify_project_managers', false );
+    }
+    /**
+     * Get WordPress blog name.
+     *
+     * @return string
+     */
+    public function get_blogname() {
+        return wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
+    }
+    
+    public static function send( $to, $subject, $message, $headers = [], $attachments = null ) {
+
+        $blogname     = self::getInstance()->get_blogname();
+        $server_name = isset( $_SERVER['SERVER_NAME'] ) ? sanitize_text_field( wp_unslash( $_SERVER['SERVER_NAME'] ) ): '';
+        $no_reply     = 'no-reply@' . preg_replace( '#^www\.#', '', strtolower( $server_name  ) );
+        $content_type = 'Content-Type: text/html';
+        $charset      = 'Charset: UTF-8';
+        $from_email   = self::getInstance()->from_email();
+        $from         = "From: $blogname <$from_email>";
+        $reply_to     = "Reply-To: $no_reply";
+
+        if ( self::getInstance()->is_bcc_enable() ) {
+
+            if ( is_array( $to ) ) {
+                $bcc     = 'Bcc: ' . implode(',', $to);
+            } else {
+                $bcc     = 'Bcc: ' . $to;
+            }
+
+            $headers = array(
+                $from,
+                $bcc,
+                $reply_to,
+                $content_type,
+                $charset,
+            );
+
+            return wp_mail( $from_email, $subject, wp_kses_post( htmlspecialchars_decode( $message ) ), $headers, $attachments );
+            
+        } else {
+            
+            $headers = array(
+                $reply_to,
+                $content_type,
+                $charset,
+                $from,
+            );
+            
+            return wp_mail( $to, $subject, wp_kses_post( htmlspecialchars_decode( $message ) ), $headers, $attachments );
+        }
+    }
+}

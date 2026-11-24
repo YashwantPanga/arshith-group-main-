@@ -1,0 +1,1141 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Life at Arshith Group | Culture, Innovation &amp; Work Environment</title>
+  <meta name="description"
+    content="Discover Life at Arshith Group. Explore our culture, team hackathons, mentorship programs, wellness benefits, and what makes working at Arshith Group extraordinary." />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Condensed:wght@700&family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+
+  <!-- Shared Site Styles -->
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles2.css" />
+  <link rel="stylesheet" href="footer-premium.css" />
+
+  <style>
+    /* ═══════════════════════════════════════════════════
+       LIFE AT ARSHITH — DEDICATED STYLES & HIGH-CONTRAST FIXES
+       ═══════════════════════════════════════════════════ */
+
+    body {
+      background: #ffffff;
+      color: #0f172a;
+      font-family: 'Outfit', 'Inter', sans-serif;
+    }
+
+    /* Header Nav Fix */
+    .ag-header {
+      background: #ffffff !important;
+      border-bottom: 1px solid #e2e8f0 !important;
+      z-index: 1000 !important;
+    }
+
+    .ag-nav-item>a {
+      color: #0f172a !important;
+      font-weight: 600 !important;
+      font-size: 0.88rem !important;
+    }
+
+    .ag-nav-item>a:hover {
+      color: #2563eb !important;
+    }
+
+    .ag-dropdown a {
+      color: #0f172a !important;
+    }
+
+    .ag-dropdown a:hover {
+      color: #2563eb !important;
+      background: #f1f5f9 !important;
+    }
+
+    /* ── HERO SECTION ── */
+    .life-hero-ultra {
+      position: relative;
+      padding: 160px 0 100px;
+      background: #060b18;
+      color: #ffffff;
+      overflow: hidden;
+    }
+
+    .life-hero-glows {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .life-glow {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: 0.75;
+    }
+
+    .glow-life-1 {
+      width: 550px;
+      height: 550px;
+      top: -120px;
+      left: 10%;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.45) 0%, transparent 75%);
+    }
+
+    .glow-life-2 {
+      width: 500px;
+      height: 500px;
+      bottom: -100px;
+      right: 5%;
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.4) 0%, transparent 75%);
+    }
+
+    .glow-life-3 {
+      width: 450px;
+      height: 450px;
+      top: 40%;
+      left: 45%;
+      background: radial-gradient(circle, rgba(245, 158, 11, 0.3) 0%, transparent 75%);
+    }
+
+    .life-hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 50px;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .life-hero-left {
+      max-width: 650px;
+    }
+
+    .life-tag-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-heading);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2.5px;
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 8px 24px;
+      border-radius: 30px;
+      margin-bottom: 22px;
+    }
+
+    .life-main-title {
+      font-family: var(--font-heading);
+      font-size: 3.6rem;
+      font-weight: 800;
+      color: #ffffff !important;
+      line-height: 1.12;
+      letter-spacing: -1px;
+      margin-bottom: 20px;
+    }
+
+    .gradient-text-multi {
+      background: linear-gradient(135deg, #38bdf8 0%, #34d399 50%, #fbbf24 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .life-main-desc {
+      font-size: 1.15rem;
+      color: #cbd5e1 !important;
+      line-height: 1.7;
+      margin-bottom: 36px;
+    }
+
+    .life-hero-btns {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 45px;
+    }
+
+    .life-btn-primary {
+      background: #2563eb;
+      color: #ffffff !important;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 15px 34px;
+      border-radius: 30px;
+      text-decoration: none;
+      box-shadow: 0 12px 28px rgba(37, 99, 235, 0.35);
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .life-btn-primary:hover {
+      background: #1d4ed8;
+      transform: translateY(-3px);
+      box-shadow: 0 18px 38px rgba(37, 99, 235, 0.45);
+      color: #ffffff !important;
+    }
+
+    .life-btn-secondary {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff !important;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 15px 30px;
+      border-radius: 30px;
+      text-decoration: none;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .life-btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-3px);
+      color: #ffffff !important;
+    }
+
+    .life-hero-right {
+      position: relative;
+    }
+
+    /* IMAGE VIBRANCY FIX: FULL OPTICAL CLARITY & BRIGHTNESS */
+    .life-hero-img-card {
+      position: relative;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5), 0 0 30px rgba(56, 189, 248, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: #090e1a;
+    }
+
+    .life-hero-img-card img {
+      width: 100%;
+      height: 440px;
+      object-fit: cover;
+      display: block;
+      opacity: 1 !important;
+      filter: brightness(1.04) contrast(1.05) !important;
+    }
+
+    .glass-floating-culture-badge {
+      position: absolute;
+      bottom: 24px;
+      left: 24px;
+      right: 24px;
+      background: rgba(15, 23, 42, 0.94);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 16px 24px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .culture-badge-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: #2563eb;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .culture-badge-text h4 {
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      font-weight: 700;
+      color: #ffffff !important;
+      margin: 0 0 2px 0;
+    }
+
+    .culture-badge-text p {
+      font-size: 0.82rem;
+      color: #cbd5e1 !important;
+      margin: 0;
+    }
+
+    /* Culture Stats Bar */
+    .life-stats-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      background: rgba(15, 23, 42, 0.9);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 24px;
+      padding: 30px 24px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+      margin-top: 60px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .life-stat-item {
+      text-align: center;
+    }
+
+    .life-stat-item h3 {
+      font-family: var(--font-heading);
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #38bdf8 !important;
+      margin-bottom: 4px;
+    }
+
+    .life-stat-item p {
+      font-size: 0.9rem;
+      color: #e2e8f0 !important;
+      font-weight: 500;
+    }
+
+    /* ── CULTURE PILLARS SECTION ── */
+    .life-pillars-section {
+      padding: 105px 0;
+      background: #ffffff;
+      color: #0f172a;
+    }
+
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 28px;
+      margin-top: 50px;
+    }
+
+    .pillar-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 24px;
+      padding: 36px 28px;
+      transition: all 0.35s ease;
+    }
+
+    .pillar-card:hover {
+      transform: translateY(-8px);
+      background: #ffffff;
+      border-color: #38bdf8;
+      box-shadow: 0 20px 45px rgba(37, 99, 235, 0.12);
+    }
+
+    .pillar-icon-box {
+      width: 62px;
+      height: 62px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      margin-bottom: 24px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    }
+
+    .pillar-icon-box.icon-blue {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8) !important;
+      color: #ffffff !important;
+    }
+
+    .pillar-icon-box.icon-green {
+      background: linear-gradient(135deg, #10b981, #059669) !important;
+      color: #ffffff !important;
+    }
+
+    .pillar-icon-box.icon-amber {
+      background: linear-gradient(135deg, #f59e0b, #d97706) !important;
+      color: #ffffff !important;
+    }
+
+    .pillar-icon-box.icon-purple {
+      background: linear-gradient(135deg, #9333ea, #7c3aed) !important;
+      color: #ffffff !important;
+    }
+
+    .pillar-icon-box i {
+      color: #ffffff !important;
+      opacity: 1 !important;
+    }
+
+    .pillar-card h3 {
+      font-family: var(--font-heading);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #0f172a !important;
+      margin-bottom: 12px;
+    }
+
+    .pillar-card p {
+      font-size: 0.95rem;
+      color: #475569 !important;
+      line-height: 1.6;
+    }
+
+    /* ── WORKPLACE SHOWCASE GALLERY ── */
+    .life-gallery-section {
+      padding: 105px 0;
+      background: #060b18;
+      color: #ffffff;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 50px;
+    }
+
+    .gallery-card {
+      background: #0d1527;
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
+      transition: all 0.35s ease;
+    }
+
+    .gallery-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(56, 189, 248, 0.5);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 35px rgba(56, 189, 248, 0.2);
+    }
+
+    .gallery-img-wrap {
+      width: 100%;
+      height: 250px;
+      overflow: hidden;
+      position: relative;
+      background: #000000;
+    }
+
+    .gallery-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 1 !important;
+      filter: brightness(1.05) contrast(1.05) !important;
+      transition: transform 0.6s ease;
+    }
+
+    .gallery-card:hover .gallery-img-wrap img {
+      transform: scale(1.06);
+    }
+
+    .gallery-body {
+      padding: 28px;
+    }
+
+    .gallery-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #38bdf8 !important;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .gallery-body h3 {
+      font-family: var(--font-heading);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #ffffff !important;
+      margin-bottom: 12px;
+    }
+
+    .gallery-body p {
+      font-size: 0.92rem;
+      color: #cbd5e1 !important;
+      line-height: 1.6;
+    }
+
+    /* ── A DAY IN THE LIFE TIMELINE ── */
+    .day-in-life-section {
+      padding: 100px 0;
+      background: #f8fafc;
+      color: #0f172a;
+    }
+
+    .timeline-schedule-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+      margin-top: 50px;
+    }
+
+    .timeline-item-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 20px;
+      padding: 28px 20px;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.04);
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .timeline-item-card:hover {
+      transform: translateY(-6px);
+      border-color: #2563eb;
+      box-shadow: 0 18px 40px rgba(37, 99, 235, 0.12);
+    }
+
+    .timeline-time-badge {
+      font-family: var(--font-heading);
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #2563eb !important;
+      background: rgba(37, 99, 235, 0.08);
+      padding: 5px 14px;
+      border-radius: 12px;
+      display: inline-block;
+      margin-bottom: 16px;
+    }
+
+    .timeline-item-card h4 {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #0f172a !important;
+      margin-bottom: 8px;
+    }
+
+    .timeline-item-card p {
+      font-size: 0.88rem;
+      color: #475569 !important;
+      line-height: 1.55;
+    }
+
+    /* ── PERKS & BENEFITS GRID ── */
+    .life-perks-section {
+      padding: 105px 0;
+      background: #ffffff;
+      color: #0f172a;
+    }
+
+    .perks-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 50px;
+    }
+
+    .perk-item-card {
+      display: flex;
+      gap: 20px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      padding: 28px;
+      border-radius: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .perk-item-card:hover {
+      background: #ffffff;
+      border-color: #2563eb;
+      box-shadow: 0 16px 36px rgba(37, 99, 235, 0.1);
+      transform: translateY(-4px);
+    }
+
+    .perk-icon-circle {
+      width: 54px;
+      height: 54px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #2563eb, #1d4ed8) !important;
+      color: #ffffff !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.35rem;
+      flex-shrink: 0;
+      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
+    }
+
+    .perk-icon-circle i {
+      color: #ffffff !important;
+      opacity: 1 !important;
+    }
+
+    .perk-info h4 {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #0f172a !important;
+      margin-bottom: 6px;
+    }
+
+    .perk-info p {
+      font-size: 0.9rem;
+      color: #475569 !important;
+      line-height: 1.55;
+    }
+
+    /* ── CALL TO ACTION SECTION ── */
+    .life-cta-section {
+      padding: 95px 0;
+      background: linear-gradient(135deg, #090e1a 0%, #0b172e 100%);
+      color: #ffffff;
+      text-align: center;
+    }
+
+    .life-cta-box {
+      max-width: 750px;
+      margin: 0 auto;
+    }
+
+    .life-cta-box h2 {
+      font-family: var(--font-heading);
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: #ffffff !important;
+      margin-bottom: 18px;
+    }
+
+    .life-cta-box p {
+      font-size: 1.1rem;
+      color: #cbd5e1 !important;
+      margin-bottom: 36px;
+      line-height: 1.6;
+    }
+
+    .life-cta-btns {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    @media (max-width: 992px) {
+      .life-hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .pillars-grid,
+      .gallery-grid,
+      .perks-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .timeline-schedule-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .life-stats-bar {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .life-main-title {
+        font-size: 2.8rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+
+      .pillars-grid,
+      .gallery-grid,
+      .perks-grid,
+      .timeline-schedule-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .life-stats-bar {
+        grid-template-columns: 1fr;
+      }
+
+      .life-cta-btns {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ══════════ HEADER / NAV ══════════ -->
+  <header class="ag-header" id="agHeader">
+    <nav class="ag-nav container">
+      <a href="index.html" class="ag-logo">
+        <img src="./logos/LOGO-removebg-preview.png" alt="Arshith Logo" class="ag-logo-img" />
+      </a>
+      <ul class="ag-nav-links" id="agNavLinks">
+        <li class="ag-nav-item"><a href="index.html">Home</a></li>
+        <li class="ag-nav-item ag-has-drop">
+          <a href="aboutgroup.html">About Us <i class="fa-solid fa-chevron-down ag-caret"></i></a>
+          <div class="ag-dropdown">
+            <a href="aboutgroup.html">About Arshith Group</a>
+            <a href="aboutceo.html">Executive Biographies</a>
+          </div>
+        </li>
+        <li class="ag-nav-item ag-has-drop">
+          <a href="index.html#companies">Businesses <i class="fa-solid fa-chevron-down ag-caret"></i></a>
+          <div class="ag-dropdown">
+            <a href="http://arshithinfotech.com/">IT Services &amp; Consulting</a>
+            <a href="https://arshithfresh.com/" target="_blank">E-Commerce</a>
+            <a href="https://suntechorganization.com/" target="_blank">Business Consulting</a>
+          </div>
+        </li>
+        <li class="ag-nav-item ag-has-drop">
+          <a href="#" style="color: #2563eb !important;">Careers <i class="fa-solid fa-chevron-down ag-caret"></i></a>
+          <div class="ag-dropdown">
+            <a href="internship.html">Internship Programs</a>
+            <a href="https://forms.gle/shX3ZvtgQDwAxoRK6" target="_blank">Technical Confirmation</a>
+          </div>
+        </li>
+        <li class="ag-nav-item"><a href="index.html#contact">Contact Us</a></li>
+      </ul>
+      <div class="ag-nav-right">
+        <button class="ag-hamburger" id="agHamburger" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ══════════ LIFE AT ARSHITH HERO ══════════ -->
+    <section class="life-hero-ultra">
+      <div class="life-hero-glows">
+        <div class="life-glow glow-life-1"></div>
+        <div class="life-glow glow-life-2"></div>
+        <div class="life-glow glow-life-3"></div>
+      </div>
+
+      <div class="container">
+        <div class="life-hero-grid">
+          <!-- Left Text Content -->
+          <div class="life-hero-left">
+            <span class="life-tag-pill"><i class="fa-solid fa-heart-pulse"></i> WORKPLACE &amp; CULTURE</span>
+            <h1 class="life-main-title">Life at <span class="gradient-text-multi">Arshith Group</span></h1>
+            <p class="life-main-desc">
+              Where extraordinary talent engineers future technology, sustainable commerce, and global business
+              consulting. Discover a workplace built on creative freedom, trust, and shared success.
+            </p>
+
+            <div class="life-hero-btns">
+              <a href="internship.html" class="life-btn-primary">
+                <span>Explore Open Positions</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </a>
+              <a href="aboutceo.html" class="life-btn-secondary">
+                <i class="fa-solid fa-users"></i>
+                <span>Meet Leadership</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Right Hero Image Showcase -->
+          <div class="life-hero-right">
+            <div class="life-hero-img-card">
+              <img src="logos/arshith_culture_team.jpg" alt="Executive Team Collaboration - Life at Arshith Group" />
+              <div class="glass-floating-culture-badge">
+                <div class="culture-badge-icon">
+                  <i class="fa-solid fa-award"></i>
+                </div>
+                <div class="culture-badge-text">
+                  <h4>Top Rated Team Culture</h4>
+                  <p>98% Employee Happiness &amp; Growth Rating</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Live Culture Stats Bar -->
+        <div class="life-stats-bar">
+          <div class="life-stat-item">
+            <h3>100+</h3>
+            <p>Visionary Teammates</p>
+          </div>
+          <div class="life-stat-item">
+            <h3>98%</h3>
+            <p>Culture &amp; Happiness Rating</p>
+          </div>
+          <div class="life-stat-item">
+            <h3>3</h3>
+            <p>Diversified Companies</p>
+          </div>
+          <div class="life-stat-item">
+            <h3>100%</h3>
+            <p>Hybrid Flexibility</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ CULTURE PILLARS ══════════ -->
+    <section class="life-pillars-section">
+      <div class="container">
+        <div class="section-heading" style="text-align: center; max-width: 650px; margin: 0 auto;">
+          <p class="section-tag"
+            style="color: #2563eb; background: rgba(37,99,235,0.08); padding: 6px 18px; border-radius: 20px; font-weight: 700; display: inline-block; margin-bottom: 12px;">
+            OUR CORE ETHOS</p>
+          <h2 style="font-size: 2.6rem; font-weight: 800; color: #0f172a;">What Drives Our People</h2>
+        </div>
+
+        <div class="pillars-grid">
+          <div class="pillar-card">
+            <div class="pillar-icon-box icon-blue">
+              <i class="fa-solid fa-lightbulb"></i>
+            </div>
+            <h3>Innovation First</h3>
+            <p>We encourage bold ideas and calculated risks. Everyone from interns to senior architects has a voice in
+              shaping our solutions.</p>
+          </div>
+
+          <div class="pillar-card">
+            <div class="pillar-icon-box icon-green">
+              <i class="fa-solid fa-handshake"></i>
+            </div>
+            <h3>Transparent Leadership</h3>
+            <p>Open communication, honest feedback loops, and leadership that actively supports your personal career
+              milestones.</p>
+          </div>
+
+          <div class="pillar-card">
+            <div class="pillar-icon-box icon-amber">
+              <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <h3>Continuous Upskilling</h3>
+            <p>Dedicated learning stipends, internal hackathons, and direct mentorship from industry veterans across IT,
+              consulting, and produce.</p>
+          </div>
+
+          <div class="pillar-card">
+            <div class="pillar-icon-box icon-purple">
+              <i class="fa-solid fa-heart-pulse"></i>
+            </div>
+            <h3>Work-Life Harmony</h3>
+            <p>Flexible schedules, mental wellness days, and a supportive environment ensuring you excel at work and
+              recharge outside.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ CULTURE SHOWCASE GALLERY ══════════ -->
+    <section class="life-gallery-section">
+      <div class="container">
+        <div class="section-heading" style="text-align: center; max-width: 650px; margin: 0 auto;">
+          <p class="section-tag"
+            style="color: #38bdf8; background: rgba(56,189,248,0.12); padding: 6px 18px; border-radius: 20px; font-weight: 700; display: inline-block; margin-bottom: 12px;">
+            INSIDE ARSHITH GROUP</p>
+          <h2 style="font-size: 2.6rem; font-weight: 800; color: #ffffff;">Experience Our Environment</h2>
+        </div>
+
+        <div class="gallery-grid">
+          <div class="gallery-card">
+            <div class="gallery-img-wrap">
+              <img src="logos/arshith_culture_team.jpg" alt="Executive Leadership & Collaboration" />
+            </div>
+            <div class="gallery-body">
+              <span class="gallery-tag">COLLABORATION</span>
+              <h3>Executive &amp; Cross-Team Synergy</h3>
+              <p>Work directly alongside company leaders, product managers, and software architects on high-impact
+                projects.</p>
+            </div>
+          </div>
+
+          <div class="gallery-card">
+            <div class="gallery-img-wrap">
+              <img src="logos/arshith_hackathon_event.jpg" alt="Annual Hackathons & Innovation Lab" />
+            </div>
+            <div class="gallery-body">
+              <span class="gallery-tag">INNOVATION LABS</span>
+              <h3>Annual Tech Hackathons</h3>
+              <p>24-hour sprints where engineers, analysts, and designers build rapid AI prototypes, microservices, and
+                apps.</p>
+            </div>
+          </div>
+
+          <div class="gallery-card">
+            <div class="gallery-img-wrap">
+              <img src="logos/arshith_team_retreat.jpg" alt="Team Celebrations & Retreats" />
+            </div>
+            <div class="gallery-body">
+              <span class="gallery-tag">COMMUNITY</span>
+              <h3>Annual Retreats &amp; Celebrations</h3>
+              <p>We celebrate company milestones, product launches, and personal achievements with team offsites and
+                gatherings.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ A DAY IN THE LIFE TIMELINE ══════════ -->
+    <section class="day-in-life-section">
+      <div class="container">
+        <div class="section-heading" style="text-align: center; max-width: 650px; margin: 0 auto;">
+          <p class="section-tag"
+            style="color: #2563eb; background: rgba(37,99,235,0.08); padding: 6px 18px; border-radius: 20px; font-weight: 700; display: inline-block; margin-bottom: 12px;">
+            WORKPLACE FLOW</p>
+          <h2 style="font-size: 2.6rem; font-weight: 800; color: #0f172a;">A Day in the Life</h2>
+        </div>
+
+        <div class="timeline-schedule-grid">
+          <div class="timeline-item-card">
+            <span class="timeline-time-badge">09:30 AM</span>
+            <h4>Coffee &amp; Standup</h4>
+            <p>Kick off the day with team syncs, coffee catchups, and prioritizing daily sprint goals.</p>
+          </div>
+
+          <div class="timeline-item-card">
+            <span class="timeline-time-badge">11:30 AM</span>
+            <h4>Deep Work Sprint</h4>
+            <p>Focus hours for building code, designing architecture, or analyzing client solutions.</p>
+          </div>
+
+          <div class="timeline-item-card">
+            <span class="timeline-time-badge">01:00 PM</span>
+            <h4>Team Lunch &amp; Lounge</h4>
+            <p>Relaxing over catered meals, playing games, or socializing in the employee lounge.</p>
+          </div>
+
+          <div class="timeline-item-card">
+            <span class="timeline-time-badge">03:30 PM</span>
+            <h4>Cross-Company Exchange</h4>
+            <p>Collaborative brainstorming between InfoTech, Arshith Fresh, and Suntech teams.</p>
+          </div>
+
+          <div class="timeline-item-card">
+            <span class="timeline-time-badge">05:30 PM</span>
+            <h4>Demos &amp; Wrap-up</h4>
+            <p>Showcasing completed features, celebrating daily wins, and wrapping up smoothly.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ BENEFITS & PERKS MATRIX ══════════ -->
+    <section class="life-perks-section">
+      <div class="container">
+        <div class="section-heading" style="text-align: center; max-width: 650px; margin: 0 auto;">
+          <p class="section-tag"
+            style="color: #2563eb; background: rgba(37,99,235,0.08); padding: 6px 18px; border-radius: 20px; font-weight: 700; display: inline-block; margin-bottom: 12px;">
+            PERKS &amp; BENEFITS</p>
+          <h2 style="font-size: 2.6rem; font-weight: 800; color: #0f172a;">Designed For Your Growth</h2>
+        </div>
+
+        <div class="perks-grid">
+          <div class="perk-item-card">
+            <div class="perk-icon-circle"><i class="fa-solid fa-laptop-house"></i></div>
+            <div class="perk-info">
+              <h4>Hybrid &amp; Remote Freedom</h4>
+              <p>Work from our modern offices or remotely with flexible work hours.</p>
+            </div>
+          </div>
+
+          <div class="perk-item-card">
+            <div class="perk-icon-circle"><i class="fa-solid fa-notes-medical"></i></div>
+            <div class="perk-info">
+              <h4>Health &amp; Family Insurance</h4>
+              <p>Comprehensive health coverage for you and your immediate family members.</p>
+            </div>
+          </div>
+
+          <div class="perk-item-card">
+            <div class="perk-icon-circle"><i class="fa-solid fa-award"></i></div>
+            <div class="perk-info">
+              <h4>Performance Bonuses</h4>
+              <p>Quarterly rewards, milestone bonuses, and stock options for high impact.</p>
+            </div>
+          </div>
+
+          <div class="perk-item-card">
+            <div class="perk-icon-circle"><i class="fa-solid fa-book-open-reader"></i></div>
+            <div class="perk-info">
+              <h4>Learning Allowances</h4>
+              <p>Sponsorship for cloud certifications, tech courses, and leadership books.</p>
+            </div>
+          </div>
+
+          <div class="perk-item-card">
+            <div class="perk-icon-circle"><i class="fa-solid fa-umbrella-beach"></i></div>
+            <div class="perk-info">
+              <h4>Generous Paid Time Off</h4>
+              <p>Paid vacation leaves, festive holidays, birthday leave, and parental leave.</p>
+            </div>
+          </div>
+
+          <div class="perk-item-card">
+            <div class="perk-icon-circle"><i class="fa-solid fa-mug-hot"></i></div>
+            <div class="perk-info">
+              <h4>Modern Lounge &amp; Snacks</h4>
+              <p>Ergonomic setups, high-speed fiber internet, artisanal coffee, and snacks.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ CTA SECTION ══════════ -->
+    <section class="life-cta-section">
+      <div class="container">
+        <div class="life-cta-box">
+          <h2>Ready to Shape the Future With Us?</h2>
+          <p>Whether you are an experienced software engineer, business consultant, or eager intern, we have a place for
+            your ambition.</p>
+          <div class="life-cta-btns">
+            <a href="internship.html" class="life-btn-primary">Explore Open Positions <i
+                class="fa-solid fa-arrow-right"></i></a>
+            <a href="index.html#contact" class="life-btn-secondary">Contact HR Team</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ══════════ FOOTER ══════════ -->
+  <footer class="ag-footer" id="footer">
+    <div class="container ag-footer-inner">
+      <div class="ag-footer-brand">
+        <a href="index.html"><img src="./logos/LOGO-removebg-preview.png" alt="Arshith Group Logo"
+            class="ag-footer-logo-img" /></a>
+        <p>
+          Arshith Group is committed to innovation, sustainability, and excellence across multiple industries including
+          E-Commerce, Technology, and Digital Services. We empower communities and deliver trusted solutions.
+        </p>
+        <div class="ag-footer-social">
+          <a href="https://www.linkedin.com/in/farook-n-2bb2b5344/" target="_blank" aria-label="LinkedIn"><i
+              class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://www.linkedin.com/company/arshith-fresh-india-pvt-ltd/posts/?feedView=all" target="_blank"
+            aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://www.linkedin.com/in/pallavi-n-4578033ab/" target="_blank" aria-label="LinkedIn"><i
+              class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://www.linkedin.com/company/suntech-it-solution/" target="_blank" aria-label="LinkedIn"><i
+              class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://www.instagram.com/arshithgroup?igsh=MWRnNXN0NDRpeWQ1bg==" target="_blank"
+            aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://youtube.com/@vamikadurbar?si=mvXxo3HM8Qe4liD9" target="_blank" aria-label="YouTube"><i
+              class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="ag-footer-cols">
+        <div class="ag-footer-col">
+          <h5>About Us</h5>
+          <ul>
+            <li><a href="aboutceo.html">About Arshith Group</a></li>
+            <li><a href="aboutceo.html">Executive Biographies</a></li>
+            <li><a href="aboutceo.html">Leadership</a></li>
+            <li><a href="index.html#journey">Our Journey</a></li>
+            <li><a href="lifeatarshith.html">Life at Arshith</a></li>
+          </ul>
+        </div>
+        <div class="ag-footer-col">
+          <h5>Businesses</h5>
+          <ul>
+            <li><a href="https://arshithfresh.com/" target="_blank">E-Commerce</a></li>
+            <li><a href="https://suntechorganization.com/" target="_blank">Business Consulting &amp; Services</a></li>
+            <li><a href="https://suntechorganization.com/" target="_blank">Digital &amp; Marketing</a></li>
+            <li><a href="http://arshithinfotech.com/">Software Development</a></li>
+          </ul>
+        </div>
+        <div class="ag-footer-col">
+          <h5>Connect</h5>
+          <ul>
+            <li><a href="aboutceo.html">About Us</a></li>
+            <li><a href="LatestNews.html">News</a></li>
+            <li><a href="index.html#companies">Business</a></li>
+            <li><a href="internship.html">Careers</a></li>
+            <li><a href="index.html#contact">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="ag-footer-col">
+          <h5>Need Help?</h5>
+          <ul style="gap: 15px; padding: 0;">
+            <li style="display: flex; align-items: flex-start; gap: 10px; list-style: none;">
+              <i class="fa-solid fa-location-dot" style="margin-top: 4px; color: #2563eb;"></i>
+              <span style="font-size: 0.88rem; color: #666">Bengaluru, Karnataka, India - 560076</span>
+            </li>
+            <li style="display: flex; align-items: center; gap: 10px; list-style: none;">
+              <i class="fa-solid fa-phone" style="color: #2563eb;"></i>
+              <span style="font-size: 0.88rem; color: #666"><a href="tel:+918618471424"
+                  style="color: #666; text-decoration: none;">+91 8618471424</a></span>
+            </li>
+            <li style="display: flex; align-items: center; gap: 10px; list-style: none;">
+              <i class="fa-regular fa-envelope" style="color: #2563eb;"></i>
+              <span style="font-size: 0.88rem; color: #666"><a href="mailto:info@arshithgroup.com"
+                  style="color: #666; text-decoration: none;">info@arshithgroup.com</a></span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Animated Background Beetle & Cyclist -->
+    <div class="footer_bg">
+      <div class="footer_bg_one">
+        <div class="car-logo">Let's start with Arshith<span>.</span></div>
+      </div>
+      <div class="footer_bg_two">
+        <div class="cyclist-logo">Others</div>
+      </div>
+    </div>
+
+    <div class="ag-footer-bottom">
+      <div class="container ag-footer-bottom-inner">
+        <p>&copy; 2026 Arshith Group. All rights reserved.</p>
+        <div class="ag-footer-legal">
+          <a href="#">Legal Disclaimer</a>
+          <a href="#">Privacy Notice</a>
+          <a href="#">Terms &amp; Conditions</a>
+        </div>
+        <button class="ag-back-top" id="agBackTop" aria-label="Back to top">
+          <i class="fa-solid fa-arrow-up"></i>
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      // Sticky header handler
+      const header = document.getElementById("agHeader");
+      if (header) {
+        window.addEventListener("scroll", function () {
+          header.classList.toggle("ag-header--scrolled", window.scrollY > 50);
+        });
+      }
+
+      // Back to top
+      const backTop = document.getElementById("agBackTop");
+      if (backTop) {
+        backTop.addEventListener("click", function () {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+      }
+
+      // Mobile hamburger toggle
+      const hamburger = document.getElementById("agHamburger");
+      const navLinks = document.getElementById("agNavLinks");
+      if (hamburger && navLinks) {
+        hamburger.addEventListener("click", function () {
+          navLinks.classList.toggle("ag-nav-open");
+          hamburger.classList.toggle("ag-hamburger--active");
+        });
+      }
+    })();
+  </script>
+
+</body>
+
+</html>
