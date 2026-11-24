@@ -68,7 +68,9 @@ const MIME_TYPES = {
   '.woff': 'font/woff',
   '.woff2': 'font/woff2',
   '.ttf': 'font/ttf',
-  '.eot': 'application/vnd.ms-fontobject'
+  '.eot': 'application/vnd.ms-fontobject',
+  '.mp4': 'video/mp4',
+  '.webm': 'video/webm'
 };
 
 const server = http.createServer((req, res) => {
@@ -147,6 +149,33 @@ const server = http.createServer((req, res) => {
 
     const ext = path.extname(filePath).toLowerCase();
     const contentType = MIME_TYPES[ext] || 'application/octet-stream';
+
+    // Video: stream with HTTP Range support (needed by Safari/iOS and for seeking)
+    if (contentType.startsWith('video/')) {
+      const size = fs.statSync(filePath).size;
+      const range = /bytes=(\d*)-(\d*)/.exec(req.headers.range || '');
+      if (range) {
+        let start = range[1] === '' ? size - Number(range[2]) : Number(range[1]);
+        let end = range[1] !== '' && range[2] !== '' ? Number(range[2]) : size - 1;
+        if (start >= size || start < 0 || end < start) {
+          res.writeHead(416, { 'Content-Range': `bytes */${size}` });
+          res.end();
+          return;
+        }
+        end = Math.min(end, size - 1);
+        res.writeHead(206, {
+          'Content-Type': contentType,
+          'Content-Range': `bytes ${start}-${end}/${size}`,
+          'Accept-Ranges': 'bytes',
+          'Content-Length': end - start + 1
+        });
+        fs.createReadStream(filePath, { start, end }).pipe(res);
+      } else {
+        res.writeHead(200, { 'Content-Type': contentType, 'Accept-Ranges': 'bytes', 'Content-Length': size });
+        fs.createReadStream(filePath).pipe(res);
+      }
+      return;
+    }
 
     fs.readFile(filePath, (err, content) => {
       if (err) {

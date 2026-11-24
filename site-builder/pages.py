@@ -23,8 +23,8 @@ P = {
     "workshop": "marque/17.jpeg",
     "md_signing": "logos/news4.jpeg",
     "ceo_signing": "logos/news5.jpeg",
-    "md_photo": "logos/mamimagefinal.jpeg",
-    "ceo_photo": "logos/farook_executive.jpg",
+    "md_photo": "md-pallavi.webp",
+    "ceo_photo": "ceo-farook.webp",
     "products": "logos/E%20COMMERCE.jpeg",
 }
 
@@ -262,7 +262,7 @@ def home():
 {hero_slider()}
 {business_features()}
 {counter([(7, "+", "Years of Innovation"), (100, "+", "Career Openings"), ("Continuous", "", "Mentorship &amp; Growth"), ("People First", "", "Global Workplace")],
-         video=(P["ceo_stage"], "logos/Logo%20video.mp4"))}
+         video=("assets/video/arshith-group-poster.jpg?v=20s", "assets/video/arshith-group.mp4?v=20s"))}
 	<!-- START WHY CHOOSE US -->
 	<section class="why_choose_area section-padding">
 		<div class="container">
@@ -329,7 +329,24 @@ def home():
 	<!-- BLOG -->
 	<section id="careers" class="blog_area section-padding">
 		<div class="container">
-			{stitle("Build Your Career. Grow With Purpose.", "At Arshith Group, we bring together visionary minds, innovators, and leaders to shape the future of enterprise technology, consulting, and digital commerce.")}
+			<div class="row ag-career-intro">
+				<div class="col-lg-6 col-sm-12 {wow(0.1)}">
+					<div class="ag-career-img"><img src="assets/img/team-collaboration.webp" class="img-fluid" alt="Arshith Group team collaborating" loading="lazy" /></div>
+				</div>
+				<div class="col-lg-6 col-sm-12 {wow(0.2)}">
+					<div class="ag-career-text">
+						<span class="ag-eyebrow">Opportunities &amp; Culture</span>
+						<h2>Build Your Career. <br />Grow With Purpose.</h2>
+						<p>At Arshith Group, we bring together visionary minds, innovators, and leaders to shape the future of enterprise technology, consulting, and digital commerce.</p>
+						<ul class="ag-ticks">
+							<li>Real production projects from day one</li>
+							<li>Structured mentorship and PPO pathways</li>
+							<li>Hybrid, collaborative and people-first culture</li>
+						</ul>
+						<a class="btn_one" href="internship.html">Explore All Positions</a> <a class="btn_one" href="lifeatarshith.html">Life at Arshith</a>
+					</div>
+				</div>
+			</div>
 			<div class="row text-center">{blog_cards(PATHWAYS)}
 			</div><!-- END ROW -->
 		</div><!--- END CONTAINER -->
@@ -377,8 +394,11 @@ def aboutgroup():
 
 
 # ======================================================================= EXECUTIVE BIOGRAPHIES (single_service + team layout)
-def marketing_block(anchor, heading, img, alt, paras):
+def marketing_block(anchor, heading, img, alt, paras, cutout=False, heading_in_text=False):
     text = "".join(f"\n\t\t\t\t\t\t<p>{p}</p>" for p in paras)
+    if heading_in_text:  # long quote headings sit above the text so both columns stay balanced
+        text = f'\n\t\t\t\t\t\t<h2 class="ag-bio-quote">{heading}</h2>' + text
+        heading = ""
     return f"""
 	<!-- START SERVICE MARKETING PAGE -->
 	<section id="{anchor}" class="marketing_area section-padding">
@@ -386,8 +406,8 @@ def marketing_block(anchor, heading, img, alt, paras):
 			<div class="row">
 				<div class="col-lg-5 col-sm-12 col-xs-12 {wow(0.1)}">
 					<div class="marketing_content">
-						<h2>{heading}</h2>
-						<img src="{img}" class="img-fluid" alt="{alt}" />
+						{f"<h2>{heading}</h2>" if heading else ""}
+						{f'<span class="ag-cutout"><img src="{img}" class="img-fluid" alt="{alt}" /></span>' if cutout else f'<img src="{img}" class="img-fluid" alt="{alt}" />'}
 					</div>
 				</div><!-- END COL -->
 				<div class="col-lg-7 col-sm-12 col-xs-12 {wow(0.2)}">
@@ -439,7 +459,7 @@ def aboutceo():
 						</div><!-- END COL  -->"""
     body = f"""
 {section_top("Executive Biographies")}
-{marketing_block("ceo-bio", "From Experience to Entrepreneurship. From One Vision to a Growing Group.", P["ceo_photo"], "Farook N - CEO &amp; Chairman, Arshith Group", ceo)}
+{marketing_block("ceo-bio", "From Experience to Entrepreneurship. From One Vision to a Growing Group.", P["ceo_photo"], "Farook N - CEO &amp; Chairman, Arshith Group", ceo, cutout=True)}
 	<!-- MARKETING LIST -->
 	<div class="marketing_list_area section-padding">
 		<div class="container">
@@ -453,7 +473,7 @@ def aboutceo():
 		</div><!--- END CONTAINER -->
 	</div>
 	<!-- END MARKETING LIST -->
-{marketing_block("md-bio", "&ldquo;Our aim is not to create a successful company, but to create a company that makes a real difference.&rdquo;", P["md_photo"], "Pallavi N - Managing Director, Arshith Group", md)}
+{marketing_block("md-bio", "&ldquo;Our aim is not to create a successful company, but to create a company that makes a real difference.&rdquo;", P["md_photo"], "Pallavi N - Managing Director, Arshith Group", md, cutout=True, heading_in_text=True)}
 {team()}
 {hire_us("Want to work with us?", "Find photos, biographies, leadership vision, and executive journeys of Arshith Group leaders and board of directors members.", "Contact us", "contact.html")}
 """
@@ -585,18 +605,32 @@ def news():
 						<span class="ag-glare" aria-hidden="true"></span>
 					</article>
 				</div><!-- END COL -->"""
-    gal = ""
-    for i, h in enumerate(HIGHLIGHTS):
+    def tile(i, h, dup):
         img = f"marque/{i + 1:02d}.jpeg"
+        # originals feed the template's image popup; the duplicate copy (for a seamless loop) just opens the original
+        link = (f'<a href="{img}" class="ag-dup" tabindex="-1" title="{h}"><i class="ti-eye"></i></a>' if dup
+                else f'<a href="{img}" class="gallery_enlarge_icon" title="{h}"><i class="ti-eye"></i></a>')
+        hidden = ' aria-hidden="true"' if dup else ""
+        return f"""
+						<div class="ag-marquee-item"{hidden}>
+							<div class="single-gallery ag-gallery-card">
+								<img src="{img}" class="img-fluid" alt="{'' if dup else 'Operational Highlight ' + str(i + 1)}" loading="lazy">
+								{link}
+								<h4>{h}</h4>
+							</div>
+						</div>"""
+
+    half = len(HIGHLIGHTS) // 2
+    rows = [list(enumerate(HIGHLIGHTS))[:half], list(enumerate(HIGHLIGHTS))[half:]]
+    gal = ""
+    for r, items in enumerate(rows):
+        direction = "ag-to-right" if r == 0 else "ag-to-left"
+        tiles = "".join(tile(i, h, False) for i, h in items) + "".join(tile(i, h, True) for i, h in items)
         gal += f"""
-					<div class="col-lg-3 col-sm-6 col-xs-12 portfolio-item mix">
-						<div class="single-gallery ag-gallery-card ag-tilt">
-							<img src="{img}" class="img-fluid" alt="Operational Highlight {i + 1}" loading="lazy">
-							<a href="{img}" class="gallery_enlarge_icon" title="{h}"><i class="ti-eye"></i></a>
-							<h4><a href="{img}" title="{h}">{h}</a></h4>
-							<span class="ag-glare" aria-hidden="true"></span>
-						</div>
-					</div><!-- End Col -->"""
+			<div class="ag-marquee {direction}">
+				<div class="ag-marquee-track">{tiles}
+				</div>
+			</div>"""
     careers = ""
     for i, (icon, href, h, p) in enumerate([
         ("sales.png", "internship.html", "Job Opportunities", "Careers"),
@@ -618,7 +652,7 @@ def news():
 	<!-- BLOG -->
 	<section class="blog_area section-padding ag-news-area">
 		<div class="container">
-			{stitle("Latest News &amp; Updates", "Milestones, partnerships and moments of pride from across Arshith Group.")}
+			{stitle("In the Spotlight", "Milestones, partnerships and moments of pride from across Arshith Group.")}
 			<div class="row">{cards}
 			</div><!-- END ROW -->
 		</div><!--- END CONTAINER -->
@@ -628,10 +662,8 @@ def news():
 	<section id="portfolio" class="portfolio_area section-padding">
 		<div class="container-fluid">
 			{stitle("Operational Highlights", "Across logistics, technology, leadership and community.")}
-			<div class="portfolio-grid">
-				<div class="row">{gal}
-				</div>
-			</div>
+		</div>
+		<div class="ag-marquees">{gal}
 		</div>
 	</section>
 	<!-- END PORTFOLIO -->
@@ -700,8 +732,10 @@ def internship(role_js):
 						<h4>{title}</h4>
 						<p class="ag-meta">Internship &middot; Arshith Group &middot; {loc}</p>
 						<p>{desc}</p>
-						<a class="btn_one" href="apply-internship.html?domain={key}">Apply</a>
-						<button type="button" class="btn_one" data-role="{key}">Details</button>
+						<div class="ag-btns">
+							<a class="btn_one" href="apply-internship.html?domain={key}">Apply</a>
+							<button type="button" class="btn_one" data-role="{key}">Details</button>
+						</div>
 					</div>
 				</div><!-- END COL -->"""
     faq_tabs = [
@@ -1009,7 +1043,7 @@ def certificate():
 # ======================================================================= CONTACT (template contact order)
 def contact():
     body = f"""
-{section_top("Let's Talk")}
+{section_top("Connect With Us")}
 	<!-- START ADDRESS -->
 	<section class="address_area section-padding">
 		<div class="container">

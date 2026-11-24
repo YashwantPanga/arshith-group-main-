@@ -5,6 +5,7 @@ OUT = r"D:\arshith group static web site\arshith-new"
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import pages as pg
+import pages_extra as px
 
 
 
@@ -29,7 +30,11 @@ domain_js = extract_object(os.path.join(OLD, "apply-internship.html"), "domainCo
 
 pages = {
     "index.html": pg.home(),
-    "aboutgroup.html": pg.aboutgroup(),
+    "aboutgroup.html": px.about_unique(),
+    "leadership.html": px.leadership(),
+    "journey.html": px.journey(),
+    "achievements.html": px.achievements(),
+    "businesses.html": px.businesses(),
     "aboutceo.html": pg.aboutceo(),
     "lifeatarshith.html": pg.life(),
     "LatestNews.html": pg.news(),

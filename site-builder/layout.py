@@ -8,9 +8,13 @@ NAV = [
     ("Home", "index.html", []),
     ("About Us", "aboutgroup.html", [
         ("About Arshith Group", "aboutgroup.html", False),
+        ("Leadership", "leadership.html", False),
         ("Executive Biographies", "aboutceo.html", False),
+        ("Our Journey", "journey.html", False),
+        ("Awards &amp; Achievements", "achievements.html", False),
     ]),
-    ("Businesses", "index.html#companies", [
+    ("Businesses", "businesses.html", [
+        ("Our Businesses", "businesses.html", False),
         ("IT Services &amp; IT Consulting", "http://arshithinfotech.com/", True),
         ("E-Commerce", "https://arshithfresh.com/", True),
         ("Multi sellers", "https://seller.arshithfresh.com/", True),
@@ -200,12 +204,15 @@ def counter(items, video=None):
 				</div><!-- END COL -->"""
     vid = ""
     if video:
-        bg, href = video
+        poster, src = video
         vid = f"""
 			<div class="row text-center">
 				<div class="col-lg-8 offset-lg-2 col-sm-12 col-xs-12 {wow(0.3)}">
-					<div class="video_btn" style="background-image: url('{bg}');  background-size:cover; background-position: center center;">
-						<a class="video-play" href="{href}"><i class="ti-video-clapper"></i></a>
+					<div class="video_btn ag-video-box">
+						<video class="ag-promo" muted loop playsinline preload="metadata" poster="{poster}" aria-label="Arshith Group introduction film">
+							<source src="{src}" type="video/mp4">
+						</video>
+						<button type="button" class="ag-video-toggle" aria-label="Pause video"><i class="ti-control-pause"></i></button>
 					</div>
 				</div>
 			</div><!--- END ROW -->"""
@@ -250,9 +257,9 @@ def hire_us(title, text, btn_text, btn_href, icon="search.png", btn2=None):
 
 
 TEAM = [
-    ("logos/farook_executive.jpg", "Farook N", "CEO - Arshith Group",
+    ("ceo-farook.webp", "Farook N", "CEO - Arshith Group",
      [("ti-email", "mailto:ceo@arshithgroup.com"), ("ti-linkedin", "https://www.linkedin.com/in/farook-n-2bb2b5344/")]),
-    ("logos/pallavi_executive.jpg", "Pallavi N", "Managing Director - Arshith Group",
+    ("md-pallavi.webp", "Pallavi N", "Managing Director - Arshith Group",
      [("ti-email", "mailto:md@arshithgroup.com"), ("ti-linkedin", "https://www.linkedin.com/in/pallavi-n-4578033ab/")]),
     ("logos/satyanarayan.jpg", "P. Satyanarayan", "CEO - Arshith Commercial Business", []),
     ("logos/trinadh.png", "K. Trinadh", "Chief Marketing Officer (CMO)", []),
@@ -382,9 +389,20 @@ SOCIALS = [
 ]
 
 
+SOCIAL_LABELS = [
+    ("https://www.linkedin.com/in/farook-n-2bb2b5344/", "fa-linkedin", "LinkedIn", "Farook N"),
+    ("https://www.linkedin.com/in/pallavi-n-4578033ab/", "fa-linkedin", "LinkedIn", "Pallavi N"),
+    ("https://www.linkedin.com/company/arshith-fresh-india-pvt-ltd/posts/?feedView=all", "fa-linkedin", "LinkedIn", "Arshith Fresh India"),
+    ("https://www.linkedin.com/company/suntech-it-solution/", "fa-linkedin", "LinkedIn", "Suntech Solutions"),
+    ("https://www.instagram.com/arshithgroup?igsh=MWRnNXN0NDRpeWQ1bg==", "fa-instagram", "Instagram", "@arshithgroup"),
+    ("https://youtube.com/@arshithfresh?si=ZjvzneHlriAxv322", "fa-youtube-play", "YouTube", "Arshith Fresh"),
+    ("https://youtube.com/@vamikadurbar?si=mvXxo3HM8Qe4liD9", "fa-youtube-play", "YouTube", "Vamika Durbar"),
+]
+
+
 def footer():
-    soc = "".join(
-        f'<li><a href="{u}"{EXT} class="{"f_linkedin" if "linkedin" in i else "f_instagram" if "insta" in i else "f_twitter"}"><i class="fa {i}" title="{t}"></i></a></li>'
+    icons = "".join(
+        f'<li><a href="{u}"{EXT} class="{"f_linkedin" if "linkedin" in i else "f_instagram" if "insta" in i else "f_twitter"}" aria-label="{t}"><i class="fa {i}" title="{t}"></i></a></li>'
         for u, i, t in SOCIALS)
     return f"""
 	<!-- START FOOTER -->
@@ -394,59 +412,52 @@ def footer():
 				<div class="col-lg-3 col-sm-6 col-xs-12">
 					<div class="footer_logo">
 						<img src="{LOGO}" alt="Arshith Group" />
-						<p>Arshith Group is committed to innovation, sustainability, and excellence across multiple industries including E-Commerce, Technology, and Digital Services. We empower communities and deliver trusted solutions.</p>
+						<p>Arshith Group is committed to innovation, sustainability, and excellence across E-Commerce, Technology, and Digital Services.</p>
 					</div>
 					<div class="social_profile">
-						<ul>{soc}</ul>
+						<ul>{icons}</ul>
 					</div>
 				</div><!--- END COL -->
 				<div class="col-lg-3 col-sm-6 col-xs-12">
 					<div class="single_footer">
-						<h4>About Us</h4>
-						<ul>
-							<li><a href="aboutgroup.html">About Arshith Group</a></li>
-							<li><a href="aboutceo.html">Executive Biographies</a></li>
-							<li><a href="aboutceo.html#ceo-bio">Leadership</a></li>
-							<li><a href="aboutgroup.html#journey">Our Journey</a></li>
-							<li><a href="aboutceo.html">Awards</a></li>
-							<li><a href="lifeatarshith.html">Life at Arshith Group</a></li>
-							<li><a href="LatestNews.html">News</a></li>
-							<li><a href="internship.html">Careers</a></li>
-							<li><a href="/admin/">Admin Examinar</a></li>
-						</ul>
-					</div>
-				</div><!--- END COL -->
-				<div class="col-lg-3 col-sm-6 col-xs-1">
-					<div class="single_footer">
-						<h4>Businesses</h4>
-						<ul>
-							<li><a href="https://arshithfresh.com/"{EXT}>E-Commerce</a></li>
-							<li><a href="https://suntechorganization.com/"{EXT}>Business Consulting &amp; Services</a></li>
-							<li><a href="https://suntechorganization.com/"{EXT}>Digital &amp; Marketing</a></li>
-							<li><a href="http://arshithinfotech.com/"{EXT}>Software Development</a></li>
-							<li><a href="index.html#companies">Business</a></li>
-							<li><a href="contact.html">Contact Us</a></li>
-						</ul>
-					</div>
-				</div><!--- END COL -->
-				<div class="col-lg-3 col-sm-6 col-xs-12">
-					<div class="single_footer">
-						<h4>Need Help?</h4>
+						<h4>Reach Us</h4>
 						<ul class="ag-help">
 							<li>Bengaluru, Karnataka, India - 560076</li>
 							<li><a href="tel:+918618471424">+91 8618471424</a></li>
 							<li><a href="mailto:info@arshithgroup.com">info@arshithgroup.com</a></li>
 							<li>Mon - Sat: 9:00 AM - 6:00 PM</li>
 						</ul>
-						<p class="ag-start">Let&rsquo;s start with <strong>Arshith</strong>.</p>
+					</div>
+				</div><!--- END COL -->
+				<div class="col-lg-3 col-sm-6 col-xs-12">
+					<div class="single_footer">
+						<h4>At a Glance</h4>
+						<ul class="ag-glance">
+							<li><b>7+</b> Years of Innovation</li>
+							<li><b>3</b> Group Companies</li>
+							<li><b>30k+</b> Happy Customers</li>
+							<li><b>100+</b> Quality Products</li>
+						</ul>
+					</div>
+				</div><!--- END COL -->
+				<div class="col-lg-3 col-sm-6 col-xs-12">
+					<div class="newsletter-form">
+						<h4>Subscribe for get updates</h4>
+						<form id="agSubscribe" class="validate" action="mailto:info@arshithgroup.com" method="get">
+							<div class="input-group input-group-lg newsletter">
+								<input type="email" name="body" class="subscribe__input" placeholder="Email Address" required>
+								<input type="hidden" name="subject" value="Subscribe to Arshith Group updates">
+								<button type="submit" class="subs_btn">Subscribe</button>
+							</div>
+						</form>
 					</div>
 				</div><!--- END COL -->
 			</div><!--- END ROW -->
 			<div class="row">
 				<div class="col-lg-12 text-center">
 					<div class="footer_copyright">
-						<p>&copy; 2026 Arshith Group. All rights reserved. &nbsp;|&nbsp; Legal Disclaimer &middot; Privacy Notice &middot; Terms &amp; Conditions &middot; Cookie Policy</p>
-						<p>Template by <a href="https://bestwpware.com/"{EXT}>Bestwpware</a> &middot; Distributed by <a href="https://themewagon.com"{EXT}>ThemeWagon</a></p>
+						<p>&copy; 2026 Arshith Group. All Rights Reserved.</p>
+						<p>Legal Disclaimer &middot; Privacy Notice &middot; Terms &amp; Conditions &middot; Cookie Policy</p>
 					</div>
 				</div>
 			</div>
