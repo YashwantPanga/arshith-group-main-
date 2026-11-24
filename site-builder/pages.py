@@ -6,8 +6,8 @@ P = {
     "office_screen": "marque/15.jpeg",
     "group_photo": "marque/06.jpeg",
     "ceo_stage": "marque/03.jpeg",
-    "ceo_cutout": "ceo.png",
-    "md_cutout": "md.png",
+    "ceo_cutout": "ceo-farook.webp",
+    "md_cutout": "md-pallavi.webp",
     "auditorium": "logos/mallareddy.jpeg",
     "college_group": "logos/diest%20collage.jpeg",
     "team": "logos/Team.jpeg",
@@ -43,13 +43,13 @@ SLIDES = [
 
 BUSINESSES = [
     ("web.png", "IT Services &amp; IT Consulting",
-     "<strong>ArshithInfoTech</strong> - Building innovative solutions with modern code, Turning ideas into a powerful digital mode, Driven by quality, performance, and trust, Delivering excellence through ArshithInfoTech.", "http://arshithinfotech.com/"),
+     "ArshithInfoTech - software development, IT solutions and technology projects, driven by quality, performance, and trust.", "http://arshithinfotech.com/"),
     ("cart.png", "E-Commerce",
-     "<strong>Arshith Fresh</strong> - Rooted in nature, grown with care, We bring freshness beyond compare. From farm to you, pure and true, Quality you trust in all we do.", "https://arshithfresh.com/"),
+     "Arshith Fresh - a direct-to-consumer platform that connects farmers directly with consumers, delivering 100% natural, farm-sourced products.", "https://arshithfresh.com/"),
     ("sales.png", "Multi sellers",
      "The Arshith Fresh seller platform for multi-seller inventory and marketplace operations.", "https://seller.arshithfresh.com/"),
     ("strategy.png", "Business Consulting &amp; Services",
-     "<strong>Suntech Solutions</strong> - Empowering businesses with smart digital solutions, Driving growth through innovation and precision. Your trusted partner for success and transformation.", "https://suntechorganization.com/"),
+     "Suntech Solutions - backend operational support, strategic consulting, and business scaling built on trust and client satisfaction.", "https://suntechorganization.com/"),
     ("marketing-1.png", "Digital Marketing",
      "Digital marketing services from Suntech Solutions, building a stronger future with Suntech Organization.", "https://suntechorganization.com/"),
     ("research.png", "Internships &amp; Training",
@@ -79,6 +79,46 @@ def business_features():
 		</div><!--- END CONTAINER -->
 	</section>
 	<!-- END FEATURES -->
+"""
+
+
+def hero_slider():
+    """Landing slideshow: original brand images, centered template-style text, smooth crossfade."""
+    bgs, texts, dots = "", "", ""
+    for i, (img, tag, h, p, url, _side, _anim) in enumerate(SLIDES):
+        act = " is-active" if i == 0 else ""
+        words = " ".join(f'<span class="ag-w" aria-hidden="true"><span>{w}</span></span>' for w in h.split())
+        bgs += f"""
+			<div class="ag-slide{act}" data-index="{i}"><div class="ag-slide-bg" style="background-image:url('{img}')"></div></div>"""
+        texts += f"""
+						<div class="hero-text ag-slide-text{act}" data-index="{i}" role="group" aria-roledescription="slide" aria-label="{i + 1} of {len(SLIDES)}"{'' if i == 0 else ' aria-hidden="true"'}>
+							<span class="ag-mask ag-tag-mask"><span class="ag-hero-tag">{tag}</span></span>
+							<h2 aria-label="{h}">{words}</h2>
+							<p class="ag-mask"><span>{p}</span></p>
+							<a href="{url}"{EXT} class="ag-cta">Know More</a>
+						</div>"""
+        dots += f'<button type="button" class="ag-dot{act}" data-index="{i}" aria-label="Show slide {i + 1}"><span></span></button>'
+    return f"""
+	<!-- START HOME -->
+	<section id="home" class="home_bg ag-hero ag-slider" aria-roledescription="carousel" aria-label="Arshith Group businesses">
+		<div class="ag-slides">{bgs}
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 col-sm-12 col-xs-12 text-center">
+					<div class="ag-texts" aria-live="polite">{texts}
+					</div>
+					<div class="ag-slider-ui">
+						<span class="ag-count"><b>01</b> / {len(SLIDES):02d}</span>
+						<div class="ag-dots">{dots}</div>
+					</div>
+				</div><!--- END COL -->
+			</div><!--- END ROW -->
+		</div><!--- END CONTAINER -->
+		<button type="button" class="ag-arrow ag-prev" aria-label="Previous slide"><i class="ti-angle-left"></i></button>
+		<button type="button" class="ag-arrow ag-next" aria-label="Next slide"><i class="ti-angle-right"></i></button>
+	</section>
+	<!-- END  HOME -->
 """
 
 
@@ -168,7 +208,7 @@ TESTIMONIALS = [
 def testimonials(items, title, text, col=6):
     cols = ""
     for i, (img, name, role, quote) in enumerate(items):
-        pic = (f'<img src="{img}" alt="{name}" />' if img
+        pic = (f'<span class="ag-pop"><img src="{img}" alt="{name}" /></span>' if img
                else f'<span class="ag-initial">{name[0]}</span>')
         cols += f"""
 							<div class="col-lg-{col} col-sm-12 col-xs-12 {wow(0.1 + i * 0.1)}">
@@ -219,21 +259,7 @@ def home():
               "Our aim is not to create a successful company, but to create a company that makes a real difference.")] + TESTIMONIALS
 
     body = f"""
-	<!-- START HOME -->
-	<section data-stellar-background-ratio="0.3" id="home" class="home_bg" style="background-image: url(assets/img/bg/home-bg.jpg);  background-size:cover; background-position: center center;">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12 col-sm-12 col-xs-12 text-center">
-					<div class="hero-text">
-						<h2>We build businesses that matter</h2>
-						<p>IT Services &amp; Consulting &middot; E-Commerce &middot; Business Consulting &amp; Services &mdash; One Vision. Three Distinct Strengths.</p>
-						<a href="aboutgroup.html">Learn More</a>
-					</div>
-				</div><!--- END COL -->
-			</div><!--- END ROW -->
-		</div><!--- END CONTAINER -->
-	</section>
-	<!-- END  HOME -->
+{hero_slider()}
 {business_features()}
 {counter([(7, "+", "Years of Innovation"), (100, "+", "Career Openings"), ("Continuous", "", "Mentorship &amp; Growth"), ("People First", "", "Global Workplace")],
          video=(P["ceo_stage"], "logos/Logo%20video.mp4"))}
@@ -250,7 +276,7 @@ def home():
 					</div>
 				</div><!--- END COL -->
 				<div class="col-lg-6 col-sm-12 col-xs-12 {wow(0.1)}">
-					<div class="single_why_choose_img">
+					<div class="single_why_choose_img ag-ceo-photo">
 						<img src="{P["ceo_cutout"]}" class="img-fluid" alt="Farook N - CEO &amp; Chairman, Arshith Group" />
 					</div>
 				</div><!--- END COL -->
@@ -284,7 +310,7 @@ def home():
 		</div><!-- END CONTAINER -->
 	</section>
 	<!-- END PORTFOLIO -->
-{journey_skills(P["auditorium"])}
+{journey_skills("assets/img/bg/skill-bg.jpg")}
 	<!-- PROMOTIONAL AREA -->
 	<div class="promotional_area section-padding">
 		<div class="container">
@@ -312,7 +338,7 @@ def home():
 {contact_form()}
 {partners()}
 """
-    return page("Arshith Group", "Arshith Group - IT Services, E-Commerce and Business Consulting.", "Home", body)
+    return page("Arshith Group", "Arshith Group - IT Services, E-Commerce and Business Consulting.", "Home", body, '	<script src="assets/js/hero-slider.js"></script>', intro=True)
 
 
 # ======================================================================= ABOUT (template about.html order)
@@ -544,27 +570,31 @@ def news():
     cards = ""
     for i, (img, h) in enumerate(NEWS):
         cards += f"""
-				<div class="col-lg-4 col-sm-6 col-xs-12 {wow(0.1)}">
-					<div class="home_single_blog">
-						<a href="{img}" class="ag-popup"><img src="{img}" class="img-fluid" alt="News Image {i + 1}" /></a>
-						<div class="home_blog_content">
-							<div class="blog_title_info">
-								<h2><a href="{img}" class="ag-popup">{h}</a></h2>
-								<span>Arshith Group</span>
-								<span><a href="LatestNews.html">News</a></span>
-							</div>
+				<div class="col-lg-4 col-sm-6 col-xs-12 ag-reveal" style="--d:{(i % 3) * 120}ms">
+					<article class="ag-news-card ag-tilt">
+						<a href="{img}" class="ag-news-media ag-popup" title="{h}">
+							<img src="{img}" alt="News Image {i + 1}" loading="lazy" />
+							<span class="ag-news-badge">News</span>
+							<span class="ag-news-zoom"><i class="ti-zoom-in"></i></span>
+						</a>
+						<div class="ag-news-body">
+							<span class="ag-news-meta"><i class="ti-flag-alt"></i> Arshith Group</span>
+							<h3>{h}</h3>
+							<a href="#" class="ag-news-more ag-open">View Story <i class="ti-arrow-right"></i></a>
 						</div>
-					</div>
+						<span class="ag-glare" aria-hidden="true"></span>
+					</article>
 				</div><!-- END COL -->"""
     gal = ""
     for i, h in enumerate(HIGHLIGHTS):
         img = f"marque/{i + 1:02d}.jpeg"
         gal += f"""
 					<div class="col-lg-3 col-sm-6 col-xs-12 portfolio-item mix">
-						<div class="single-gallery">
-							<img src="{img}" class="img-fluid" alt="Operational Highlight {i + 1}">
+						<div class="single-gallery ag-gallery-card ag-tilt">
+							<img src="{img}" class="img-fluid" alt="Operational Highlight {i + 1}" loading="lazy">
 							<a href="{img}" class="gallery_enlarge_icon" title="{h}"><i class="ti-eye"></i></a>
-							<h4><a href="{img}" class="ag-popup" title="{h}">{h}</a></h4>
+							<h4><a href="{img}" title="{h}">{h}</a></h4>
+							<span class="ag-glare" aria-hidden="true"></span>
 						</div>
 					</div><!-- End Col -->"""
     careers = ""
@@ -586,9 +616,10 @@ def news():
     body = f"""
 {section_top("Latest news &amp; updates")}
 	<!-- BLOG -->
-	<section class="blog_area section-padding">
+	<section class="blog_area section-padding ag-news-area">
 		<div class="container">
-			<div class="row text-center">{cards}
+			{stitle("Latest News &amp; Updates", "Milestones, partnerships and moments of pride from across Arshith Group.")}
+			<div class="row">{cards}
 			</div><!-- END ROW -->
 		</div><!--- END CONTAINER -->
 	</section>
@@ -616,7 +647,8 @@ def news():
 {contact_form()}
 {partners()}
 """
-    return page("Latest News | Arshith Group", "Latest news and updates from Arshith Group.", "News", body)
+    return page("Latest News | Arshith Group", "Latest news and updates from Arshith Group.", "News", body,
+                '\t<script src="assets/js/news-cards.js"></script>')
 
 
 # ======================================================================= INTERNSHIP

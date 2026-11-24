@@ -52,8 +52,10 @@ def nav_html(active):
     return "\n".join(out)
 
 
-def head(title, description, slider=False):
+def head(title, description, slider=False, intro=False):
     sl = '\n\t<link rel="stylesheet" href="assets/css/slider.css">' if slider else ""
+    INTRO = ("\n\t<script>if(!matchMedia('(prefers-reduced-motion: reduce)').matches)"
+             "document.documentElement.classList.add('ag-pre');</script>") if intro else ""
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -64,8 +66,9 @@ def head(title, description, slider=False):
 	<title>{title}</title>
 	<link rel="icon" href="{LOGO}">
 	<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Jost:wght@400;500;600;700&display=swap">
 	<link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
 	<link rel="stylesheet" href="assets/fonts/themify-icons.css">
 	<link rel="stylesheet" href="assets/owlcarousel/css/owl.carousel.css">
@@ -76,7 +79,7 @@ def head(title, description, slider=False):
 	<link rel="stylesheet" href="assets/css/menu.css">
 	<link rel="stylesheet" href="assets/css/style.css">
 	<link rel="stylesheet" href="assets/css/responsive.css">
-	<link rel="stylesheet" href="assets/css/arshith.css">
+	<link rel="stylesheet" href="assets/css/arshith.css">{INTRO}
 </head>
 
 <body data-spy="scroll" data-offset="80">
@@ -477,5 +480,5 @@ def scripts(extra="", swipe=False):
 """
 
 
-def page(title, description, active, body, extra_js="", slider=False):
-    return head(title, description, slider) + header(active) + body + footer() + scripts(extra_js, swipe=slider)
+def page(title, description, active, body, extra_js="", slider=False, intro=False):
+    return head(title, description, slider, intro) + header(active) + body + footer() + scripts(extra_js, swipe=slider)

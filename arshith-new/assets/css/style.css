@@ -33,7 +33,7 @@ Version      : 1.0
 */
 body {
 color: #747474;
-font-family: 'Poppins', sans-serif;
+font-family: 'DM Sans', sans-serif;
 font-size: 16px;
 font-weight: 400;
 line-height: 26px;
@@ -50,12 +50,12 @@ h5,
 h6 {
   letter-spacing: 0px;
   margin-top: 0px; 
-  font-family: oswald,sans-serif;
+  font-family: 'Jost', 'DM Sans', sans-serif;
   color: #1b2032;
   font-weight: 400;
 }
 a {
-font-family: oswald,sans-serif;
+font-family: 'Jost', 'DM Sans', sans-serif;
 text-decoration: none;
 -webkit-transition: all 0.2s ease 0s;
 transition: all 0.2s ease 0s;
@@ -79,19 +79,19 @@ li {
 
 ::-webkit-input-placeholder {
   font-weight: 400;
-font-family: 'Poppins', sans-serif; }
+font-family: 'DM Sans', sans-serif; }
 
 :-moz-placeholder {
   font-weight: 400;
-font-family: 'Poppins', sans-serif;}
+font-family: 'DM Sans', sans-serif;}
 
 ::-moz-placeholder {
   font-weight: 400;
-font-family: 'Poppins', sans-serif;}
+font-family: 'DM Sans', sans-serif;}
 
 :-ms-input-placeholder {
   font-weight: 400;
-font-family: 'Poppins', sans-serif;}
+font-family: 'DM Sans', sans-serif;}
 .form-control::placeholder {
 	color: #232a34;
 	opacity: 1;
@@ -973,7 +973,7 @@ display: inline-block;
 	font-size: 20px;
 }
 .single_testimonial h5 {
-	font-family: 'Poppins', sans-serif;
+	font-family: 'DM Sans', sans-serif;
 	overflow: hidden;
 	font-size: 16px;
 }
@@ -1277,7 +1277,7 @@ height: 50px;
 	display: block;
 	font-size: 14px;
 	padding: 5px 0;
-	font-family: poppins;
+	font-family: 'DM Sans', sans-serif;
 	font-weight: 400;
 }
 .categories ul li a:hover { color: #ffaa17 }
@@ -1426,7 +1426,7 @@ text-transform: uppercase;}
 	padding: 20px;
 	width: 100%;
 	margin-bottom: 15px;
-	font-family: 'Poppins', sans-serif;
+	font-family: 'DM Sans', sans-serif;
 }
 .contact textarea {
 	background: #fff;
@@ -1439,7 +1439,7 @@ text-transform: uppercase;}
 	font-weight:400;
 	padding: 20px;
 	width: 100%;
-	font-family: 'Poppins', sans-serif;
+	font-family: 'DM Sans', sans-serif;
 }
 .contact input:focus {
 	border: 1px solid #f6f6f6;

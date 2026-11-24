@@ -8,8 +8,9 @@
 	<title>Arshith Group</title>
 	<link rel="icon" href="logos/LOGO-removebg-preview.png">
 	<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Jost:wght@400;500;600;700&display=swap">
 	<link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
 	<link rel="stylesheet" href="assets/fonts/themify-icons.css">
 	<link rel="stylesheet" href="assets/owlcarousel/css/owl.carousel.css">
@@ -21,6 +22,7 @@
 	<link rel="stylesheet" href="assets/css/style.css">
 	<link rel="stylesheet" href="assets/css/responsive.css">
 	<link rel="stylesheet" href="assets/css/arshith.css">
+	<script>if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('ag-pre');</script>
 </head>
 
 <body data-spy="scroll" data-offset="80">
@@ -69,21 +71,49 @@
 	</header>
 	<!-- END NAVBAR-->
 
+
 	<!-- START HOME -->
-	<section data-stellar-background-ratio="0.3" id="home" class="home_bg" style="background-image: url(assets/img/bg/home-bg.jpg);  background-size:cover; background-position: center center;">
+	<section id="home" class="home_bg ag-hero ag-slider" aria-roledescription="carousel" aria-label="Arshith Group businesses">
+		<div class="ag-slides">
+			<div class="ag-slide is-active" data-index="0"><div class="ag-slide-bg" style="background-image:url('logos/ecommerce3.png')"></div></div>
+			<div class="ag-slide" data-index="1"><div class="ag-slide-bg" style="background-image:url('logos/infotech.jpeg')"></div></div>
+			<div class="ag-slide" data-index="2"><div class="ag-slide-bg" style="background-image:url('logos/nonit.png')"></div></div>
+		</div>
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12 col-sm-12 col-xs-12 text-center">
-					<div class="hero-text">
-						<h2>We build businesses that matter</h2>
-						<p>IT Services &amp; Consulting &middot; E-Commerce &middot; Business Consulting &amp; Services &mdash; One Vision. Three Distinct Strengths.</p>
-						<a href="aboutgroup.html">Learn More</a>
+					<div class="ag-texts" aria-live="polite">
+						<div class="hero-text ag-slide-text is-active" data-index="0" role="group" aria-roledescription="slide" aria-label="1 of 3">
+							<span class="ag-mask ag-tag-mask"><span class="ag-hero-tag">E-Commerce</span></span>
+							<h2 aria-label="Arshith Fresh"><span class="ag-w" aria-hidden="true"><span>Arshith</span></span> <span class="ag-w" aria-hidden="true"><span>Fresh</span></span></h2>
+							<p class="ag-mask"><span>Rooted in nature, grown with care, We bring freshness beyond compare. From farm to you, pure and true, Quality you trust in all we do..</span></p>
+							<a href="https://arshithfresh.com/" target="_blank" rel="noopener" class="ag-cta">Know More</a>
+						</div>
+						<div class="hero-text ag-slide-text" data-index="1" role="group" aria-roledescription="slide" aria-label="2 of 3" aria-hidden="true">
+							<span class="ag-mask ag-tag-mask"><span class="ag-hero-tag">IT Services &amp; IT Consulting</span></span>
+							<h2 aria-label="ArshithInfoTech"><span class="ag-w" aria-hidden="true"><span>ArshithInfoTech</span></span></h2>
+							<p class="ag-mask"><span>Building innovative solutions with modern code, Turning ideas into a powerful digital mode, Driven by quality, performance, and trust, Delivering excellence through ArshithInfoTech.</span></p>
+							<a href="http://arshithinfotech.com/" target="_blank" rel="noopener" class="ag-cta">Know More</a>
+						</div>
+						<div class="hero-text ag-slide-text" data-index="2" role="group" aria-roledescription="slide" aria-label="3 of 3" aria-hidden="true">
+							<span class="ag-mask ag-tag-mask"><span class="ag-hero-tag">Business Consulting &amp; Services</span></span>
+							<h2 aria-label="Suntech Solutions."><span class="ag-w" aria-hidden="true"><span>Suntech</span></span> <span class="ag-w" aria-hidden="true"><span>Solutions.</span></span></h2>
+							<p class="ag-mask"><span>Empowering businesses with smart digital solutions, Driving growth through innovation and precision. Your trusted partner for success and transformation, Building a stronger future with Suntech Organization.</span></p>
+							<a href="https://suntechorganization.com/" target="_blank" rel="noopener" class="ag-cta">Know More</a>
+						</div>
+					</div>
+					<div class="ag-slider-ui">
+						<span class="ag-count"><b>01</b> / 03</span>
+						<div class="ag-dots"><button type="button" class="ag-dot is-active" data-index="0" aria-label="Show slide 1"><span></span></button><button type="button" class="ag-dot" data-index="1" aria-label="Show slide 2"><span></span></button><button type="button" class="ag-dot" data-index="2" aria-label="Show slide 3"><span></span></button></div>
 					</div>
 				</div><!--- END COL -->
 			</div><!--- END ROW -->
 		</div><!--- END CONTAINER -->
+		<button type="button" class="ag-arrow ag-prev" aria-label="Previous slide"><i class="ti-angle-left"></i></button>
+		<button type="button" class="ag-arrow ag-next" aria-label="Next slide"><i class="ti-angle-right"></i></button>
 	</section>
 	<!-- END  HOME -->
+
 
 	<!-- FEATURES -->
 	<section id="companies" class="feature_area">
@@ -97,14 +127,14 @@
 					<div class="single_feature">
 						<img src="assets/img/icon/web.png" alt="icon" />
 						<h4><a href="http://arshithinfotech.com/" target="_blank" rel="noopener">IT Services &amp; IT Consulting</a></h4>
-						<p><strong>ArshithInfoTech</strong> - Building innovative solutions with modern code, Turning ideas into a powerful digital mode, Driven by quality, performance, and trust, Delivering excellence through ArshithInfoTech.</p>
+						<p>ArshithInfoTech - software development, IT solutions and technology projects, driven by quality, performance, and trust.</p>
 					</div>
 				</div><!-- END COL -->
 				<div class="col-lg-4 col-sm-6 col-xs-12 no-padding wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.2s" data-wow-offset="0">
 					<div class="single_feature">
 						<img src="assets/img/icon/cart.png" alt="icon" />
 						<h4><a href="https://arshithfresh.com/" target="_blank" rel="noopener">E-Commerce</a></h4>
-						<p><strong>Arshith Fresh</strong> - Rooted in nature, grown with care, We bring freshness beyond compare. From farm to you, pure and true, Quality you trust in all we do.</p>
+						<p>Arshith Fresh - a direct-to-consumer platform that connects farmers directly with consumers, delivering 100% natural, farm-sourced products.</p>
 					</div>
 				</div><!-- END COL -->
 				<div class="col-lg-4 col-sm-6 col-xs-12 no-padding wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s" data-wow-offset="0">
@@ -118,7 +148,7 @@
 					<div class="single_feature">
 						<img src="assets/img/icon/strategy.png" alt="icon" />
 						<h4><a href="https://suntechorganization.com/" target="_blank" rel="noopener">Business Consulting &amp; Services</a></h4>
-						<p><strong>Suntech Solutions</strong> - Empowering businesses with smart digital solutions, Driving growth through innovation and precision. Your trusted partner for success and transformation.</p>
+						<p>Suntech Solutions - backend operational support, strategic consulting, and business scaling built on trust and client satisfaction.</p>
 					</div>
 				</div><!-- END COL -->
 				<div class="col-lg-4 col-sm-6 col-xs-12 no-padding wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.5s" data-wow-offset="0">
@@ -198,8 +228,8 @@
 					</div>
 				</div><!--- END COL -->
 				<div class="col-lg-6 col-sm-12 col-xs-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.1s" data-wow-offset="0">
-					<div class="single_why_choose_img">
-						<img src="ceo.png" class="img-fluid" alt="Farook N - CEO &amp; Chairman, Arshith Group" />
+					<div class="single_why_choose_img ag-ceo-photo">
+						<img src="ceo-farook.webp" class="img-fluid" alt="Farook N - CEO &amp; Chairman, Arshith Group" />
 					</div>
 				</div><!--- END COL -->
 			</div><!--- END ROW -->
@@ -272,7 +302,7 @@
 	<!-- END PORTFOLIO -->
 
 	<!-- SKILLS -->
-	<section id="journey" class="skills_area section-padding" style="background-image: url('logos/mallareddy.jpeg');  background-size:cover;background-position:center;">
+	<section id="journey" class="skills_area section-padding" style="background-image: url('assets/img/bg/skill-bg.jpg');  background-size:cover;background-position:center;">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-5 col-sm-8 col-xs-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.2s" data-wow-offset="0">
@@ -342,7 +372,7 @@
 					<div class="row">
 							<div class="col-lg-6 col-sm-12 col-xs-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.1s" data-wow-offset="0">
 								<div class="single_testimonial">
-									<div class="testimonial_img"><img src="md.png" alt="Pallavi N" /></div>
+									<div class="testimonial_img"><span class="ag-pop"><img src="md-pallavi.webp" alt="Pallavi N" /></span></div>
 									<p>&ldquo;Our aim is not to create a successful company, but to create a company that makes a real difference.&rdquo;</p>
 									<h4>Pallavi N</h4>
 									<h5>Managing Director - Arshith Group</h5>
@@ -607,6 +637,6 @@
 	<script src="assets/js/scrolltopcontrol.js"></script>
 	<script src="assets/js/scripts.js"></script>
 	<script src="assets/js/arshith.js"></script>
-
+	<script src="assets/js/hero-slider.js"></script>
 </body>
 </html>
